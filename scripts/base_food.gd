@@ -1,7 +1,7 @@
 class_name BaseFood extends Node3D
 
 @export_category("BaseFood")
-@export var kitchen_object_so : KitchenObjectSO
+
 @export var object_name : String
 @export var default_name : String
 #@onready var object_name : String : get = getter_name

@@ -153,7 +153,7 @@ layers = 2
 material_override = SubResource("StandardMaterial3D_du71i")
 texture = SubResource("CompressedTexture2D_jwp1e")
 
-[node name="MeshRenderer" type="MeshInstance3D" parent="." index="8"]
+[node name="Black" type="MeshInstance3D" parent="." index="8"]
 editor_description = "[MeshRenderer 23::9a9137fa2b035d34e881701d2c178192:5850129231471598083]"
 transform = Transform3D(-1.40465, -9.09459e-08, 3.82137e-15, -2.36215e-21, -4.5473e-08, -1, 1.22798e-07, -1.0403, 4.37114e-08, 0.003, 1.268, 0.0489)
 mesh = SubResource("QuadMesh_6bek0")

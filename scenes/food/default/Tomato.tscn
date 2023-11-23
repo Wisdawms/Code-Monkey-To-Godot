@@ -1,12 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b68ul883sgwc7"]
+[gd_scene load_steps=4 format=3 uid="uid://b68ul883sgwc7"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_rpewv"]
 [ext_resource type="PackedScene" uid="uid://cqbdf81si24sm" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/Tomato_Visual.prefab.tscn" id="2_ecgjw"]
-[ext_resource type="Resource" uid="uid://c72vnjx8le14x" path="res://resources/tomato_SO.tres" id="2_efjqa"]
 [ext_resource type="Texture2D" uid="uid://bqxoi48rw4mpr" path="res://Assets/_Assets/Textures/Icons/Tomato.png" id="2_g0oha"]
 
 [node name="Tomato" instance=ExtResource("1_rpewv")]
-kitchen_object_so = ExtResource("2_efjqa")
 object_name = "Tomato"
 default_name = "Tomato"
 icon = ExtResource("2_g0oha")
