@@ -8,7 +8,6 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc1cp"]
 resource_local_to_scene = true
 resource_name = "Kitchen Counter"
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("2_x6dqf")
 metallic = 0.4
 roughness = 0.272166
@@ -37,6 +36,7 @@ _surfaces = [{
 blend_shape_mode = 0
 
 [node name="Plates_Counter" instance=ExtResource("1_sxyhh")]
+type = "Plates_Counter"
 
 [node name="PlatesCounter_Visual" type="MeshInstance3D" parent="." index="6"]
 editor_description = "[MeshRenderer 23::e21b499d164095947b7559f0267f0e63:867046696110709345]"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=23 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
 [ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
 [ext_resource type="PackedScene" uid="uid://c2f5d2m2eresa" path="res://scenes/counters/container_counters/cabbage_container_counter.tscn" id="9_ql0l1"]
+[ext_resource type="PackedScene" uid="uid://6vbwuf72kjgn" path="res://scenes/counters/bases/plates_counter.tscn" id="11_6wsyw"]
 [ext_resource type="PackedScene" uid="uid://jtmrhy65dsc3" path="res://scenes/counters/container_counters/matty_patty_uncooked_container_counter.tscn" id="11_ab6fb"]
 [ext_resource type="PackedScene" uid="uid://dhi0y56man0l2" path="res://scenes/counters/bases/clear_counter.tscn" id="12_3c5xn"]
 [ext_resource type="PackedScene" uid="uid://dbo3mxqnxi6xf" path="res://scenes/counters/container_counters/tomato_container_counter.tscn" id="12_yo1jd"]
@@ -301,6 +302,12 @@ FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6.75)
 CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
 FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Plates_Counter" parent="Counters" instance=ExtResource("11_6wsyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="Plates_Counter2" parent="Counters" instance=ExtResource("11_6wsyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
 
 [node name="Bread_Container_Counter" parent="Counters" instance=ExtResource("8_4ipu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2.25)

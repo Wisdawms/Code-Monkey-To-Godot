@@ -15,7 +15,7 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 #region Counter Settings
 @export_subgroup("Counter_Settings")
 @export_enum("Counter", "Food") var handle_prog_on = "Food"
-@export_enum("Clear_Counter", "Cutting_Counter", "Container_Counter", "Trash_Bin", "Stove_Counter") var type : String
+@export_enum("Clear_Counter", "Cutting_Counter", "Container_Counter", "Trash_Bin", "Stove_Counter", "Plates_Counter") var type : String
 #endregion
 
 #region Debugging
@@ -587,7 +587,8 @@ func spawn_food_on_container()->void:
 
 
 func _process(_delta: float) -> void:
-	item = counter_top_point.get_child(-1)
+	if counter_top_point.get_child_count() != 0 and item != counter_top_point.get_child(-1):
+		item = counter_top_point.get_child(-1)
 	interactor = Globals.find_node("Player")
 	handle_lerp_progress_bar()
 	handle_prog_bar_max_value()
