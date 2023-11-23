@@ -5,6 +5,7 @@ class_name BaseFood extends Node3D
 @export var object_name : String
 @export var default_name : String
 #@onready var object_name : String : get = getter_name
+@export var Ingredients : Array[KitchenObjectSO]
 var cutting_prog : float = 0
 @onready var fry_timer: Timer = get_node("FryTimer")
 @export var sliced: bool

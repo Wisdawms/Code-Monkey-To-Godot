@@ -7,9 +7,12 @@
 [node name="plate" instance=ExtResource("1_0qkrm")]
 object_name = "Plate"
 default_name = "Plate"
+Ingredients = Array[Resource("res://scripts/KitchenObjectSO.gd")]([null])
 icon = ExtResource("2_fvud0")
 
 [node name="Plate_Visual" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
 mesh = ExtResource("2_ur6jr")
 skeleton = NodePath("")
+
+[node name="plate_content" type="Node3D" parent="." index="2"]

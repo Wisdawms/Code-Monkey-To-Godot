@@ -58,6 +58,16 @@ var mesh_instances : Array
 
 #region [    Methods For Handling Stuff    ]
 
+func handle_spawning_plates(delta)->void:
+	if type == "Plates_Counter":
+		if counter_top_point.get_child_count() < plate_amount_max:
+			spawn_plate_timer += delta
+			if spawn_plate_timer > spawn_plate_timer_max:
+				spawn_food_on_container(counter_top_point.get_child_count())
+				spawn_plate_timer = 0.0
+		else:
+			print("Reached maximum number of plates on counter!")
+
 func handle_stove_on_and_off_animation()->void:
 	if run_once:
 		if type == "Stove_Counter":
@@ -534,6 +544,24 @@ func replace_item(interactor : MyPlayerClass)->void:
 			if Kitchen_Object != null:
 				print("You are holding (", interactor.item_holding.object_name, ") This counter takes (", Kitchen_Object.object_name, ")")
 				return
+		if item_one.object_name == "Plate" and item_two.object_name != "Plate": # if plate on counter and player holding food
+			if item_one.get_node("plate_content").get_child_count() < 1:
+				item_two.reparent( item_one.get_node("plate_content") )
+				item_two.position = Vector3(0, 0.1 , 0)
+				item_two.rotation = Vector3.ZERO
+				print("Placed ", item_two, "on ", item_one.object_name)
+				return
+		elif item_two.object_name == "Plate" and item_one.object_name != "Plate": # if holding plate and there's food on counter
+			# place food on plate then put plate on counter
+			if item_two.get_node("plate_content").get_child_count() < 1:
+				item_one.reparent( item_two.get_node("plate_content") )
+				item_one.position = Vector3(0, 0.1 , 0)
+				item_one.rotation = Vector3.ZERO
+				item_two.reparent( counter_top_point ) # place on counter
+				item_two.position = Vector3.ZERO
+				item_two.rotation = Vector3.ZERO
+				print("Placed ", item_two, "on ", item_one.object_name)
+				return
 		item_one.reparent(interactor.hold_item_marker)
 		item_two.reparent( self.get_node("CounterTopPoint") )
 		item_one.position = interactor.hold_item_marker.position * .2
@@ -596,15 +624,7 @@ func spawn_food_on_container(offset : int = 1)->void:
 
 
 func _process(delta: float) -> void:
-	if type == "Plates_Counter":
-		if counter_top_point.get_child_count() < plate_amount_max:
-			spawn_plate_timer += delta
-			if spawn_plate_timer > spawn_plate_timer_max:
-				spawn_food_on_container(counter_top_point.get_child_count())
-				spawn_plate_timer = 0.0
-		else:
-			print("Reached maximum number of plates on counter!")
-
+	handle_spawning_plates(delta)
 	
 	if counter_top_point.get_child_count() != 0 and item != counter_top_point.get_child(-1):
 		item = counter_top_point.get_child(-1)
