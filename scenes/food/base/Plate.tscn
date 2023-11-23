@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbaiuljqcf6jt"]
+[gd_scene load_steps=4 format=3 uid="uid://dbaiuljqcf6jt"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_0qkrm"]
+[ext_resource type="Texture2D" uid="uid://3rm6e5m3q8hl" path="res://Assets/_Assets/Textures/Icons/Plate.png" id="2_fvud0"]
 [ext_resource type="ArrayMesh" uid="uid://dw2anso2h3ba1" path="res://Assets/_Assets/Meshes/Plate.plate.mesh" id="2_ur6jr"]
 
 [node name="plate" instance=ExtResource("1_0qkrm")]
+object_name = "Plate"
+default_name = "Plate"
+icon = ExtResource("2_fvud0")
 
 [node name="Plate_Visual" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)

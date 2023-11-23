@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://6vbwuf72kjgn"]
+[gd_scene load_steps=8 format=3 uid="uid://6vbwuf72kjgn"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_sxyhh"]
+[ext_resource type="Resource" uid="uid://d0yh7wlandaox" path="res://resources/plate_SO.tres" id="2_gm3hk"]
 [ext_resource type="Texture2D" uid="uid://d2uqu0kvio624" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_AlbedoTransparency.png" id="2_x6dqf"]
 [ext_resource type="Texture2D" uid="uid://b40iqkii1jasw" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_Normal.png" id="3_mhmi6"]
 [ext_resource type="Texture2D" uid="uid://d2dc4h0bvxbdd" path="res://Assets/_Assets/Textures/CircleDashed.png" id="4_48d0e"]
@@ -37,6 +38,7 @@ blend_shape_mode = 0
 
 [node name="Plates_Counter" instance=ExtResource("1_sxyhh")]
 type = "Plates_Counter"
+Kitchen_Object = ExtResource("2_gm3hk")
 
 [node name="PlatesCounter_Visual" type="MeshInstance3D" parent="." index="6"]
 editor_description = "[MeshRenderer 23::e21b499d164095947b7559f0267f0e63:867046696110709345]"

@@ -16,11 +16,15 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 @export_subgroup("Counter_Settings")
 @export_enum("Counter", "Food") var handle_prog_on = "Food"
 @export_enum("Clear_Counter", "Cutting_Counter", "Container_Counter", "Trash_Bin", "Stove_Counter", "Plates_Counter") var type : String
+@export_category("Plates_Counter_Settings")
+@export var spawn_plate_timer_max : float = 4.0
+@export var plate_amount_max: int = 4
 #endregion
 
 #region Debugging
-@export var _is_frying : bool
 @export_subgroup("for_debugging")
+var spawn_plate_timer : float
+@export var _is_frying : bool
 @export var offset : float
 @export var hovered : bool
 var is_burning_meat: bool
@@ -236,7 +240,7 @@ func _on_fry_timer_timeout() -> void:
 			if output:
 				var spawn : Object = output.prefab.instantiate()
 				item.queue_free()
-				counter_top_point.add_child(spawn)
+				counter_top_point.add_child(spawn, true)
 				print("A ", input.object_name, " has been cooked into ", output.object_name ,"!")
 				if output.object_name == "MeatPattyBurned": print("You burnt your meat!!! :(")
 				match handle_prog_on:
@@ -359,7 +363,11 @@ func interact(interactor : MyPlayerClass)->void:
 			replace_item(interactor)
 		elif Settings.can_replace_objects_on_frying_counter(self): # normal counters
 			replace_item(interactor)
-		else: print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
+		else: 
+			if type == "Plates_Counter":
+				print("This counter only produces plates")
+				return
+			print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
 	if not counter_has_object() and not player_has_object(interactor): # handles spawning an item
 		if not type == "Container_Counter":
 			print( "There's nothing on this counter" )
@@ -384,7 +392,7 @@ func interact_alt(interactor : MyPlayerClass)->void:
 							if item.cutting_prog >= cut_recipe_so.cutting_prog_max: # if reached max cut progress, then cut the object finally
 								var spawn : Object = output.prefab.instantiate()
 								item.queue_free()
-								counter_top_point.add_child(spawn)
+								counter_top_point.add_child(spawn, true)
 								item.cutting_prog = 0
 								OnItemChanged.emit()
 								print( "You sliced this (", item.default_name, ") into (", spawn.object_name, ")" )
@@ -392,7 +400,7 @@ func interact_alt(interactor : MyPlayerClass)->void:
 							if cutting_prog >= cut_recipe_so.cutting_prog_max: # if reached max cut progress, then cut the object finally
 								var spawn : Object = output.prefab.instantiate()
 								item.queue_free()
-								counter_top_point.add_child(spawn)
+								counter_top_point.add_child(spawn,true)
 								cutting_prog = 0
 								OnItemChanged.emit()
 								print( "You sliced this (", item.default_name, ") into (", spawn.object_name, ")" )
@@ -436,7 +444,6 @@ func interact_alt(interactor : MyPlayerClass)->void:
 
 
 #endregion
-
 
 #region [    Boolean Methods    ]
 
@@ -487,7 +494,6 @@ func player_has_object(interactor : MyPlayerClass)->bool:
 	return interactor.item_holding != null
 
 #endregion
-
 
 #region [    Do Methods    ]
 func give_item(interactor : MyPlayerClass )->void:
@@ -574,19 +580,32 @@ func fry_item_if_possible()->void:
 				prog_bar_sprite._hide()
 				prog_bar_sprite.shown = false
 
-func spawn_food_on_container()->void:
+func spawn_food_on_container(offset : int = 1)->void:
 	var anim_player : AnimationPlayer = $CounterAnimations
-	if anim_player != null:
+	if type == "Container_Counter" and anim_player != null:
 		anim_player.play("ContainerOpenClose")
-		var object : Object = Kitchen_Object.prefab.instantiate()
-		counter_top_point.add_child(object)
-		print("Spawned (", Kitchen_Object.object_name , ") on ", self.name )
-		OnItemChanged.emit()
+	var object : Object = Kitchen_Object.prefab.instantiate()
+	counter_top_point.add_child(object, true)
+	if type == "Plates_Counter":
+		object.position = Vector3(0.0, 0.05 * offset, 0.0)
+		object.rotation.y = randf_range(0.0, 360.0)
+	print("Spawned (", Kitchen_Object.object_name , ") on ", self.name )
+	OnItemChanged.emit()
 
 #endregion
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	if type == "Plates_Counter":
+		if counter_top_point.get_child_count() < plate_amount_max:
+			spawn_plate_timer += delta
+			if spawn_plate_timer > spawn_plate_timer_max:
+				spawn_food_on_container(counter_top_point.get_child_count())
+				spawn_plate_timer = 0.0
+		else:
+			print("Reached maximum number of plates on counter!")
+
+	
 	if counter_top_point.get_child_count() != 0 and item != counter_top_point.get_child(-1):
 		item = counter_top_point.get_child(-1)
 	interactor = Globals.find_node("Player")
