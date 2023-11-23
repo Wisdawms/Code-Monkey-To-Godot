@@ -1,0 +1,345 @@
+[gd_scene load_steps=23 format=3 uid="uid://bab7vd3bw73uw"]
+
+[ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
+[ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
+[ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="3_qj1pw"]
+[ext_resource type="Script" path="res://scripts/Camera3D.gd" id="3_yb8cg"]
+[ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_5kud7"]
+[ext_resource type="PackedScene" uid="uid://dbl1o1hgl32r7" path="res://scenes/main scene & player/fps.tscn" id="5_ixcvf"]
+[ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
+[ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
+[ext_resource type="PackedScene" uid="uid://c2f5d2m2eresa" path="res://scenes/counters/container_counters/cabbage_container_counter.tscn" id="9_ql0l1"]
+[ext_resource type="PackedScene" uid="uid://jtmrhy65dsc3" path="res://scenes/counters/container_counters/matty_patty_uncooked_container_counter.tscn" id="11_ab6fb"]
+[ext_resource type="PackedScene" uid="uid://dhi0y56man0l2" path="res://scenes/counters/bases/clear_counter.tscn" id="12_3c5xn"]
+[ext_resource type="PackedScene" uid="uid://dbo3mxqnxi6xf" path="res://scenes/counters/container_counters/tomato_container_counter.tscn" id="12_yo1jd"]
+[ext_resource type="PackedScene" uid="uid://x50jpniq1an6" path="res://scenes/counters/container_counters/cheese_container_counter.tscn" id="13_1eld5"]
+[ext_resource type="PackedScene" uid="uid://b28fqjvm4g2k2" path="res://scenes/counters/cutting_counter.tscn" id="13_p46un"]
+[ext_resource type="PackedScene" uid="uid://dd8fwikw27aiu" path="res://scenes/counters/bases/base_container_counter.tscn" id="14_q2e4u"]
+[ext_resource type="PackedScene" uid="uid://clnghyebk6udh" path="res://scenes/counters/bases/plates_counter.tscn" id="18_3gdvx"]
+[ext_resource type="PackedScene" uid="uid://jq0pwd7jvd56" path="res://scenes/counters/bases/trash_bin_counter.tscn" id="18_8w7u7"]
+[ext_resource type="PackedScene" uid="uid://cn042vbpd1s0j" path="res://scenes/counters/stove_counter.tscn" id="19_yps3e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn38t"]
+resource_name = "Floor"
+depth_draw_mode = 1
+uv1_scale = Vector3(50, 50, 0)
+metadata/unidot_keys = {
+"disabledShaderPasses": [],
+"m_BuildTextureStacks": [],
+"m_CorrespondingSourceObject": [null, 0, null, null],
+"m_CustomRenderQueue": -1,
+"m_DoubleSidedGI": 0,
+"m_EnableInstancingVariants": 0,
+"m_InvalidKeywords": [],
+"m_LightmapFlags": 4,
+"m_ModifiedSerializedProperties": 0,
+"m_Name": "Floor",
+"m_ObjectHideFlags": 0,
+"m_Parent": [null, 0, null, null],
+"m_PrefabAsset": [null, 0, null, null],
+"m_PrefabInstance": [null, 0, null, null],
+"m_SavedProperties": {
+"m_Colors": [{
+"_BaseColor": Color(1, 1, 1, 1)
+}, {
+"_Color": Color(1, 1, 1, 1)
+}, {
+"_EmissionColor": Color(0, 0, 0, 1)
+}, {
+"_SpecColor": Color(0.2, 0.2, 0.2, 1)
+}],
+"m_Floats": [{
+"_AlphaClip": 0
+}, {
+"_AlphaToMask": 0
+}, {
+"_Blend": 0
+}, {
+"_BlendModePreserveSpecular": 1
+}, {
+"_BumpScale": 1
+}, {
+"_ClearCoatMask": 0
+}, {
+"_ClearCoatSmoothness": 0
+}, {
+"_Cull": 2
+}, {
+"_Cutoff": 0.5
+}, {
+"_DetailAlbedoMapScale": 1
+}, {
+"_DetailNormalMapScale": 1
+}, {
+"_DstBlend": 0
+}, {
+"_DstBlendAlpha": 0
+}, {
+"_EnvironmentReflections": 1
+}, {
+"_GlossMapScale": 0
+}, {
+"_Glossiness": 0
+}, {
+"_GlossyReflections": 0
+}, {
+"_Metallic": 0
+}, {
+"_OcclusionStrength": 1
+}, {
+"_Parallax": 0.005
+}, {
+"_QueueOffset": 0
+}, {
+"_ReceiveShadows": 1
+}, {
+"_Smoothness": 0.5
+}, {
+"_SmoothnessTextureChannel": 0
+}, {
+"_SpecularHighlights": 1
+}, {
+"_SrcBlend": 1
+}, {
+"_SrcBlendAlpha": 1
+}, {
+"_Surface": 0
+}, {
+"_WorkflowMode": 1
+}, {
+"_ZWrite": 1
+}],
+"m_Ints": [],
+"m_TexEnvs": [{
+"_BaseMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(50, 50),
+"m_Texture": [null, 2800000, "a4a30a507a1311a438ecf1507369b28d", 3]
+}
+}, {
+"_BumpMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_DetailAlbedoMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_DetailMask": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_DetailNormalMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_EmissionMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_MainTex": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(50, 50),
+"m_Texture": [null, 2800000, "a4a30a507a1311a438ecf1507369b28d", 3]
+}
+}, {
+"_MetallicGlossMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_OcclusionMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_ParallaxMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"_SpecGlossMap": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"unity_Lightmaps": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"unity_LightmapsInd": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}, {
+"unity_ShadowMasks": {
+"m_Offset": Vector2(0, 0),
+"m_Scale": Vector2(1, 1),
+"m_Texture": [null, 0, null, null]
+}
+}],
+"serializedVersion": 3
+},
+"m_Shader": [null, 4800000, "933532a4fcc9baf4fa0491de14d08ed7", 3],
+"m_ValidKeywords": [],
+"serializedVersion": 8,
+"stringTagMap": {
+"RenderType": "Opaque"
+}
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3j6gm"]
+material = SubResource("StandardMaterial3D_jn38t")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xr3p1"]
+size = Vector3(2, 0.001, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gyb2q"]
+font_size = 24
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_v2br7")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_aa4i7")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2, 1.5, 0.025)
+collision_mask = 7
+gravity = 20.0
+
+[node name="env&light" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_qj1pw")
+
+[node name="dl3d" type="DirectionalLight3D" parent="env&light"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 1)
+current = true
+script = ExtResource("3_yb8cg")
+player = NodePath("../Player")
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = ExtResource("4_5kud7")
+mesh = SubResource("PlaneMesh_3j6gm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_xr3p1")
+
+[node name="FPS" parent="." instance=ExtResource("5_ixcvf")]
+label_settings = SubResource("LabelSettings_gyb2q")
+
+[node name="Wall" parent="." instance=ExtResource("7_3xxqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0)
+
+[node name="Wall2" parent="." instance=ExtResource("7_3xxqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0.5, 0)
+
+[node name="Wall3" parent="." instance=ExtResource("7_3xxqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.25, 0)
+
+[node name="Counters" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0.6)
+
+[node name="Base_Container_Counter" parent="Counters" instance=ExtResource("14_q2e4u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.625)
+type = ""
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Clear_Counter" parent="Counters" instance=ExtResource("12_3c5xn")]
+transform = Transform3D(1.86265e-08, 0, 1, 0, 1, 0, -1, 0, 1.86265e-08, -5, 0, 6.25)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Clear_Counter2" parent="Counters" instance=ExtResource("12_3c5xn")]
+transform = Transform3D(1.86265e-08, 0, 1, 0, 1, 0, -1, 0, 1.86265e-08, -5, 0, 8.125)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Clear_Counter4" parent="Counters" instance=ExtResource("12_3c5xn")]
+transform = Transform3D(-1, 0, -2.50849e-08, 0, 1, 0, 2.50849e-08, 0, -1, -2.5, 0, 9.375)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Clear_Counter5" parent="Counters" instance=ExtResource("12_3c5xn")]
+transform = Transform3D(-1, 0, -2.50849e-08, 0, 1, 0, 2.50849e-08, 0, -1, 0, 0, 9.375)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Clear_Counter6" parent="Counters" instance=ExtResource("12_3c5xn")]
+transform = Transform3D(-1, 0, -2.50849e-08, 0, 1, 0, 2.50849e-08, 0, -1, 2.5, 0, 9.375)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Trash_Bin_Counter" parent="Counters" instance=ExtResource("18_8w7u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.75)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Trash_Bin_Counter2" parent="Counters" instance=ExtResource("18_8w7u7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, 6.75)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Bread_Container_Counter" parent="Counters" instance=ExtResource("8_4ipu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2.25)
+
+[node name="Cabbage_Container_Counter" parent="Counters" instance=ExtResource("9_ql0l1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2.25)
+
+[node name="Cheese_Container_Counter" parent="Counters" instance=ExtResource("13_1eld5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 2.25)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="MattyPattyUncooked_Container_Counter" parent="Counters" instance=ExtResource("11_ab6fb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 2.25)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Tomato_Container_Counter" parent="Counters" instance=ExtResource("12_yo1jd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 0, 2.25)
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
+
+[node name="Cutting_Counter" parent="Counters" instance=ExtResource("13_p46un")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 2.25)
+
+[node name="Cutting_Counter2" parent="Counters" instance=ExtResource("13_p46un")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.75, 0, 2.25)
+handle_prog_on = "Counter"
+
+[node name="Stove_Counter" parent="Counters" instance=ExtResource("19_yps3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2.25)
+
+[node name="Plates_Counter" parent="Counters" instance=ExtResource("18_3gdvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75, 0, 6)
+
+[node name="Plates_Counter2" parent="Counters" instance=ExtResource("18_3gdvx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+
+[node name="Stove_Counter2" parent="Counters" instance=ExtResource("19_yps3e")]
+transform = Transform3D(-1.86265e-08, 0, -1, 0, 1, 0, 1, 0, -1.86265e-08, 8.25, 0, 3.75)
+handle_prog_on = "Counter"

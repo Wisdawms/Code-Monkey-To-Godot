@@ -1,0 +1,42 @@
+[gd_resource type="Animation" format=3 uid="uid://b7fryidp0dp8j"]
+
+[resource]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knife/Trail:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0166667, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Chopping Board")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 1.291, 0)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Knife")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.1, 1, -0.423, 1.498, 0.396, 0.2, 1, -0.423, 1.498, 0.396)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Knife")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, -0.512, 0.703, 0.488, 0.116667, 1, -0.37091, -0.249275, 0.601954, 0.66177, 0.2, 1, -0.37091, -0.249275, 0.601954, 0.66177)
+metadata/resolved_to_default_paths = {
+"TChopping Board": ["Chopping Board", "", 4],
+"TKnife": ["Knife", "", 4],
+"VKnife/Trail:visible": ["Knife/Trail", "m_IsActive", 1]
+}

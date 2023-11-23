@@ -1,0 +1,289 @@
+[gd_scene load_steps=14 format=3 uid="uid://csdsgppw14yh7"]
+
+[ext_resource type="Texture2D" uid="uid://nk06rncvgtjd" path="res://new_viewport_texture.tres" id="1_6irft"]
+[ext_resource type="Script" path="res://scenes/counters/Progress_Bar_Sprite.gd" id="3_ccskm"]
+[ext_resource type="Script" path="res://scenes/counters/Label3D.gd" id="3_lt7r6"]
+[ext_resource type="Texture2D" uid="uid://b5pjn5e4ldktg" path="res://label_viewporttext.tres" id="3_ms8qt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5otjn"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("1_6irft")
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+texture_filter = 2
+texture_repeat = false
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="Animation" id="Animation_34uct"]
+resource_name = "hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material_override:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../text_3d/text_3d:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../text_3d/text_3d:material_override:albedo_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lerb3"]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material_override:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../text_3d/text_3d:material_override:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x6rfi"]
+resource_name = "RESET"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material_override:albedo_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../text_3d/text_3d:material_override:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e52it"]
+resource_local_to_scene = true
+_data = {
+"RESET": SubResource("Animation_x6rfi"),
+"hide": SubResource("Animation_34uct"),
+"show": SubResource("Animation_lerb3")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8lydq"]
+resource_local_to_scene = true
+bg_color = Color(0.207843, 0.227451, 0.301961, 1)
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.113725, 0.113725, 0.152941, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+shadow_color = Color(0, 0, 0, 0.490196)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5sjdg"]
+resource_local_to_scene = true
+bg_color = Color(0.631373, 0.392157, 0.196078, 1)
+border_width_left = 32
+border_width_top = 32
+border_width_right = 32
+border_width_bottom = 32
+border_color = Color(0.113725, 0.113725, 0.152941, 1)
+corner_radius_top_left = 128
+corner_radius_top_right = 128
+corner_radius_bottom_right = 128
+corner_radius_bottom_left = 128
+shadow_size = 16
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvulg"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("3_ms8qt")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gtnrf"]
+viewport_path = NodePath("text_3d/text_3d/SubViewport")
+
+[node name="counter_hud" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="prog_bar_sprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5otjn")
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_6irft")
+script = ExtResource("3_ccskm")
+
+[node name="prog_anim" type="AnimationPlayer" parent="prog_bar_sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_e52it")
+}
+autoplay = "RESET"
+
+[node name="SubViewport" type="SubViewport" parent="prog_bar_sprite"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(1920, 480)
+
+[node name="Control" type="Control" parent="prog_bar_sprite/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="prog_bar_sprite/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -958.5
+offset_top = -239.0
+offset_right = 958.5
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_8lydq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5sjdg")
+max_value = 1.0
+step = 0.001
+value = 1.0
+show_percentage = false
+
+[node name="text_3d" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386023, 0)
+script = ExtResource("3_lt7r6")
+
+[node name="text_3d" type="Sprite3D" parent="text_3d"]
+transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qvulg")
+pixel_size = 0.03
+texture = SubResource("ViewportTexture_gtnrf")
+
+[node name="SubViewport" type="SubViewport" parent="text_3d/text_3d"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(877, 512)
+
+[node name="Control" type="RichTextLabel" parent="text_3d/text_3d/SubViewport"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -68.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.878431, 0.172549, 0.172549, 1)
+theme_override_colors/font_outline_color = Color(0.376471, 0.145098, 0.145098, 1)
+theme_override_constants/outline_size = 55
+theme_override_font_sizes/normal_font_size = 151
+theme_override_font_sizes/bold_font_size = 100
+bbcode_enabled = true
+text = "[center][shake rate=20.0 level=50 connected =1][b]MEAT BURNING[/b][/shake][/center]"
+fit_content = true
+
+[connection signal="value_changed" from="prog_bar_sprite/SubViewport/Control/ProgressBar" to="prog_bar_sprite" method="_on_progress_bar_value_changed"]

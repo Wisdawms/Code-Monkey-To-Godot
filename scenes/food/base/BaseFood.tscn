@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ncbk7iqm1b17"]
+
+[ext_resource type="Script" path="res://scripts/base_food.gd" id="1_ky50t"]
+
+[node name="base_food" type="Node3D" groups=["food"]]
+script = ExtResource("1_ky50t")
+
+[node name="FryTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=4 format=3 uid="uid://cftya23kt6cib"]
+
+[ext_resource type="Texture2D" uid="uid://dcaflgv8bt0jq" path="res://Assets/_Assets/Textures/Icons/Bread.png" id="1_2mhau"]
+[ext_resource type="Script" path="res://scripts/KitchenObjectSO.gd" id="1_dpcwh"]
+[ext_resource type="PackedScene" uid="uid://c8evo6j2c3tl7" path="res://scenes/food/default/Bread.tscn" id="2_1acwg"]
+
+[resource]
+script = ExtResource("1_dpcwh")
+prefab = ExtResource("2_1acwg")
+Icon = ExtResource("1_2mhau")
+object_name = "Bread"

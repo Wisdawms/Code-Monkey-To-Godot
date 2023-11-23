@@ -1,0 +1,15 @@
+[gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://crrr4kpip0p6r"]
+
+[ext_resource type="Animation" uid="uid://c642w6rp52hwj" path="res://Assets/_Assets/Animations/ContainerCounterClosed.anim.tres" id="1_hr1od"]
+[ext_resource type="Animation" uid="uid://b0sywycadsfth" path="res://Assets/_Assets/Animations/ContainerCounterOpenClose.anim.tres" id="2_nk6vd"]
+
+[resource]
+resource_name = "ContainerCounter"
+_data = {
+"ContainerClosed": ExtResource("1_hr1od"),
+"ContainerOpenClose": ExtResource("2_nk6vd")
+}
+metadata/animation_guid_fileid_to_name = {
+"7e9192aa6090c834589ba44fb1d962a7:7400000": "ContainerClosed",
+"f8c1f20930651254f9dad32e4686d44d:7400000": "ContainerOpenClose"
+}

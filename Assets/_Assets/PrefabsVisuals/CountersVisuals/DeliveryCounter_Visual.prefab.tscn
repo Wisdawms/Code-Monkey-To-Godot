@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://5iixywusk3n"]
+
+[ext_resource type="ArrayMesh" uid="uid://qwwb1d10gsdb" path="res://Assets/_Assets/Meshes/Kitchen Counter.Counter.mesh" id="1_gemhb"]
+[ext_resource type="Material" uid="uid://huh6uf1ousrb" path="res://Assets/_Assets/Meshes/Kitchen Counter_Blue.mat.tres" id="2_mt53s"]
+
+[node name="DeliveryCounter_Visual" type="Node3D"]
+
+[node name="KitchenCounter" type="Node3D" parent="."]
+transform = Transform3D(1.65, 0, 0, 0, 1.5, 0, 0, 0, 1.65, 0, 0, 0)
+
+[node name="MeshRenderer" type="MeshInstance3D" parent="KitchenCounter"]
+editor_description = "[MeshRenderer 23::be1e77e8d4e81bf4292e5b46dc090583:3297719422930810476]"
+mesh = ExtResource("1_gemhb")
+surface_material_override/0 = ExtResource("2_mt53s")
+metadata/unidot_keys = {
+"m_AdditionalVertexStreams": [null, 0, null, null],
+"m_AutoUVMaxAngle": 89,
+"m_AutoUVMaxDistance": 0.5,
+"m_CastShadows": 1,
+"m_CorrespondingSourceObject": [null, 0, null, null],
+"m_DynamicOccludee": 1,
+"m_Enabled": 1,
+"m_GameObject": [null, 591945872155229481, null, null],
+"m_IgnoreNormalsForChartDetection": 0,
+"m_ImportantGI": 0,
+"m_LightProbeUsage": 1,
+"m_LightProbeVolumeOverride": [null, 0, null, null],
+"m_LightmapParameters": [null, 0, null, null],
+"m_Materials": [[null, 2100000, "ddeee0face48cd346be478cda5ba7071", 2]],
+"m_MinimumChartSize": 4,
+"m_MotionVectors": 1,
+"m_ObjectHideFlags": 0,
+"m_PrefabAsset": [null, 0, null, null],
+"m_PrefabInstance": [null, 0, null, null],
+"m_PreserveUVs": 0,
+"m_ProbeAnchor": [null, 0, null, null],
+"m_RayTraceProcedural": 0,
+"m_RayTracingMode": 2,
+"m_ReceiveGI": 1,
+"m_ReceiveShadows": 1,
+"m_ReflectionProbeUsage": 1,
+"m_RendererPriority": 0,
+"m_RenderingLayerMask": 1,
+"m_ScaleInLightmap": 1,
+"m_SelectedEditorRenderState": 3,
+"m_SortingLayer": 0,
+"m_SortingLayerID": 0,
+"m_SortingOrder": 0,
+"m_StaticBatchInfo": {
+"firstSubMesh": 0,
+"subMeshCount": 0
+},
+"m_StaticBatchRoot": [null, 0, null, null],
+"m_StaticShadowCaster": 0,
+"m_StitchLightmapSeams": 1
+}

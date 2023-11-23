@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=4 format=3 uid="uid://dyl7regwslm5f"]
+
+[ext_resource type="Texture2D" uid="uid://reqfav5lhphl" path="res://Assets/_Assets/Textures/Icons/CheeseBlock.png" id="1_amkcx"]
+[ext_resource type="Script" path="res://scripts/KitchenObjectSO.gd" id="1_hox62"]
+[ext_resource type="PackedScene" uid="uid://dlxm27k5q3t5s" path="res://scenes/food/default/CheeseBlock.tscn" id="2_ksa41"]
+
+[resource]
+script = ExtResource("1_hox62")
+prefab = ExtResource("2_ksa41")
+Icon = ExtResource("1_amkcx")
+object_name = "CheeseBlock"

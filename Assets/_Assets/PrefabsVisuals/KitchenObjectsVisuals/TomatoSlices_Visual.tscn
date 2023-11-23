@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi8wqorehhhdi"]
+
+[ext_resource type="PackedScene" uid="uid://b26etle6evaf7" path="res://Assets/_Assets/Meshes/Tomato slice.gltf" id="1_6t8wp"]
+
+[node name="TomatoSlices_Visual" type="Node3D"]
+
+[node name="Tomato slice" parent="." instance=ExtResource("1_6t8wp")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.15, 0, 0.177)
+
+[node name="Tomato slice (1)" parent="." instance=ExtResource("1_6t8wp")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -0.19, 0, 0.04)
+
+[node name="Tomato slice (2)" parent="." instance=ExtResource("1_6t8wp")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0.074, 0, -0.181)
+
+[editable path="Tomato slice"]
+[editable path="Tomato slice (1)"]
+[editable path="Tomato slice (2)"]

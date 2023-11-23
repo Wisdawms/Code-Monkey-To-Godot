@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=4 format=3 uid="uid://c6qh0bvj0hrss"]
+
+[ext_resource type="Texture2D" uid="uid://0ga51boiqwtw" path="res://Assets/_Assets/Textures/Icons/MeatPattyBurned.png" id="1_tughu"]
+[ext_resource type="PackedScene" uid="uid://di6pmmkenphd4" path="res://scenes/food/slices/meat_patty_burned.tscn" id="2_mymg0"]
+[ext_resource type="Script" path="res://scripts/KitchenObjectSO.gd" id="3_rqqw6"]
+
+[resource]
+script = ExtResource("3_rqqw6")
+prefab = ExtResource("2_mymg0")
+Icon = ExtResource("1_tughu")
+object_name = "MeatPattyBurned"

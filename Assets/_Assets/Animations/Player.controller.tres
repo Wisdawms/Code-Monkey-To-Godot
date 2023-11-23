@@ -1,0 +1,39 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=7 format=3 uid="uid://ccpyp3h0shyly"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_en4sq"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2bsva"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hqfg6"]
+advance_mode = 2
+advance_expression = "IsWalking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eruv4"]
+advance_mode = 2
+advance_expression = "not IsWalking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y2mtf"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cwkwd"]
+resource_name = "Player"
+states/End/position = Vector2(300, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_en4sq")
+states/Idle/position = Vector2(330, 360)
+states/Start/position = Vector2(300, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_2bsva")
+states/Walk/position = Vector2(330, 480)
+transitions = ["Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_hqfg6"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_eruv4"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_y2mtf")]
+
+[resource]
+"nodes/Base Layer/node" = SubResource("AnimationNodeStateMachine_cwkwd")
+"nodes/Base Layer/position" = Vector2(100, 200)
+nodes/output/position = Vector2(600, 350)
+node_connections = [&"output", 0, &"Base Layer"]
+metadata/IsWalking = false
+metadata/guid_fileid_to_animation_name = {
+"1d9b9f03f848d714abb6b7ff43d4531b:7400000": "Idle",
+"686436e1b17e56340a28f218c36b9d68:7400000": "Walk"
+}

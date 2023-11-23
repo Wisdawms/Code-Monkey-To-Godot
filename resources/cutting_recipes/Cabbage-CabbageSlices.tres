@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CuttingRecipeSO" load_steps=4 format=3 uid="uid://cb8ubngfeuvqt"]
+
+[ext_resource type="Resource" uid="uid://xthrdypf5mv5" path="res://resources/cabbage_SO.tres" id="1_j2ho7"]
+[ext_resource type="Script" path="res://scripts/CuttingRecipeSO.gd" id="1_pcrc0"]
+[ext_resource type="Resource" uid="uid://dqs5g3atm4062" path="res://resources/slices/cabbage_slices.tres" id="2_1woqq"]
+
+[resource]
+script = ExtResource("1_pcrc0")
+input = ExtResource("1_j2ho7")
+output = ExtResource("2_1woqq")
+cutting_prog_max = 5

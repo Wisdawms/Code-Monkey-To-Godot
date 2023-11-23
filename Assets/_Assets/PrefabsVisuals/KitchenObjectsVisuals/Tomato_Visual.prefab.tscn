@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqbdf81si24sm"]
+
+[ext_resource type="PackedScene" uid="uid://c6l5h11dq60s" path="res://Assets/_Assets/Meshes/Tomato.gltf" id="1_1xk5h"]
+
+[node name="Tomato_Visual" type="Node3D"]
+
+[node name="Tomato" parent="." instance=ExtResource("1_1xk5h")]
+transform = Transform3D(4.26, 0, 0, 0, 4.26, 0, 0, 0, 4.26, 0, 0, 0)
+
+[editable path="Tomato"]

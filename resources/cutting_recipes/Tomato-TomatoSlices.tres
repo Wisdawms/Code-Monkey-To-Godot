@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CuttingRecipeSO" load_steps=4 format=3 uid="uid://c2cyx00w6lbrw"]
+
+[ext_resource type="Script" path="res://scripts/CuttingRecipeSO.gd" id="1_gt1xb"]
+[ext_resource type="Resource" uid="uid://c72vnjx8le14x" path="res://resources/tomato_SO.tres" id="1_htdpy"]
+[ext_resource type="Resource" uid="uid://cd4882h1tcysr" path="res://resources/slices/tomato_slices.tres" id="2_l6u4a"]
+
+[resource]
+script = ExtResource("1_gt1xb")
+input = ExtResource("1_htdpy")
+output = ExtResource("2_l6u4a")
+cutting_prog_max = 3

@@ -1,0 +1,14 @@
+[gd_scene load_steps=5 format=3 uid="uid://di1tlpfierfh1"]
+
+[ext_resource type="PackedScene" uid="uid://sp12slmo7dw5" path="res://scenes/food/slices/BaseFoodSlices.tscn" id="1_hfdfh"]
+[ext_resource type="Resource" uid="uid://cxumqfd6vu2dg" path="res://resources/slices/cheese_block_slices.tres" id="2_ajblw"]
+[ext_resource type="Texture2D" uid="uid://clslwqvs7re0d" path="res://Assets/_Assets/Textures/Icons/CheeseSlice.png" id="2_du6rx"]
+[ext_resource type="PackedScene" uid="uid://bnbc541hk65" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/CheeseSlices_Visual.prefab.tscn" id="2_gjsh1"]
+
+[node name="cheese_block_slice" instance=ExtResource("1_hfdfh")]
+kitchen_object_so = ExtResource("2_ajblw")
+object_name = "CheeseBlockSlices"
+default_name = "CheeseBlock"
+icon = ExtResource("2_du6rx")
+
+[node name="CheeseSlices_Visual" parent="." index="0" instance=ExtResource("2_gjsh1")]

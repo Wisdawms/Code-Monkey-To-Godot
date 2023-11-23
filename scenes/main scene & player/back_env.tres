@@ -1,0 +1,70 @@
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://clndxvoywpt7g"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh32d"]
+seed = 230
+frequency = 0.0675
+offset = Vector3(-811.88, 0, 0)
+fractal_lacunarity = 0.56
+fractal_gain = -1.07
+fractal_weighted_strength = 0.29
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rs34n"]
+seamless = true
+seamless_blend_skirt = 0.56
+noise = SubResource("FastNoiseLite_fh32d")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ogjn1"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.368627, 0.368627, 0.368627, 1)
+sky_energy_multiplier = 0.63
+sky_cover = SubResource("NoiseTexture2D_rs34n")
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_energy_multiplier = 0.0
+sun_angle_max = 55.12
+
+[sub_resource type="Sky" id="Sky_dgh6k"]
+sky_material = SubResource("ProceduralSkyMaterial_ogjn1")
+
+[resource]
+background_mode = 2
+background_color = Color(0.141176, 0.133333, 0.156863, 1)
+background_energy_multiplier = 0.58
+sky = SubResource("Sky_dgh6k")
+sky_custom_fov = 79.3
+ambient_light_source = 2
+ambient_light_color = Color(0.145098, 0.101961, 0.239216, 1)
+ambient_light_sky_contribution = 0.33
+ambient_light_energy = 7.94
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 1.15
+tonemap_white = 9.75
+ssr_max_steps = 128
+ssr_fade_in = 1.63925
+ssr_fade_out = 1.86607
+ssr_depth_tolerance = 0.01
+ssao_radius = 2.06
+ssao_intensity = 5.4
+ssao_detail = 5.0
+ssao_horizon = 0.43
+ssao_sharpness = 0.9
+ssao_light_affect = 0.2
+ssao_ao_channel_affect = 0.11
+sdfgi_use_occlusion = true
+sdfgi_cascades = 2
+sdfgi_min_cell_size = 0.01
+sdfgi_cascade0_distance = 0.64
+sdfgi_max_distance = 2.56
+sdfgi_y_scale = 2
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 8.0
+glow_strength = 0.8
+glow_blend_mode = 1
+glow_hdr_threshold = 1.71
+glow_hdr_scale = 0.54
+glow_hdr_luminance_cap = 1.91
+glow_map_strength = 0.64
+adjustment_enabled = true
+adjustment_contrast = 0.91
+adjustment_saturation = 1.26

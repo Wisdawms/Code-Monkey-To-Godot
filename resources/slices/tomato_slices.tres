@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=4 format=3 uid="uid://cd4882h1tcysr"]
+
+[ext_resource type="Script" path="res://scripts/KitchenObjectSO.gd" id="1_1wl33"]
+[ext_resource type="Texture2D" uid="uid://njibj3d8boft" path="res://Assets/_Assets/Textures/Icons/TomatoSlice.png" id="1_q4mgi"]
+[ext_resource type="PackedScene" uid="uid://cfi2pbgavclsr" path="res://scenes/food/slices/TomatoSlices.tscn" id="2_o7k6l"]
+
+[resource]
+script = ExtResource("1_1wl33")
+prefab = ExtResource("2_o7k6l")
+Icon = ExtResource("1_q4mgi")
+object_name = "TomatoSlices"

@@ -1,0 +1,39 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=7 format=3 uid="uid://n0c3dn1qwknj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_67418"]
+animation = &"ContainerClosed"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i4b0q"]
+animation = &"ContainerOpenClose"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ce73b"]
+advance_mode = 2
+advance_expression = "OpenClose"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yvay2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yvep2"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bfdea"]
+resource_name = "ContainerCounter"
+states/ContainerClosed/node = SubResource("AnimationNodeAnimation_67418")
+states/ContainerClosed/position = Vector2(330, 370)
+states/ContainerOpenClose/node = SubResource("AnimationNodeAnimation_i4b0q")
+states/ContainerOpenClose/position = Vector2(330, 490)
+states/End/position = Vector2(300, 100)
+states/Start/position = Vector2(300, 100)
+transitions = ["ContainerClosed", "ContainerOpenClose", SubResource("AnimationNodeStateMachineTransition_ce73b"), "ContainerOpenClose", "ContainerClosed", SubResource("AnimationNodeStateMachineTransition_yvay2"), "Start", "ContainerClosed", SubResource("AnimationNodeStateMachineTransition_yvep2")]
+
+[resource]
+"nodes/Base Layer/node" = SubResource("AnimationNodeStateMachine_bfdea")
+"nodes/Base Layer/position" = Vector2(100, 200)
+nodes/output/position = Vector2(600, 350)
+node_connections = [&"output", 0, &"Base Layer"]
+metadata/OpenClose = false
+metadata/guid_fileid_to_animation_name = {
+"7e9192aa6090c834589ba44fb1d962a7:7400000": "ContainerClosed",
+"f8c1f20930651254f9dad32e4686d44d:7400000": "ContainerOpenClose"
+}

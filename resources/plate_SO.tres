@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=4 format=3 uid="uid://bymlgg8h6ayan"]
+
+[ext_resource type="Script" path="res://scripts/KitchenObjectSO.gd" id="1_rg371"]
+[ext_resource type="Texture2D" uid="uid://3rm6e5m3q8hl" path="res://Assets/_Assets/Textures/Icons/Plate.png" id="1_sal7x"]
+[ext_resource type="PackedScene" uid="uid://deahpv5h5xi4" path="res://scenes/food/base/Plate.tscn" id="2_q4drk"]
+
+[resource]
+script = ExtResource("1_rg371")
+prefab = ExtResource("2_q4drk")
+Icon = ExtResource("1_sal7x")
+object_name = "Plate"

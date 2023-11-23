@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnbc541hk65"]
+
+[ext_resource type="PackedScene" uid="uid://vffj6nrpp78e" path="res://Assets/_Assets/Meshes/Cheese slice.gltf" id="1_1k7ul"]
+
+[node name="CheeseSlices_Visual" type="Node3D"]
+
+[node name="Cheese slice" parent="." instance=ExtResource("1_1k7ul")]
+transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 0, 0, 0)
+
+[node name="Cheese slice (1)" parent="." instance=ExtResource("1_1k7ul")]
+transform = Transform3D(-1.08491, -0.489767, -2.75374, -0.34667, 2.95442, -0.388878, 2.77539, 0.177582, -1.12502, -0.206, 0, -0.015)
+
+[node name="Cheese slice (2)" parent="." instance=ExtResource("1_1k7ul")]
+transform = Transform3D(1.18161, 0.0909272, -2.756, -0.360432, 2.97774, -0.0562888, 2.73384, 0.353288, 1.18376, 0.186, 0.043, -0.025)
+
+[editable path="Cheese slice"]
+[editable path="Cheese slice (1)"]
+[editable path="Cheese slice (2)"]

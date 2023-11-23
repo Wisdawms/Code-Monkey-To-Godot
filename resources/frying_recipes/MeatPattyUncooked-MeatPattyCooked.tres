@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FryingRecipeSO" load_steps=4 format=3 uid="uid://q63dfm8e6udi"]
+
+[ext_resource type="Resource" uid="uid://dovo8vbvck1w2" path="res://resources/meat_patty_uncooked_SO.tres" id="1_afdgs"]
+[ext_resource type="Script" path="res://scripts/FryingRecipeSO.gd" id="1_fbevi"]
+[ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="2_twk1l"]
+
+[resource]
+script = ExtResource("1_fbevi")
+input = ExtResource("1_afdgs")
+output = ExtResource("2_twk1l")
+frying_timer_max = 3.0

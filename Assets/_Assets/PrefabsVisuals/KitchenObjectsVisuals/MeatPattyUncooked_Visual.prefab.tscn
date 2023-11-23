@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b02gtpfwcd1uy"]
+
+[ext_resource type="PackedScene" uid="uid://bpxqfguxjhkry" path="res://Assets/_Assets/Meshes/Uncooked meat patty.gltf" id="1_yc7lw"]
+
+[node name="MeatPattyUncooked_Visual" type="Node3D"]
+
+[node name="Uncooked meat patty" parent="." instance=ExtResource("1_yc7lw")]
+transform = Transform3D(3.2, 0, 0, 0, 3.2, 0, 0, 0, 3.2, 0, 0.05, 0)
+
+[editable path="Uncooked meat patty"]

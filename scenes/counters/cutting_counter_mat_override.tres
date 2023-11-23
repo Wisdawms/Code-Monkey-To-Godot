@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cokx6ges60brp"]
+
+[resource]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+heightmap_scale = 16.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+texture_filter = 2
+texture_repeat = false
+billboard_mode = 1
+billboard_keep_scale = true

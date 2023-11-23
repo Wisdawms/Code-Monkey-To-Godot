@@ -1,0 +1,66 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bpxqfguxjhkry"
+path="res://.godot/imported/Uncooked meat patty.gltf-8b431bc3976afd35427c7c135b60f177.scn"
+
+[deps]
+
+source_file="res://Assets/_Assets/Meshes/Uncooked meat patty.gltf"
+dest_files=["res://.godot/imported/Uncooked meat patty.gltf-8b431bc3976afd35427c7c135b60f177.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name="Root Scene"
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=false
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path="res://addons/unidot_importer/post_import_unity_model.gd"
+_subresources={
+"animations": {},
+"materials": {
+"Meat": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets/_Assets/Meshes/Uncooked meat patty.Meat.material"
+}
+},
+"meshes": {
+"Root Scene_Uncooked meat patty": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/_Assets/Meshes/Uncooked meat patty.Uncooked meat patty.mesh"
+},
+"Uncooked meat patty": {
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Assets/_Assets/Meshes/Uncooked meat patty.Uncooked meat patty.mesh"
+}
+},
+"nodes": {
+"PATH:AnimationPlayer": {
+"optimizer/enabled": true,
+"optimizer/max_angular_error": 0.00277778,
+"optimizer/max_linear_error": 0.5
+}
+}
+}
+gltf/naming_version=0
+gltf/embedded_image_handling=1

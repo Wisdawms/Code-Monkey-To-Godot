@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://db3fc2xnet3li"]
+
+[ext_resource type="Script" path="res://scenes/counters/Label3D.gd" id="1_4dmci"]
+[ext_resource type="PackedScene" uid="uid://cgawgwi7dl0vw" path="res://scenes/text_control.tscn" id="2_dtnta"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_njqr3"]
+viewport_path = NodePath("text_3d/SubViewport")
+
+[node name="text_3d" type="Node3D"]
+script = ExtResource("1_4dmci")
+
+[node name="text_3d" type="Sprite3D" parent="."]
+transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
+pixel_size = 0.03
+texture = SubResource("ViewportTexture_njqr3")
+
+[node name="SubViewport" type="SubViewport" parent="text_3d"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(877, 512)
+
+[node name="Control" parent="text_3d/SubViewport" instance=ExtResource("2_dtnta")]

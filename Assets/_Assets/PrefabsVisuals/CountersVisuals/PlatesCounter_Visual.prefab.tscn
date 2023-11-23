@@ -1,0 +1,113 @@
+[gd_scene load_steps=3 format=3 uid="uid://crm5jxgy3qv7u"]
+
+[ext_resource type="ArrayMesh" uid="uid://qwwb1d10gsdb" path="res://Assets/_Assets/Meshes/Kitchen Counter.Counter.mesh" id="1_44fc4"]
+[ext_resource type="Material" uid="uid://ddsj8284sjv3j" path="res://Assets/_Assets/Meshes/Kitchen Counter.Kitchen Counter.material" id="2_a1dox"]
+
+[node name="PlatesCounter_Visual" type="Node3D"]
+
+[node name="KitchenCounter" type="Node3D" parent="."]
+transform = Transform3D(1.7, 0, 0, 0, 1.5, 0, 0, 0, 1.7, 0, 0, 0)
+
+[node name="MeshRenderer" type="MeshInstance3D" parent="KitchenCounter"]
+editor_description = "[MeshRenderer 23::e21b499d164095947b7559f0267f0e63:867046696110709345]"
+mesh = ExtResource("1_44fc4")
+surface_material_override/0 = ExtResource("2_a1dox")
+metadata/unidot_keys = {
+"m_AdditionalVertexStreams": [null, 0, null, null],
+"m_AutoUVMaxAngle": 89,
+"m_AutoUVMaxDistance": 0.5,
+"m_CastShadows": 1,
+"m_CorrespondingSourceObject": [null, 0, null, null],
+"m_DynamicOccludee": 1,
+"m_Enabled": 1,
+"m_GameObject": [null, 4472461010448373620, null, null],
+"m_IgnoreNormalsForChartDetection": 0,
+"m_ImportantGI": 0,
+"m_LightProbeUsage": 1,
+"m_LightProbeVolumeOverride": [null, 0, null, null],
+"m_LightmapParameters": [null, 0, null, null],
+"m_Materials": [[null, 592705374249410987, "e3d496c6436b0cf4a8eef3d8865e8639", 3]],
+"m_MinimumChartSize": 4,
+"m_MotionVectors": 1,
+"m_ObjectHideFlags": 0,
+"m_PrefabAsset": [null, 0, null, null],
+"m_PrefabInstance": [null, 0, null, null],
+"m_PreserveUVs": 0,
+"m_ProbeAnchor": [null, 0, null, null],
+"m_RayTraceProcedural": 0,
+"m_RayTracingMode": 2,
+"m_ReceiveGI": 1,
+"m_ReceiveShadows": 1,
+"m_ReflectionProbeUsage": 1,
+"m_RendererPriority": 0,
+"m_RenderingLayerMask": 1,
+"m_ScaleInLightmap": 1,
+"m_SelectedEditorRenderState": 3,
+"m_SortingLayer": 0,
+"m_SortingLayerID": 0,
+"m_SortingOrder": 0,
+"m_StaticBatchInfo": {
+"firstSubMesh": 0,
+"subMeshCount": 0
+},
+"m_StaticBatchRoot": [null, 0, null, null],
+"m_StaticShadowCaster": 0,
+"m_StitchLightmapSeams": 1
+}
+
+[node name="CircleSprite" type="Node3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, 0, 1.268, 0)
+
+[node name="SpriteRenderer" type="Node" parent="CircleSprite"]
+metadata/unidot_keys = {
+"m_AdaptiveModeThreshold": 0.5,
+"m_AutoUVMaxAngle": 89,
+"m_AutoUVMaxDistance": 0.5,
+"m_CastShadows": 0,
+"m_Color": Color(1, 1, 1, 1),
+"m_CorrespondingSourceObject": [null, 0, null, null],
+"m_DrawMode": 0,
+"m_DynamicOccludee": 1,
+"m_Enabled": 1,
+"m_FlipX": 0,
+"m_FlipY": 0,
+"m_GameObject": [null, 433585800057296854, null, null],
+"m_IgnoreNormalsForChartDetection": 0,
+"m_ImportantGI": 0,
+"m_LightProbeUsage": 1,
+"m_LightProbeVolumeOverride": [null, 0, null, null],
+"m_LightmapParameters": [null, 0, null, null],
+"m_MaskInteraction": 0,
+"m_Materials": [[null, 10754, "0000000000000000f000000000000000", 0]],
+"m_MinimumChartSize": 4,
+"m_MotionVectors": 1,
+"m_ObjectHideFlags": 0,
+"m_PrefabAsset": [null, 0, null, null],
+"m_PrefabInstance": [null, 0, null, null],
+"m_PreserveUVs": 0,
+"m_ProbeAnchor": [null, 0, null, null],
+"m_RayTraceProcedural": 0,
+"m_RayTracingMode": 0,
+"m_ReceiveGI": 1,
+"m_ReceiveShadows": 0,
+"m_ReflectionProbeUsage": 1,
+"m_RendererPriority": 0,
+"m_RenderingLayerMask": 1,
+"m_ScaleInLightmap": 1,
+"m_SelectedEditorRenderState": 0,
+"m_Size": Vector2(1, 1),
+"m_SortingLayer": 0,
+"m_SortingLayerID": 0,
+"m_SortingOrder": 0,
+"m_Sprite": [null, 21300000, "256b17f65ca4560449866be321c6b6b2", 3],
+"m_SpriteSortPoint": 0,
+"m_SpriteTileMode": 0,
+"m_StaticBatchInfo": {
+"firstSubMesh": 0,
+"subMeshCount": 0
+},
+"m_StaticBatchRoot": [null, 0, null, null],
+"m_StaticShadowCaster": 0,
+"m_StitchLightmapSeams": 1,
+"m_WasSpriteAssigned": 1
+}

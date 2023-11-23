@@ -1,0 +1,48 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=9 format=3 uid="uid://bpuijasig4gki"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yg2xc"]
+animation = &"CuttingCounterCut"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3y0dm"]
+animation = &"CuttingCounterCut"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v4x2c"]
+animation = &"CuttingCounterIdle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ssbcs"]
+advance_mode = 2
+advance_expression = "Cut"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p2m8r"]
+advance_mode = 2
+advance_expression = "Cut"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e6y30"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2nbf6"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_syvqc"]
+resource_name = "CuttingCounter"
+states/CuttingCounterCut/node = SubResource("AnimationNodeAnimation_yg2xc")
+states/CuttingCounterCut/position = Vector2(650, 210)
+states/CuttingCounterCut~Dup1/node = SubResource("AnimationNodeAnimation_3y0dm")
+states/CuttingCounterCut~Dup1/position = Vector2(675, 235)
+states/CuttingCounterIdle/node = SubResource("AnimationNodeAnimation_v4x2c")
+states/CuttingCounterIdle/position = Vector2(330, 330)
+states/End/position = Vector2(300, 100)
+states/Start/position = Vector2(300, 100)
+transitions = ["CuttingCounterIdle", "CuttingCounterCut", SubResource("AnimationNodeStateMachineTransition_ssbcs"), "CuttingCounterCut", "CuttingCounterCut~Dup1", SubResource("AnimationNodeStateMachineTransition_p2m8r"), "CuttingCounterCut~Dup1", "CuttingCounterCut", SubResource("AnimationNodeStateMachineTransition_p2m8r"), "CuttingCounterCut", "CuttingCounterIdle", SubResource("AnimationNodeStateMachineTransition_e6y30"), "CuttingCounterCut~Dup1", "CuttingCounterIdle", SubResource("AnimationNodeStateMachineTransition_e6y30"), "Start", "CuttingCounterIdle", SubResource("AnimationNodeStateMachineTransition_2nbf6")]
+
+[resource]
+"nodes/Base Layer/node" = SubResource("AnimationNodeStateMachine_syvqc")
+"nodes/Base Layer/position" = Vector2(100, 200)
+nodes/output/position = Vector2(600, 350)
+node_connections = [&"output", 0, &"Base Layer"]
+metadata/Cut = false
+metadata/guid_fileid_to_animation_name = {
+"8e51262abb6b5fa4288bd453b7cfb7a6:7400000": "CuttingCounterIdle",
+"d7dc3ae032292ec4790e41ed41f65f1d:7400000": "CuttingCounterCut"
+}

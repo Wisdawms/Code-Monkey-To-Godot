@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://c45cy6vcrdq2j"]
+
+[ext_resource type="PackedScene" uid="uid://cbw4bxdnc30iv" path="res://Assets/_Assets/Meshes/Cabbage slice_shaped.gltf" id="1_ir1ey"]
+
+[node name="CabbageSliced_Visual" type="Node3D"]
+
+[node name="Lattuce slice_shaped" parent="." instance=ExtResource("1_ir1ey")]
+transform = Transform3D(-1.80778, 0, 0.855523, 0, 2, 0, -0.855523, 0, -1.80778, -0.001, 0.021, 0.161)
+
+[node name="Lattuce slice_shaped (1)" parent="." instance=ExtResource("1_ir1ey")]
+transform = Transform3D(-1.50329, 0, -1.31914, 0, 2, 0, 1.31914, 0, -1.50329, 0.136, 0.00600003, 0.06)
+
+[node name="Lattuce slice_shaped (2)" parent="." instance=ExtResource("1_ir1ey")]
+transform = Transform3D(-1.9514, 0, -0.438206, 0, 2, 0, 0.438206, 0, -1.9514, -0.199, 0.006, -0.007)
+
+[node name="Lattuce slice_shaped (3)" parent="." instance=ExtResource("1_ir1ey")]
+transform = Transform3D(0.255134, -0.0202075, -1.98356, 0.157913, 1.99376, 2.74442e-09, 1.97736, -0.156614, 0.255933, 0.139, 0.006, -0.147)
+
+[node name="Lattuce slice_shaped (4)" parent="." instance=ExtResource("1_ir1ey")]
+transform = Transform3D(-1.62758, 0.000641935, -1.16232, 0.0807847, 1.99523, -0.11202, 1.15951, -0.13811, -1.62372, -0.114, 0.026, -0.212)
+
+[editable path="Lattuce slice_shaped"]
+[editable path="Lattuce slice_shaped (1)"]
+[editable path="Lattuce slice_shaped (2)"]
+[editable path="Lattuce slice_shaped (3)"]
+[editable path="Lattuce slice_shaped (4)"]

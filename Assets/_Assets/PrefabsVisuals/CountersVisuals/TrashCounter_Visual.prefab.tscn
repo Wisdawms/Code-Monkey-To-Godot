@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dap0thwqt6f6r"]
+
+[ext_resource type="ArrayMesh" uid="uid://cftd6lib4s1gw" path="res://Assets/_Assets/Meshes/Trash bin.trash bin.mesh" id="1_sfonc"]
+
+[node name="trash bin" type="MeshInstance3D"]
+mesh = ExtResource("1_sfonc")
+skeleton = NodePath("")

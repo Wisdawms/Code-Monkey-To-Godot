@@ -1,0 +1,669 @@
+[gd_resource type="Resource" load_steps=26 format=3 uid="uid://dmvn8qwdo4616"]
+
+[ext_resource type="Script" path="res://addons/unidot_importer/asset_meta.gd" id="1_ekbwu"]
+[ext_resource type="Script" path="res://addons/unidot_importer/asset_database.gd" id="2_n5718"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbfgv"]
+resource_name = "Default-Line"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u1c6"]
+resource_name = "PINK"
+shading_mode = 0
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="Resource" id="Resource_uieha"]
+resource_name = "UISprite"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4ejc"]
+resource_name = "Font Material"
+
+[sub_resource type="BoxMesh" id="BoxMesh_dhjkw"]
+resource_name = "Cube"
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rb76m"]
+resource_name = "Cylinder"
+
+[sub_resource type="SphereMesh" id="SphereMesh_03yvd"]
+resource_name = "Sphere"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lg5l0"]
+resource_name = "Capsule"
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iib0n"]
+resource_name = "Plane"
+size = Vector2(10, 10)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="QuadMesh" id="QuadMesh_bbiiu"]
+resource_name = "Quad"
+flip_faces = true
+size = Vector2(-1, 1)
+
+[sub_resource type="Resource" id="Resource_cvuwi"]
+resource_name = "Library/unity default resources"
+script = ExtResource("1_ekbwu")
+path = "Library/unity default resources"
+guid = "0000000000000000e000000000000000"
+importer_keys = {}
+importer_type = ""
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {}
+godot_resources = {
+10001: SubResource("Resource_uieha"),
+10100: SubResource("StandardMaterial3D_f4ejc"),
+10102: SubResource("Resource_uieha"),
+10202: SubResource("BoxMesh_dhjkw"),
+10206: SubResource("CylinderMesh_rb76m"),
+10207: SubResource("SphereMesh_03yvd"),
+10208: SubResource("CapsuleMesh_lg5l0"),
+10209: SubResource("PlaneMesh_iib0n"),
+10210: SubResource("QuadMesh_bbiiu")
+}
+main_object_id = 0
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4r3d8"]
+resource_name = "Default-Skybox"
+sky_top_color = Color(0.454902, 0.678431, 0.87451, 1)
+sky_horizon_color = Color(0.894118, 0.952941, 1, 1)
+sky_curve = 0.0731028
+ground_bottom_color = Color(0.454902, 0.470588, 0.490196, 1)
+ground_horizon_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0aiw"]
+resource_name = "Default-ParticleSystem"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_end36"]
+resource_name = "Sprites-Default"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7afq"]
+resource_name = "Sprites-Mask"
+
+[sub_resource type="Resource" id="Resource_eaqrj"]
+resource_name = "Resources/unity_builtin_extra"
+script = ExtResource("1_ekbwu")
+path = "Resources/unity_builtin_extra"
+guid = "0000000000000000f000000000000000"
+importer_keys = {}
+importer_type = ""
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {}
+godot_resources = {
+10302: SubResource("StandardMaterial3D_cbfgv"),
+10303: SubResource("StandardMaterial3D_cbfgv"),
+10304: SubResource("ProceduralSkyMaterial_4r3d8"),
+10306: SubResource("StandardMaterial3D_cbfgv"),
+10308: SubResource("StandardMaterial3D_d0aiw"),
+10754: SubResource("StandardMaterial3D_end36"),
+10758: SubResource("StandardMaterial3D_w7afq"),
+10905: SubResource("Resource_uieha")
+}
+main_object_id = 0
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="Resource" id="Resource_32ipo"]
+resource_name = "Assets/_Assets/Animations/CuttingCounter.controller"
+script = ExtResource("1_ekbwu")
+path = "Assets/_Assets/Animations/CuttingCounter.controller.tres"
+guid = "d87dfd3351d974345a720c6f6cefbd37"
+importer_keys = {
+"externalObjects": [],
+"mainObjectFileID": 9100000
+}
+importer_type = "NativeFormatImporter"
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {
+-6520405846048007411: 1102,
+-6090484737093469784: 1101,
+-5026359573715793066: 1107,
+-2968155584977858811: 1101,
+-2009780075452151638: 1101,
+9100000: 91,
+4993720664110070679: 1101,
+5719456674392618763: 1102
+}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {
+"AnimatorController": PackedInt64Array(9100000),
+"AnimatorState": PackedInt64Array(-6520405846048007411, 5719456674392618763, 5719456674392618763),
+"AnimatorStateMachine": PackedInt64Array(-5026359573715793066),
+"AnimatorStateTransition": PackedInt64Array(-6090484737093469784, -2968155584977858811, -2009780075452151638, 4993720664110070679)
+}
+godot_resources = {
+-9100000: "res://Assets/_Assets/Animations/CuttingCounter.library.tres",
+9100000: "Assets/_Assets/Animations/CuttingCounter.controller.tres"
+}
+main_object_id = 9100000
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {
+"8e51262abb6b5fa4288bd453b7cfb7a6": 7400000,
+"d7dc3ae032292ec4790e41ed41f65f1d": 7400000
+}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="Resource" id="Resource_e4swn"]
+resource_name = "Assets/_Assets/Animations/CuttingCounterIdle.anim"
+script = ExtResource("1_ekbwu")
+path = "Assets/_Assets/Animations/CuttingCounterIdle.anim.tres"
+guid = "8e51262abb6b5fa4288bd453b7cfb7a6"
+importer_keys = {
+"externalObjects": [],
+"mainObjectFileID": 7400000
+}
+importer_type = "NativeFormatImporter"
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {
+7400000: 74
+}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {
+"AnimationClip": PackedInt64Array(7400000, 7400000)
+}
+godot_resources = {
+7400000: "Assets/_Assets/Animations/CuttingCounterIdle.anim.tres"
+}
+main_object_id = 7400000
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="Resource" id="Resource_ul1ga"]
+resource_name = "Assets/_Assets/Animations/CuttingCounterCut.anim"
+script = ExtResource("1_ekbwu")
+path = "Assets/_Assets/Animations/CuttingCounterCut.anim.tres"
+guid = "d7dc3ae032292ec4790e41ed41f65f1d"
+importer_keys = {
+"externalObjects": [],
+"mainObjectFileID": 7400000
+}
+importer_type = "NativeFormatImporter"
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {
+7400000: 74
+}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {
+"AnimationClip": PackedInt64Array(7400000, 7400000)
+}
+godot_resources = {
+7400000: "Assets/_Assets/Animations/CuttingCounterCut.anim.tres"
+}
+main_object_id = 7400000
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="Resource" id="Resource_x6kma"]
+resource_name = "Assets/_Assets/Textures/ButtonBackground.png"
+script = ExtResource("1_ekbwu")
+path = "Assets/_Assets/Textures/ButtonBackground.png"
+guid = "a4a30a507a1311a438ecf1507369b28d"
+importer_keys = {
+"alignment": 0,
+"alphaIsTransparency": 1,
+"alphaUsage": 1,
+"applyGammaDecoding": 0,
+"bumpmap": {
+"convertToNormalMap": 0,
+"externalNormalMap": 0,
+"flipGreenChannel": 0,
+"heightScale": 0.25,
+"normalMapFilter": 0
+},
+"compressionQuality": 50,
+"compressionQualitySet": 0,
+"cookieLightType": 0,
+"cubemapConvolution": 0,
+"externalObjects": [],
+"flipbookColumns": 1,
+"flipbookRows": 1,
+"generateCubemap": 6,
+"grayScaleToAlpha": 0,
+"ignoreMipmapLimit": 0,
+"ignorePngGamma": 0,
+"internalIDToNameTable": [],
+"isReadable": 0,
+"lightmap": 0,
+"maxTextureSize": 2048,
+"maxTextureSizeSet": 0,
+"mipmaps": {
+"alphaTestReferenceValue": 0.5,
+"borderMipMap": 0,
+"enableMipMap": 1,
+"fadeOut": 0,
+"linearTexture": 0,
+"mipMapFadeDistanceEnd": 3,
+"mipMapFadeDistanceStart": 1,
+"mipMapMode": 0,
+"mipMapsPreserveCoverage": 0,
+"sRGBTexture": 1
+},
+"nPOTScale": 0,
+"pSDRemoveMatte": 0,
+"platformSettings": [{
+"allowsAlphaSplitting": 0,
+"androidETC2FallbackOverride": 0,
+"buildTarget": "DefaultTexturePlatform",
+"compressionQuality": 50,
+"crunchedCompression": 0,
+"forceMaximumCompressionQuality_BC6H_BC7": 0,
+"maxTextureSize": 2048,
+"overridden": 0,
+"resizeAlgorithm": 0,
+"serializedVersion": 3,
+"textureCompression": 1,
+"textureFormat": -1
+}, {
+"allowsAlphaSplitting": 0,
+"androidETC2FallbackOverride": 0,
+"buildTarget": "Standalone",
+"compressionQuality": 50,
+"crunchedCompression": 0,
+"forceMaximumCompressionQuality_BC6H_BC7": 0,
+"maxTextureSize": 2048,
+"overridden": 0,
+"resizeAlgorithm": 0,
+"serializedVersion": 3,
+"textureCompression": 1,
+"textureFormat": -1
+}, {
+"allowsAlphaSplitting": 0,
+"androidETC2FallbackOverride": 0,
+"buildTarget": "Server",
+"compressionQuality": 50,
+"crunchedCompression": 0,
+"forceMaximumCompressionQuality_BC6H_BC7": 0,
+"maxTextureSize": 2048,
+"overridden": 0,
+"resizeAlgorithm": 0,
+"serializedVersion": 3,
+"textureCompression": 1,
+"textureFormat": -1
+}],
+"seamlessCubemap": 0,
+"serializedVersion": 12,
+"singleChannelComponent": 0,
+"spriteBorder": Quaternion(0, 0, 0, 0),
+"spriteExtrude": 1,
+"spriteGenerateFallbackPhysicsShape": 1,
+"spriteMeshType": 1,
+"spriteMode": 1,
+"spritePivot": Vector2(0.5, 0.5),
+"spritePixelsToUnits": 100,
+"spriteSheet": {
+"bones": [],
+"edges": [],
+"internalID": 0,
+"nameFileIdTable": [],
+"outline": [],
+"physicsShape": [],
+"secondaryTextures": [],
+"serializedVersion": 2,
+"spriteID": "5e97eb03825dee720800000000000000",
+"sprites": [],
+"vertices": [],
+"weights": []
+},
+"spriteTessellationDetail": -1,
+"streamingMipmaps": 0,
+"streamingMipmapsPriority": 0,
+"swizzle": 50462976,
+"textureFormat": 1,
+"textureFormatSet": 0,
+"textureSettings": {
+"aniso": 1,
+"filterMode": 1,
+"mipBias": 0,
+"serializedVersion": 2,
+"wrapU": 0,
+"wrapV": 0,
+"wrapW": 0
+},
+"textureShape": 1,
+"textureType": 8,
+"vTOnly": 0
+}
+importer_type = "TextureImporter"
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {}
+godot_resources = {
+2800000: "Assets/_Assets/Textures/ButtonBackground.png"
+}
+main_object_id = 2800000
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="Resource" id="Resource_myu74"]
+resource_name = "Assets/_Assets/Textures/GradientVertical.png"
+script = ExtResource("1_ekbwu")
+path = "Assets/_Assets/Textures/GradientVertical.png"
+guid = "f18900e22c39de34184357b4a90ff275"
+importer_keys = {
+"alignment": 0,
+"alphaIsTransparency": 0,
+"alphaUsage": 1,
+"applyGammaDecoding": 0,
+"bumpmap": {
+"convertToNormalMap": 0,
+"externalNormalMap": 0,
+"heightScale": 0.25,
+"normalMapFilter": 0
+},
+"compressionQuality": 50,
+"compressionQualitySet": 0,
+"cookieLightType": 0,
+"cubemapConvolution": 0,
+"externalObjects": [],
+"flipbookColumns": 1,
+"flipbookRows": 1,
+"generateCubemap": 6,
+"grayScaleToAlpha": 0,
+"ignoreMasterTextureLimit": 0,
+"ignorePngGamma": 0,
+"internalIDToNameTable": [],
+"isReadable": 0,
+"lightmap": 0,
+"maxTextureSize": 2048,
+"maxTextureSizeSet": 0,
+"mipmaps": {
+"alphaTestReferenceValue": 0.5,
+"borderMipMap": 0,
+"enableMipMap": 1,
+"fadeOut": 0,
+"linearTexture": 0,
+"mipMapFadeDistanceEnd": 3,
+"mipMapFadeDistanceStart": 1,
+"mipMapMode": 0,
+"mipMapsPreserveCoverage": 0,
+"sRGBTexture": 1
+},
+"nPOTScale": 1,
+"pSDRemoveMatte": 0,
+"pSDShowRemoveMatteOption": 0,
+"platformSettings": [{
+"allowsAlphaSplitting": 0,
+"androidETC2FallbackOverride": 0,
+"buildTarget": "DefaultTexturePlatform",
+"compressionQuality": 50,
+"crunchedCompression": 0,
+"forceMaximumCompressionQuality_BC6H_BC7": 0,
+"maxTextureSize": 2048,
+"overridden": 0,
+"resizeAlgorithm": 0,
+"serializedVersion": 3,
+"textureCompression": 1,
+"textureFormat": -1
+}, {
+"allowsAlphaSplitting": 0,
+"androidETC2FallbackOverride": 0,
+"buildTarget": "Standalone",
+"compressionQuality": 50,
+"crunchedCompression": 0,
+"forceMaximumCompressionQuality_BC6H_BC7": 0,
+"maxTextureSize": 2048,
+"overridden": 0,
+"resizeAlgorithm": 0,
+"serializedVersion": 3,
+"textureCompression": 1,
+"textureFormat": -1
+}, {
+"allowsAlphaSplitting": 0,
+"androidETC2FallbackOverride": 0,
+"buildTarget": "Server",
+"compressionQuality": 50,
+"crunchedCompression": 0,
+"forceMaximumCompressionQuality_BC6H_BC7": 0,
+"maxTextureSize": 2048,
+"overridden": 0,
+"resizeAlgorithm": 0,
+"serializedVersion": 3,
+"textureCompression": 1,
+"textureFormat": -1
+}],
+"seamlessCubemap": 0,
+"serializedVersion": 12,
+"singleChannelComponent": 0,
+"spriteBorder": Quaternion(0, 0, 0, 0),
+"spriteExtrude": 1,
+"spriteGenerateFallbackPhysicsShape": 1,
+"spriteMeshType": 1,
+"spriteMode": 0,
+"spritePivot": Vector2(0.5, 0.5),
+"spritePixelsToUnits": 100,
+"spriteSheet": {
+"bones": [],
+"edges": [],
+"internalID": 0,
+"nameFileIdTable": [],
+"outline": [],
+"physicsShape": [],
+"secondaryTextures": [],
+"serializedVersion": 2,
+"sprites": [],
+"vertices": [],
+"weights": []
+},
+"spriteTessellationDetail": -1,
+"streamingMipmaps": 0,
+"streamingMipmapsPriority": 0,
+"textureFormat": 1,
+"textureFormatSet": 0,
+"textureSettings": {
+"aniso": 1,
+"filterMode": 1,
+"mipBias": 0,
+"serializedVersion": 2,
+"wrapU": 0,
+"wrapV": 0,
+"wrapW": 0
+},
+"textureShape": 1,
+"textureType": 0,
+"vTOnly": 0
+}
+importer_type = "TextureImporter"
+internal_data = {}
+prefab_id_to_guid = {}
+prefab_gameobject_name_to_fileid_and_children = {}
+prefab_main_gameobject_id = 0
+prefab_main_transform_id = 0
+prefab_source_id_pair_to_stripped_id = {}
+transform_fileid_to_rotation_delta = {}
+transform_fileid_to_parent_fileid = {}
+fileid_to_nodepath = {}
+fileid_to_skeleton_bone = {}
+fileid_to_utype = {}
+fileid_to_gameobject_fileid = {}
+type_to_fileids = {}
+godot_resources = {
+2800000: "Assets/_Assets/Textures/GradientVertical.png"
+}
+main_object_id = 2800000
+gameobject_name_to_fileid_and_children = {}
+transform_fileid_to_children = {}
+gameobject_fileid_to_components = {}
+transform_fileid_to_prefab_ids = {}
+gameobject_fileid_to_rename = {}
+dependency_guids = {}
+prefab_dependency_guids = {}
+meta_dependency_guids = {}
+autodetected_bone_map_dict = {}
+humanoid_bone_map_dict = {}
+humanoid_bone_map_crc32_dict = {}
+humanoid_skeleton_hip_position = Vector3(0, 1, 0)
+imported_animation_paths = {}
+imported_mesh_paths = {}
+imported_material_paths = {}
+
+[sub_resource type="Shader" id="Shader_e8ytw"]
+resource_name = "Unidot Hidden Shader"
+code = "shader_type spatial;render_mode unshaded;void vertex() {VERTEX=vec3(1.0);}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kngvv"]
+resource_name = "Unidot Hidden Material"
+render_priority = 0
+shader = SubResource("Shader_e8ytw")
+
+[resource]
+script = ExtResource("2_n5718")
+global_log_count = 876
+guid_to_path = {
+"0000000000000000e000000000000000": "Library/unity default resources",
+"0000000000000000f000000000000000": "Resources/unity_builtin_extra",
+"8e51262abb6b5fa4288bd453b7cfb7a6": "Assets/_Assets/Animations/CuttingCounterIdle.anim.tres",
+"a4a30a507a1311a438ecf1507369b28d": "Assets/_Assets/Textures/ButtonBackground.png",
+"d7dc3ae032292ec4790e41ed41f65f1d": "Assets/_Assets/Animations/CuttingCounterCut.anim.tres",
+"d87dfd3351d974345a720c6f6cefbd37": "Assets/_Assets/Animations/CuttingCounter.controller.tres",
+"f18900e22c39de34184357b4a90ff275": "Assets/_Assets/Textures/GradientVertical.png"
+}
+path_to_meta = {
+"Assets/_Assets/Animations/CuttingCounter.controller.tres": SubResource("Resource_32ipo"),
+"Assets/_Assets/Animations/CuttingCounterCut.anim.tres": SubResource("Resource_ul1ga"),
+"Assets/_Assets/Animations/CuttingCounterIdle.anim.tres": SubResource("Resource_e4swn"),
+"Assets/_Assets/Textures/ButtonBackground.png": SubResource("Resource_x6kma"),
+"Assets/_Assets/Textures/GradientVertical.png": SubResource("Resource_myu74"),
+"Library/unity default resources": SubResource("Resource_cvuwi"),
+"Resources/unity_builtin_extra": SubResource("Resource_eaqrj")
+}
+truncated_shader_reference = SubResource("Shader_e8ytw")
+truncated_material_reference = SubResource("ShaderMaterial_kngvv")
+null_material_reference = SubResource("StandardMaterial3D_1u1c6")
+default_material_reference = SubResource("StandardMaterial3D_cbfgv")

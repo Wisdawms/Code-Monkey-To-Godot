@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://b5vr4kdue1jb2"]
+
+[ext_resource type="Script" path="res://scripts/base_counter.gd" id="1_pix0m"]
+[ext_resource type="Resource" uid="uid://c2cyx00w6lbrw" path="res://resources/cutting_recipes/Tomato-TomatoSlices.tres" id="2_q56w3"]
+[ext_resource type="Resource" uid="uid://cb8ubngfeuvqt" path="res://resources/cutting_recipes/Cabbage-CabbageSlices.tres" id="3_jdv0h"]
+[ext_resource type="Resource" uid="uid://cum74cmduytuv" path="res://resources/cutting_recipes/CheeseBlock-CheeseBlockSlices.tres" id="4_qklte"]
+[ext_resource type="Resource" uid="uid://djg65gqsbfc6p" path="res://resources/cutting_recipes/CheeseBlockSlices-Tomato.tres" id="5_yluwx"]
+[ext_resource type="Resource" uid="uid://bqkxs3dautcti" path="res://resources/frying_recipes/MeatPattyCooked-MeatPattyBurned.tres" id="6_5rq15"]
+[ext_resource type="Resource" uid="uid://q63dfm8e6udi" path="res://resources/frying_recipes/MeatPattyUncooked-MeatPattyCooked.tres" id="7_ddt5t"]
+[ext_resource type="PackedScene" uid="uid://csdsgppw14yh7" path="res://scenes/prog_bar_node_scene.tscn" id="8_gq6uo"]
+
+[sub_resource type="Animation" id="Animation_on1yi"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_gwd4j"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1.5, -0.125, 0, 0.125, 0, 1.6, -0.125, 0, 0.125, 0, 1.5, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_esxme"]
+_data = {
+"RESET": SubResource("Animation_on1yi"),
+"hover": SubResource("Animation_gwd4j")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n0hpx"]
+
+[node name="Base_Counter" type="Node3D" groups=["counters"]]
+script = ExtResource("1_pix0m")
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([ExtResource("3_jdv0h"), ExtResource("4_qklte"), ExtResource("5_yluwx"), ExtResource("2_q56w3")])
+FryingRecipeSOArray = Array[Resource("res://scripts/FryingRecipeSO.gd")]([ExtResource("6_5rq15"), ExtResource("7_ddt5t")])
+
+[node name="hover" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CounterTopPoint")
+libraries = {
+"": SubResource("AnimationLibrary_esxme")
+}
+autoplay = "hover"
+
+[node name="counter_name" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+text = "counter_name"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1.65, 0, 0, 0, 1.65, 0, 0, 0, 1.65, 0, 0, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_n0hpx")
+
+[node name="CounterTopPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+gizmo_extents = 0.84
+
+[node name="FryTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="counter_hud" parent="." instance=ExtResource("8_gq6uo")]
+
+[connection signal="timeout" from="FryTimer" to="." method="_on_fry_timer_timeout"]

@@ -1,0 +1,19 @@
+[gd_resource type="Animation" format=3 uid="uid://b0sywycadsfth"]
+
+[resource]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 8.28295e-08, -1.5708), Vector3(-3.04036, 0, -1.5708), Vector3(-1.5708, 0, -1.5708)]
+}
+metadata/resolved_to_default_paths = {
+"TSingle door/.": ["Single door", "", 4]
+}

@@ -1,0 +1,15 @@
+[gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://ch2ykw43c2k05"]
+
+[ext_resource type="Animation" uid="uid://d25oflxq6city" path="res://Assets/_Assets/Animations/Idle.anim.tres" id="1_lbjqj"]
+[ext_resource type="Animation" uid="uid://cor2q471s8blt" path="res://Assets/_Assets/Animations/Walk.anim.tres" id="2_cxjc4"]
+
+[resource]
+resource_name = "Player"
+_data = {
+"Idle": ExtResource("1_lbjqj"),
+"Walk": ExtResource("2_cxjc4")
+}
+metadata/animation_guid_fileid_to_name = {
+"1d9b9f03f848d714abb6b7ff43d4531b:7400000": "Idle",
+"686436e1b17e56340a28f218c36b9d68:7400000": "Walk"
+}

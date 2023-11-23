@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="KitchenObjectSO" load_steps=4 format=3 uid="uid://xthrdypf5mv5"]
+
+[ext_resource type="Texture2D" uid="uid://cl42hg7ckdufm" path="res://Assets/_Assets/Textures/Icons/Cabbage.png" id="1_7ecs2"]
+[ext_resource type="Script" path="res://scripts/KitchenObjectSO.gd" id="1_t67cc"]
+[ext_resource type="PackedScene" uid="uid://dpf5kerdx4buq" path="res://scenes/food/default/Cabbage.tscn" id="2_p4mkb"]
+
+[resource]
+script = ExtResource("1_t67cc")
+prefab = ExtResource("2_p4mkb")
+Icon = ExtResource("1_7ecs2")
+object_name = "Cabbage"

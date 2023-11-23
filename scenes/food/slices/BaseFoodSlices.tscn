@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://sp12slmo7dw5"]
+
+[ext_resource type="Script" path="res://scripts/base_food.gd" id="1_7moed"]
+
+[node name="base_food_slice" type="Node3D" groups=["food_slices"]]
+script = ExtResource("1_7moed")
+object_name = "BaseFoodSlices"
+default_name = "BaseFoodSlicesDefaultName"
+sliced = true
