@@ -7,6 +7,7 @@ class_name BaseFood extends Node3D
 #@onready var object_name : String : get = getter_name
 @export var Ingredients : Array[KitchenObjectSO]
 @export var SO_List : Array[KitchenObjectSO]
+@export var valid_kitchen_object_so_list : Array[KitchenObjectSO]
 var cutting_prog : float = 0
 @onready var fry_timer: Timer = get_node("FryTimer")
 @export var sliced: bool
@@ -43,4 +44,5 @@ func get_kitchen_object_so()->KitchenObjectSO:
 
 func add_ingredient(kitchen_object_so : KitchenObjectSO)->void:
 	if object_name == "Plate":
-		Ingredients.append(kitchen_object_so)
+		if valid_kitchen_object_so_list.has(kitchen_object_so):
+			Ingredients.append(kitchen_object_so)

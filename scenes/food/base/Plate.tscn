@@ -1,12 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbaiuljqcf6jt"]
+[gd_scene load_steps=10 format=3 uid="uid://dbaiuljqcf6jt"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_0qkrm"]
 [ext_resource type="Texture2D" uid="uid://3rm6e5m3q8hl" path="res://Assets/_Assets/Textures/Icons/Plate.png" id="2_fvud0"]
+[ext_resource type="Resource" uid="uid://cftya23kt6cib" path="res://resources/bread_SO.tres" id="2_o03fk"]
 [ext_resource type="ArrayMesh" uid="uid://dw2anso2h3ba1" path="res://Assets/_Assets/Meshes/Plate.plate.mesh" id="2_ur6jr"]
+[ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="3_k3wq5"]
+[ext_resource type="Resource" uid="uid://c6qh0bvj0hrss" path="res://resources/meat_patty_burned.tres" id="4_f5bpf"]
+[ext_resource type="Resource" uid="uid://dqs5g3atm4062" path="res://resources/slices/cabbage_slices.tres" id="5_pipo5"]
+[ext_resource type="Resource" uid="uid://cxumqfd6vu2dg" path="res://resources/slices/cheese_block_slices.tres" id="6_fnouy"]
+[ext_resource type="Resource" uid="uid://cd4882h1tcysr" path="res://resources/slices/tomato_slices.tres" id="7_8xwab"]
 
 [node name="plate" instance=ExtResource("1_0qkrm")]
 object_name = "Plate"
 default_name = "Plate"
+valid_kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("7_8xwab"), ExtResource("6_fnouy"), ExtResource("5_pipo5"), ExtResource("3_k3wq5"), ExtResource("4_f5bpf"), ExtResource("2_o03fk")])
 icon = ExtResource("2_fvud0")
 
 [node name="Plate_Visual" type="MeshInstance3D" parent="." index="1"]
