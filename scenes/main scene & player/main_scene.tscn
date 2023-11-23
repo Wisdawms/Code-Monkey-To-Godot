@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=24 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b28fqjvm4g2k2" path="res://scenes/counters/cutting_counter.tscn" id="13_p46un"]
 [ext_resource type="PackedScene" uid="uid://dd8fwikw27aiu" path="res://scenes/counters/bases/base_container_counter.tscn" id="14_q2e4u"]
 [ext_resource type="PackedScene" uid="uid://jq0pwd7jvd56" path="res://scenes/counters/bases/trash_bin_counter.tscn" id="18_8w7u7"]
+[ext_resource type="PackedScene" uid="uid://b68ul883sgwc7" path="res://scenes/food/default/Tomato.tscn" id="19_txlwa"]
 [ext_resource type="PackedScene" uid="uid://cn042vbpd1s0j" path="res://scenes/counters/stove_counter.tscn" id="19_yps3e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn38t"]
@@ -343,3 +344,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2.25)
 [node name="Stove_Counter2" parent="Counters" instance=ExtResource("19_yps3e")]
 transform = Transform3D(-1.86265e-08, 0, -1, 0, 1, 0, 1, 0, -1.86265e-08, 8.25, 0, 3.75)
 handle_prog_on = "Counter"
+
+[node name="Tomato" parent="Counters" instance=ExtResource("19_txlwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16527, 1.49409, 3.47639)

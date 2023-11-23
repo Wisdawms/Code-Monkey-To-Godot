@@ -66,7 +66,8 @@ func handle_spawning_plates(delta)->void:
 				spawn_food_on_container(counter_top_point.get_child_count())
 				spawn_plate_timer = 0.0
 		else:
-			print("Reached maximum number of plates on counter!")
+			pass
+			#print("Reached maximum number of plates on counter!")
 
 func handle_stove_on_and_off_animation()->void:
 	if run_once:
@@ -94,7 +95,7 @@ func handle_burning_meat_effects()->void:
 	if type == "Stove_Counter" and counter_has_object():
 		if current_counter_obj == "MeatPattyCooked":
 			if is_frying() and not is_burning_meat:
-				print("Your meat is burning yo!", " It will turn into ", get_output_for_input(current_counter_obj).object_name)
+				print("Your meat is burning yo!", " It will turn into ", get_output_from_input(current_counter_obj).object_name)
 				prog_bar.get("theme_override_styles/fill/bg_color").set_bg_color(Color(0.63137257099152, 0, 0.19607843458652))
 				is_burning_meat = true
 		else:
@@ -104,15 +105,15 @@ func handle_burning_meat_effects()->void:
 
 
 func set_current_player_and_counter_obj()->void:
-	match counter_has_object():
-		true: current_counter_obj = self.item.object_name
-		false: current_counter_obj = "nothing"
-	match player_has_object(interactor):
-		true: player_obj = interactor.item_holding.object_name
-		false: player_obj = "nothing"
+	if counter_has_object():
+		current_counter_obj = self.item.object_name
+	else: current_counter_obj = "nothing"
+	if player_has_object(interactor):
+		player_obj = interactor.item_holding.object_name
+	else: player_obj = "nothing"
 
 
-func get_output_for_input(input : String) -> Resource:
+func get_output_from_input(input : String) -> Resource: # returns the output of KitchenObjectSO's input
 	match type:
 		"Cutting_Counter":
 			for cutting_recipe : Resource in CuttingRecipeSOArray: # iterates through the recipe list
@@ -126,7 +127,7 @@ func get_output_for_input(input : String) -> Resource:
 					return frying_recipe.output #returns the output of that input from the recipe list
 	return null
 
-func get_recipe_so_with_input(input : String) -> Resource:
+func get_recipe_so_with_input(input : String) -> Resource: # returns FryingRecipeSO or CuttingRecipeSO
 	match type:
 		"Cutting_Counter":
 			for cutting_recipe : Resource in CuttingRecipeSOArray: # iterates through the recipe list
@@ -145,7 +146,7 @@ func set_ko(new_ko : KitchenObjectSO)->void: # change kitchen object icon when k
 	if type == "Container_Counter":
 		get_node("Counter_Lid/Sprite3D").material_override.albedo_texture = Kitchen_Object.Icon
 
-func set_so()->void:
+func set_recipe_so()->void:
 	if counter_has_object():
 		match type:
 			"Cutting_Counter":
@@ -245,7 +246,7 @@ func _on_fry_timer_timeout() -> void:
 	if type == "Stove_Counter":
 		item = counter_top_point.get_child(-1)
 		var input  : BaseFood = item
-		var output : KitchenObjectSO = get_output_for_input(self.item.object_name)
+		var output : KitchenObjectSO = get_output_from_input(self.item.object_name)
 		if counter_has_object():
 			if output:
 				var spawn : Object = output.prefab.instantiate()
@@ -389,13 +390,13 @@ func interact_alt(interactor : MyPlayerClass)->void:
 	if type == "Cutting_Counter": # for cutting counter interaction_alt
 		if counter_has_object():
 			if not player_has_object(interactor):
-				if cut_recipe_so and item and get_output_for_input(self.item.object_name):
+				if cut_recipe_so and item and get_output_from_input(self.item.object_name):
 					match handle_prog_on:
 						"Food":
 							item.cutting_prog += 1
 						"Counter":
 							cutting_prog += 1
-					var output : KitchenObjectSO = get_output_for_input(self.item.object_name)
+					var output : KitchenObjectSO = get_output_from_input(self.item.object_name)
 					emit_signal("OnProgressChanged", item.cutting_prog as float / cut_recipe_so.cutting_prog_max as float)
 					match handle_prog_on:
 						"Food":
@@ -431,6 +432,7 @@ func interact_alt(interactor : MyPlayerClass)->void:
 				# do nothing basically
 				pass
 			else : print("Can't alt-interact with this counter")
+		else: print("You are holding an item, and you can't alt-interact with this stove :)")
 		#                        old slice logic
 		#var spawn : Object
 		#var slices_folder : String = "res://scenes/food/slices/"
@@ -544,24 +546,31 @@ func replace_item(interactor : MyPlayerClass)->void:
 			if Kitchen_Object != null:
 				print("You are holding (", interactor.item_holding.object_name, ") This counter takes (", Kitchen_Object.object_name, ")")
 				return
+		# plate-food system
 		if item_one.object_name == "Plate" and item_two.object_name != "Plate": # if plate on counter and player holding food
-			if item_one.get_node("plate_content").get_child_count() < 1:
-				item_two.reparent( item_one.get_node("plate_content") )
-				item_two.position = Vector3(0, 0.1 , 0)
-				item_two.rotation = Vector3.ZERO
-				print("Placed ", item_two, "on ", item_one.object_name)
+			if not item_one.Ingredients.has(item_two.get_kitchen_object_so()): # if plate is empty
+				item_two.reparent( item_one.get_node("plate_content") ) # place ( food ) on plate
+				item_two.position = Vector3(0, 0.1 , 0) # offset
+				item_two.rotation = Vector3.ZERO # reset rotation
+				item_one.add_ingredient(item_two.get_kitchen_object_so())
+				#item_one.get_node("plate_content").add_child(item_two.get_kitchen_object_so().prefab.instantiate())
+				#item_two.queue_free()
+				print("Placed ", item_two.object_name, "on ", item_one.object_name)
 				return
 		elif item_two.object_name == "Plate" and item_one.object_name != "Plate": # if holding plate and there's food on counter
 			# place food on plate then put plate on counter
-			if item_two.get_node("plate_content").get_child_count() < 1:
-				item_one.reparent( item_two.get_node("plate_content") )
+			if not item_two.Ingredients.has(item_one.get_kitchen_object_so()): # if plate on player is empty
+				item_one.reparent( item_two.get_node("plate_content") ) # place food on player's plate
 				item_one.position = Vector3(0, 0.1 , 0)
 				item_one.rotation = Vector3.ZERO
-				item_two.reparent( counter_top_point ) # place on counter
-				item_two.position = Vector3.ZERO
-				item_two.rotation = Vector3.ZERO
-				print("Placed ", item_two, "on ", item_one.object_name)
+				item_two.add_ingredient(item_one.get_kitchen_object_so())
+				# if place plate on counter when picking up food is enabled
+				#item_two.reparent( counter_top_point ) # then place plate on counter
+				#item_two.position = Vector3.ZERO
+				#item_two.rotation = Vector3.ZERO
+				print("Placed ", item_two.object_name, "on ", item_one.object_name)
 				return
+				
 		item_one.reparent(interactor.hold_item_marker)
 		item_two.reparent( self.get_node("CounterTopPoint") )
 		item_one.position = interactor.hold_item_marker.position * .2
@@ -624,19 +633,21 @@ func spawn_food_on_container(offset : int = 1)->void:
 
 
 func _process(delta: float) -> void:
+	
 	handle_spawning_plates(delta)
 	
-	if counter_top_point.get_child_count() != 0 and item != counter_top_point.get_child(-1):
+	if counter_top_point.get_child_count() != 0:
 		item = counter_top_point.get_child(-1)
+	else: item = null
+	
 	interactor = Globals.find_node("Player")
 	handle_lerp_progress_bar()
 	handle_prog_bar_max_value()
-	set_so()
-	set_current_player_and_counter_obj()
+	set_recipe_so()
 	handle_stove_on_and_off_animation()
 	handle_burning_meat_effects()
 	handle_prog_sprite_visibility()
-
+	set_current_player_and_counter_obj()
 func _ready() -> void:
 	OnItemChanged.connect(ItemHasChanged)
 	for child : Object in get_all_children(self):

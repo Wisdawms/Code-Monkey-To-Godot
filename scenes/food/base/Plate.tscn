@@ -7,7 +7,6 @@
 [node name="plate" instance=ExtResource("1_0qkrm")]
 object_name = "Plate"
 default_name = "Plate"
-Ingredients = Array[Resource("res://scripts/KitchenObjectSO.gd")]([null])
 icon = ExtResource("2_fvud0")
 
 [node name="Plate_Visual" type="MeshInstance3D" parent="." index="1"]
