@@ -334,9 +334,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 0, 2.25)
 CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
 FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
 
-[node name="Delivery_Counter" parent="Counters" instance=ExtResource("18_h0f4w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 9)
-
 [node name="Cutting_Counter" parent="Counters" instance=ExtResource("13_p46un")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 2.25)
 
@@ -351,3 +348,6 @@ CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([ExtR
 [node name="Stove_Counter2" parent="Counters" instance=ExtResource("19_yps3e")]
 transform = Transform3D(-1.86265e-08, 0, -1, 0, 1, 0, 1, 0, -1.86265e-08, 8.25, 0, 3.75)
 handle_prog_on = "Counter"
+
+[node name="Delivery_Counter" parent="Counters" instance=ExtResource("18_h0f4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)

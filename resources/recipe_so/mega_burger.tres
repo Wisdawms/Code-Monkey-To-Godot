@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RecipeSO" load_steps=7 format=3 uid="uid://df6lrqk4jrw0a"]
+
+[ext_resource type="Resource" uid="uid://cftya23kt6cib" path="res://resources/bread_SO.tres" id="1_4ttea"]
+[ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="2_63bxf"]
+[ext_resource type="Resource" uid="uid://cxumqfd6vu2dg" path="res://resources/slices/cheese_block_slices.tres" id="3_0mrfe"]
+[ext_resource type="Script" path="res://scripts/RecipeSO.gd" id="4_6wcmi"]
+[ext_resource type="Resource" uid="uid://cd4882h1tcysr" path="res://resources/slices/tomato_slices.tres" id="4_7jmpu"]
+[ext_resource type="Resource" uid="uid://dqs5g3atm4062" path="res://resources/slices/cabbage_slices.tres" id="5_gw55r"]
+
+[resource]
+script = ExtResource("4_6wcmi")
+kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("1_4ttea"), ExtResource("2_63bxf"), ExtResource("3_0mrfe"), ExtResource("4_7jmpu"), ExtResource("5_gw55r")])
+recipe_name = "MegaBurger"

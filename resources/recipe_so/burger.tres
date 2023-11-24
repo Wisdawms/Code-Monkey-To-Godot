@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RecipeSO" load_steps=4 format=3 uid="uid://nd3cbk8a5f6y"]
+
+[ext_resource type="Script" path="res://scripts/RecipeSO.gd" id="1_cpse2"]
+[ext_resource type="Resource" uid="uid://cftya23kt6cib" path="res://resources/bread_SO.tres" id="1_kdjgi"]
+[ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="2_3clxy"]
+
+[resource]
+script = ExtResource("1_cpse2")
+kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("1_kdjgi"), ExtResource("2_3clxy")])
+recipe_name = "Burger"

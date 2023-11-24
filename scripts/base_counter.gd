@@ -42,6 +42,7 @@ var frying_recipe_so : FryingRecipeSO
 
 #region Getting nodes
 @export_subgroup("getting_nodes")
+@onready var dev_man : DeliveryManager = get_node("Delivery_Manager")
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
 @onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
@@ -555,8 +556,7 @@ func give_item(interactor : MyPlayerClass )->void:
 	if type == "Delivery_Counter":
 		if interactor.item_holding.object_name == "Plate":
 			if not interactor.item_holding.Ingredients.is_empty():
-				print("Delivered plate!")
-				interactor.item_holding.queue_free()
+				dev_man.deliver_recipe(interactor.item_holding)
 				return
 			else: 
 				print("This plate be empty yo")

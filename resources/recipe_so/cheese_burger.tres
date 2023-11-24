@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RecipeSO" load_steps=5 format=3 uid="uid://frpx4tcnddat"]
+
+[ext_resource type="Resource" uid="uid://cftya23kt6cib" path="res://resources/bread_SO.tres" id="1_g7jc2"]
+[ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="2_wlvqs"]
+[ext_resource type="Resource" uid="uid://cxumqfd6vu2dg" path="res://resources/slices/cheese_block_slices.tres" id="3_6t0qk"]
+[ext_resource type="Script" path="res://scripts/RecipeSO.gd" id="3_xgnnr"]
+
+[resource]
+script = ExtResource("3_xgnnr")
+kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("1_g7jc2"), ExtResource("2_wlvqs"), ExtResource("3_6t0qk")])
+recipe_name = "CheeseBurger"
