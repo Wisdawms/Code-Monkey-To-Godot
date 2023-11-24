@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0ushgdkf7x4v"]
+
+[ext_resource type="Script" path="res://icon_template.gd" id="1_brgwq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wdeha"]
+resource_local_to_scene = true
+load_path = "res://.godot/imported/Cross.png-c3ded0d2d45c0d75d0edbb27984a54f7.s3tc.ctex"
+
+[node name="icon_template" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_brgwq")
+
+[node name="icon_sprite" type="Sprite2D" parent="."]
+position = Vector2(50, 50)
+scale = Vector2(0.6, 0.6)
+texture = SubResource("CompressedTexture2D_wdeha")

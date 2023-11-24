@@ -1,13 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://b5vr4kdue1jb2"]
+[gd_scene load_steps=16 format=3 uid="uid://b5vr4kdue1jb2"]
 
 [ext_resource type="Script" path="res://scripts/base_counter.gd" id="1_pix0m"]
 [ext_resource type="Resource" uid="uid://c2cyx00w6lbrw" path="res://resources/cutting_recipes/Tomato-TomatoSlices.tres" id="2_q56w3"]
 [ext_resource type="Resource" uid="uid://cb8ubngfeuvqt" path="res://resources/cutting_recipes/Cabbage-CabbageSlices.tres" id="3_jdv0h"]
+[ext_resource type="Resource" uid="uid://cxumqfd6vu2dg" path="res://resources/slices/cheese_block_slices.tres" id="4_1pxag"]
 [ext_resource type="Resource" uid="uid://cum74cmduytuv" path="res://resources/cutting_recipes/CheeseBlock-CheeseBlockSlices.tres" id="4_qklte"]
-[ext_resource type="Resource" uid="uid://djg65gqsbfc6p" path="res://resources/cutting_recipes/CheeseBlockSlices-Tomato.tres" id="5_yluwx"]
+[ext_resource type="Resource" uid="uid://c72vnjx8le14x" path="res://resources/tomato_SO.tres" id="5_m8t8a"]
 [ext_resource type="Resource" uid="uid://bqkxs3dautcti" path="res://resources/frying_recipes/MeatPattyCooked-MeatPattyBurned.tres" id="6_5rq15"]
+[ext_resource type="Script" path="res://scripts/CuttingRecipeSO.gd" id="6_k0071"]
 [ext_resource type="Resource" uid="uid://q63dfm8e6udi" path="res://resources/frying_recipes/MeatPattyUncooked-MeatPattyCooked.tres" id="7_ddt5t"]
 [ext_resource type="PackedScene" uid="uid://csdsgppw14yh7" path="res://scenes/prog_bar_node_scene.tscn" id="8_gq6uo"]
+
+[sub_resource type="Resource" id="Resource_i6vum"]
+script = ExtResource("6_k0071")
+input = ExtResource("4_1pxag")
+output = ExtResource("5_m8t8a")
+cutting_prog_max = 3
 
 [sub_resource type="Animation" id="Animation_on1yi"]
 length = 0.001
@@ -49,7 +57,7 @@ _data = {
 
 [node name="Base_Counter" type="Node3D" groups=["counters"]]
 script = ExtResource("1_pix0m")
-CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([ExtResource("3_jdv0h"), ExtResource("4_qklte"), ExtResource("5_yluwx"), ExtResource("2_q56w3")])
+CuttingRecipeSOArray = Array[ExtResource("6_k0071")]([ExtResource("3_jdv0h"), ExtResource("4_qklte"), SubResource("Resource_i6vum"), ExtResource("2_q56w3")])
 FryingRecipeSOArray = Array[Resource("res://scripts/FryingRecipeSO.gd")]([ExtResource("6_5rq15"), ExtResource("7_ddt5t")])
 
 [node name="hover" type="AnimationPlayer" parent="."]

@@ -2,6 +2,8 @@ class_name BaseFood extends Node3D
 
 @export_category("BaseFood")
 
+@export var icon_template_scene : PackedScene
+@onready var icons_grid : GridContainer = $food_icons/food_icons_sprite3d/SubViewport/food_icons/MarginContainer/VBoxContainer/HBoxContainer/icons_grid
 @export var object_name : String
 @export var default_name : String
 #@onready var object_name : String : get = getter_name
@@ -51,3 +53,6 @@ func add_ingredient(kitchen_object_so : KitchenObjectSO)->void:
 			Ingredients.append(kitchen_object_so)
 			if Ingredients.has(kitchen_object_so):
 				plate_complete_visual.get_node(kitchen_object_so.object_name).visible = true
+				var new_food_icon = icon_template_scene.instantiate()
+				icons_grid.add_child(new_food_icon, true)
+				new_food_icon.Icon.texture = kitchen_object_so.Icon

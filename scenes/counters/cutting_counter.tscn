@@ -1,8 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://b28fqjvm4g2k2"]
+[gd_scene load_steps=27 format=3 uid="uid://b28fqjvm4g2k2"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_vjbhv"]
 [ext_resource type="Texture2D" uid="uid://d2uqu0kvio624" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_AlbedoTransparency.png" id="2_d7bpe"]
+[ext_resource type="Resource" uid="uid://cb8ubngfeuvqt" path="res://resources/cutting_recipes/Cabbage-CabbageSlices.tres" id="2_vlp42"]
 [ext_resource type="Texture2D" uid="uid://b40iqkii1jasw" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_Normal.png" id="3_aqr0p"]
+[ext_resource type="Resource" uid="uid://cum74cmduytuv" path="res://resources/cutting_recipes/CheeseBlock-CheeseBlockSlices.tres" id="3_s2m55"]
+[ext_resource type="Resource" uid="uid://c2cyx00w6lbrw" path="res://resources/cutting_recipes/Tomato-TomatoSlices.tres" id="4_otwvj"]
 [ext_resource type="Texture2D" uid="uid://b1bip2i1u7siw" path="res://Assets/_Assets/Meshes/Textures/Chopping board_AlbedoTransparency.png" id="5_lnvm1"]
 [ext_resource type="Texture2D" uid="uid://cakgufmca0abu" path="res://Assets/_Assets/Meshes/Textures/Chopping board_Normal.png" id="6_xwaih"]
 [ext_resource type="Texture2D" uid="uid://dk2vxh2vfdl40" path="res://Assets/_Assets/Meshes/Textures/Knife_AlbedoTransparency.png" id="7_jtvh7"]
@@ -195,6 +198,7 @@ blend_shape_mode = 0
 
 [node name="Cutting_Counter" instance=ExtResource("1_vjbhv")]
 type = "Cutting_Counter"
+CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([ExtResource("2_vlp42"), ExtResource("3_s2m55"), ExtResource("4_otwvj")])
 
 [node name="knife_anim" type="AnimationPlayer" parent="." index="0"]
 libraries = {

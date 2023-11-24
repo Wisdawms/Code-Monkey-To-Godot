@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dbaiuljqcf6jt"]
+[gd_scene load_steps=20 format=3 uid="uid://dbaiuljqcf6jt"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_0qkrm"]
 [ext_resource type="Texture2D" uid="uid://3rm6e5m3q8hl" path="res://Assets/_Assets/Textures/Icons/Plate.png" id="2_fvud0"]
+[ext_resource type="PackedScene" uid="uid://c0ushgdkf7x4v" path="res://icon_template.tscn" id="2_kw4ur"]
 [ext_resource type="Resource" uid="uid://cftya23kt6cib" path="res://resources/bread_SO.tres" id="2_o03fk"]
 [ext_resource type="ArrayMesh" uid="uid://dw2anso2h3ba1" path="res://Assets/_Assets/Meshes/Plate.plate.mesh" id="2_ur6jr"]
 [ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="3_k3wq5"]
@@ -15,8 +16,20 @@
 [ext_resource type="PackedScene" uid="uid://bnbc541hk65" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/CheeseSlices_Visual.prefab.tscn" id="13_swb3d"]
 [ext_resource type="PackedScene" uid="uid://c45cy6vcrdq2j" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/CabbageSliced_Visual.prefab.tscn" id="14_13htv"]
 [ext_resource type="PackedScene" uid="uid://c2doyukv012s8" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/MeatPattyBurned_Visual.prefab.tscn" id="15_kycnj"]
+[ext_resource type="Texture2D" uid="uid://cwxxqnf047sqx" path="res://food_icons_viewport_texture.tres" id="17_kkedk"]
+[ext_resource type="PackedScene" uid="uid://bddj0bddntq8h" path="res://box_container.tscn" id="18_uufis"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14pfo"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("17_kkedk")
+billboard_mode = 1
+billboard_keep_scale = true
 
 [node name="Plate" instance=ExtResource("1_0qkrm")]
+icon_template_scene = ExtResource("2_kw4ur")
 object_name = "Plate"
 default_name = "Plate"
 valid_kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("7_8xwab"), ExtResource("6_fnouy"), ExtResource("5_pipo5"), ExtResource("3_k3wq5"), ExtResource("4_f5bpf"), ExtResource("2_o03fk")])
@@ -53,6 +66,22 @@ visible = false
 [node name="MeatPattyBurned" parent="PlateCompleteVisual" index="5" instance=ExtResource("15_kycnj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.166, 0)
 visible = false
+
+[node name="food_icons" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386023, 0)
+
+[node name="food_icons_sprite3d" type="Sprite3D" parent="food_icons" index="0"]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_14pfo")
+pixel_size = 0.03
+texture = ExtResource("17_kkedk")
+
+[node name="SubViewport" type="SubViewport" parent="food_icons/food_icons_sprite3d" index="0"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+
+[node name="food_icons" parent="food_icons/food_icons_sprite3d/SubViewport" index="0" instance=ExtResource("18_uufis")]
 
 [editable path="PlateCompleteVisual/Bread"]
 [editable path="PlateCompleteVisual/Bread/Bread bottom"]

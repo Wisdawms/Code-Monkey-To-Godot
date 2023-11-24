@@ -392,7 +392,7 @@ func interact(interactor : MyPlayerClass)->void:
 					print("This counter only produces plates")
 					return
 				else: 
-					# if holding food and interact with plate counter, get plate and put food on it
+					# if holding apropos food and interact with plate counter, get plate and put food on it
 					var food = interactor.item_holding
 					var plate = counter_top_point.get_child(-1)
 					if plate.valid_kitchen_object_so_list.has(food.get_kitchen_object_so()):
@@ -697,13 +697,10 @@ func spawn_food_on_container(plates_on_top_offset_y : int = 1)->void:
 
 
 func _process(delta: float) -> void:
-	
-	handle_spawning_plates(delta)
-	
 	if counter_top_point.get_child_count() != 0:
 		item = counter_top_point.get_child(-1)
 	else: item = null
-	
+	handle_spawning_plates(delta)
 	interactor = Globals.find_node("Player")
 	handle_lerp_progress_bar()
 	handle_prog_bar_max_value()

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/counters/Progress_Bar_Sprite.gd" id="3_ccskm"]
 [ext_resource type="Script" path="res://scenes/counters/Label3D.gd" id="3_lt7r6"]
-[ext_resource type="Texture2D" uid="uid://b5pjn5e4ldktg" path="res://label_viewporttext.tres" id="3_ms8qt"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xi067"]
 viewport_path = NodePath("prog_bar_sprite/SubViewport")
@@ -191,13 +190,16 @@ corner_radius_bottom_right = 128
 corner_radius_bottom_left = 128
 shadow_size = 16
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_nts7v"]
+viewport_path = NodePath("text_3d/text_3d/SubViewport")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvulg"]
 resource_local_to_scene = true
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 0)
-albedo_texture = ExtResource("3_ms8qt")
+albedo_texture = SubResource("ViewportTexture_nts7v")
 billboard_mode = 1
 billboard_keep_scale = true
 
