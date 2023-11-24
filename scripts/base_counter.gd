@@ -550,11 +550,13 @@ func give_item(interactor : MyPlayerClass )->void:
 		OnItemChanged.emit()
 		return
 
-	interactor.item_holding.reparent(self.get_node("CounterTopPoint") )
-	interactor.item_holding.position = Vector3(0, plates_on_top_offset_y, 0)
-	interactor.item_holding.rotation = Vector3.ZERO
-	print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
-	OnItemChanged.emit()
+	if type != "Plates_Counter":
+		interactor.item_holding.reparent(self.get_node("CounterTopPoint") )
+		interactor.item_holding.position = Vector3(0, plates_on_top_offset_y, 0)
+		interactor.item_holding.rotation = Vector3.ZERO
+		print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
+		OnItemChanged.emit()
+	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
 func take_item(interactor : MyPlayerClass)->void:
 	handle_reset_prog()
