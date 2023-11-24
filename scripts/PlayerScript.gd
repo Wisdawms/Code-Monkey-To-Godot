@@ -12,11 +12,15 @@ func _process(_delta: float) -> void:
 		item_holding = hold_item_marker.get_child(-1)
 	else: item_holding = null
 func _physics_process(delta: float) -> void:
-	handle_movement(delta)
 	move_and_slide()
 	handle_gravity(delta)
 	get_movement_velocity()
 	handle_rotation(delta)
+	handle_movement(delta)
+	
+	
+
+func _input(event: InputEvent) -> void:
 	handle_interactions()
 
 func get_movement_velocity()->void:

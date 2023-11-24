@@ -12,13 +12,16 @@ var cutting_prog : float = 0
 @onready var fry_timer: Timer = get_node("FryTimer")
 @export var sliced: bool
 @export var icon : CompressedTexture2D
+@onready var plate_complete_visual : Node3D = get_node("PlateCompleteVisual")
 
 @export var has_been_on_frying : bool = false
 @onready var on_counter : BaseCounter
-var files_array : Array = []
 
 func _ready() -> void:
 	get_sos()
+	if object_name == "Plate":
+		for node in plate_complete_visual.get_children():
+			node.visible = false
 
 func _process(_delta: float) -> void:
 	if get_parent().get_parent().is_in_group("counters"):
@@ -39,10 +42,12 @@ func get_sos():
 func get_kitchen_object_so()->KitchenObjectSO:
 	for so in SO_List:
 		if self.object_name == so.object_name:
-			return so
+			return so	
 	return null
 
 func add_ingredient(kitchen_object_so : KitchenObjectSO)->void:
 	if object_name == "Plate":
 		if valid_kitchen_object_so_list.has(kitchen_object_so):
 			Ingredients.append(kitchen_object_so)
+			if Ingredients.has(kitchen_object_so):
+				plate_complete_visual.get_node(kitchen_object_so.object_name).visible = true

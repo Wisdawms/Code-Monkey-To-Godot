@@ -26,7 +26,7 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 var spawn_plate_timer : float
 @export var _is_frying : bool
 @export var plates_on_top_offset_y : float
-@export var food_on_plates_offset_y : float = 0.05
+@export var food_on_plates_offset_y : float = 0.15
 @export var hovered : bool
 var is_burning_meat: bool
 var cutting_prog : float = 0
@@ -550,30 +550,30 @@ func replace_item(interactor : MyPlayerClass)->void:
 			if Kitchen_Object != null:
 				print("You are holding (", interactor.item_holding.object_name, ") This counter takes (", Kitchen_Object.object_name, ")")
 				return
-		# plate-food system
+		# [  plate-food system  ]
 		if item_one.object_name == "Plate" and item_two.object_name != "Plate": # if plate on counter and player holding food
 			if not item_one.Ingredients.has(item_two.get_kitchen_object_so()) and item_one.valid_kitchen_object_so_list.has(item_two.get_kitchen_object_so()): # if plate is empty
-				item_two.reparent( item_one.get_node("plate_content") ) # place ( food ) on plate
-				item_two.position = Vector3(0, item_one.get_node("plate_content").get_child_count() * food_on_plates_offset_y , 0) 
-				item_two.rotation = Vector3.ZERO # reset rotation
-				item_one.add_ingredient(item_two.get_kitchen_object_so())
-				#item_one.get_node("plate_content").add_child(item_two.get_kitchen_object_so().prefab.instantiate())
-				#item_two.queue_free()
+				#item_two.reparent( item_one.get_node("plate_content") ) # place ( food ) on plate
+				#item_two.position = Vector3(0, item_one.get_node("plate_content").get_child_count() * food_on_plates_offset_y , 0) 
+				#item_two.rotation = Vector3.ZERO # reset rotation
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
+				item_one.add_ingredient(item_two.get_kitchen_object_so())
+				item_two.queue_free()
 				OnItemChanged.emit()
 				return
 		elif item_two.object_name == "Plate" and item_one.object_name != "Plate": # if holding plate and there's food on counter
 			# place food on plate 
 			if not item_two.Ingredients.has(item_one.get_kitchen_object_so()) and item_two.valid_kitchen_object_so_list.has(item_one.get_kitchen_object_so()) : # if plate on player is empty
-				item_one.reparent( item_two.get_node("plate_content") ) # place food on player's plate
-				item_one.position = Vector3(0, item_two.get_node("plate_content").get_child_count() *  food_on_plates_offset_y , 0)
-				item_one.rotation = Vector3.ZERO
-				item_two.add_ingredient(item_one.get_kitchen_object_so())
-				# if place plate on counter when picking up food is enabled
+				#item_one.reparent( item_two.get_node("plate_content") ) # place food on player's plate
+				#item_one.position = Vector3(0, item_two.get_node("plate_content").get_child_count() *  food_on_plates_offset_y , 0)
+				#item_one.rotation = Vector3.ZERO
+				# if place plate on counter when picking up food is enabled [ NOT NEEDED NOW ]
 				#item_two.reparent( counter_top_point ) # then place plate on counter
 				#item_two.position = Vector3.ZERO
 				#item_two.rotation = Vector3.ZERO
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
+				item_two.add_ingredient(item_one.get_kitchen_object_so())
+				item_one.queue_free()
 				return
 		
 		item_one.reparent(interactor.hold_item_marker)
@@ -588,15 +588,16 @@ func replace_item(interactor : MyPlayerClass)->void:
 	# for placing food from stove or cutting counter to plate
 	elif not has_frying_recipe(interactor) or not has_recipe(interactor) and type == "Cutting_Counter" or type == "Stove_Counter" and item_two.object_name == "Plate" and Settings.can_replace_objects_on_normal_counter(self):
 		if not item_two.Ingredients.has(item_one.get_kitchen_object_so()) and item_two.valid_kitchen_object_so_list.has(item_one.get_kitchen_object_so()) : # if plate on player is empty
-				item_one.reparent( item_two.get_node("plate_content") ) # place food on player's plate
-				item_one.position = Vector3(0, item_two.get_node("plate_content").get_child_count() * food_on_plates_offset_y  , 0)
-				item_one.rotation = Vector3.ZERO
-				item_two.add_ingredient(item_one.get_kitchen_object_so())
-				# if place plate on counter when picking up food is enabled
+				#item_one.reparent( item_two.get_node("plate_content") ) # place food on player's plate
+				#item_one.position = Vector3(0, item_two.get_node("plate_content").get_child_count() * food_on_plates_offset_y  , 0)
+				#item_one.rotation = Vector3.ZERO
+				# if place plate on counter when picking up food is enabled [ NOT NEEDED NOW ]
 				#item_two.reparent( counter_top_point ) # then place plate on counter
 				#item_two.position = Vector3.ZERO
 				#item_two.rotation = Vector3.ZERO
-				print("Placed ", item_two.object_name, "on ", item_one.object_name)
+				print("Placed ", item_two.object_name, " on ", item_one.object_name)
+				item_two.add_ingredient(item_one.get_kitchen_object_so())
+				item_one.queue_free()
 				OnItemChanged.emit()
 				return
 				
