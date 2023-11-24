@@ -351,6 +351,10 @@ func interact(interactor : MyPlayerClass)->void:
 	item = counter_top_point.get_child(-1)
 	plates_on_top_offset_y = counter_top_point.get_child_count() *.5
 	
+	var item_one : BaseFood = item
+	var item_two : BaseFood = interactor.item_holding
+	
+	
 	if not player_has_object(interactor): # handles taking an item from counter
 		if counter_has_object(): # if counter has kitchen object
 			take_item(interactor)
@@ -379,8 +383,12 @@ func interact(interactor : MyPlayerClass)->void:
 			replace_item(interactor)
 		else: 
 			if type == "Plates_Counter":
-				print("This counter only produces plates")
-				return
+				if player_obj == "Plate":
+					print("This counter only produces plates")
+					return
+				else: 
+					# take plate from plate counter and put food on it
+					pass
 			print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
 	if not counter_has_object() and not player_has_object(interactor): # handles spawning an item
 		if not type == "Container_Counter":
@@ -545,11 +553,28 @@ func replace_item(interactor : MyPlayerClass)->void:
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
 	
+	
 	if type == "Cutting_Counter" and has_recipe(interactor) or type == "Stove_Counter" and has_frying_recipe(interactor) or Settings.can_replace_objects_on_normal_counter(self):
 		if item_one.default_name != item_two.default_name and type == "Container_Counter":
 			if Kitchen_Object != null:
+				
+				if item_two.object_name == "Plate" and item_one.object_name != "Plate":
+					if item_two.valid_kitchen_object_so_list.has(item_one.get_kitchen_object_so()):
+						if not item_two.Ingredients.has(item_one.get_kitchen_object_so()):
+							print("Put ", item_one.object_name, " on ", item_two.name)
+							item_two.add_ingredient(item_one.get_kitchen_object_so())
+							item_one.queue_free()
+							OnItemChanged.emit()
+							return
+						else: print("Plate already has this item")
+					else:
+						print("Can't put ", item_one.object_name, " on ", item_two.name)
+						return
+						
 				print("You are holding (", interactor.item_holding.object_name, ") This counter takes (", Kitchen_Object.object_name, ")")
 				return
+				
+						
 		# [  plate-food system  ]
 		if item_one.object_name == "Plate" and item_two.object_name != "Plate": # if plate on counter and player holding food
 			if not item_one.Ingredients.has(item_two.get_kitchen_object_so()) and item_one.valid_kitchen_object_so_list.has(item_two.get_kitchen_object_so()): # if plate is empty
@@ -575,6 +600,7 @@ func replace_item(interactor : MyPlayerClass)->void:
 				item_two.add_ingredient(item_one.get_kitchen_object_so())
 				item_one.queue_free()
 				return
+		
 		
 		item_one.reparent(interactor.hold_item_marker)
 		item_two.reparent( self.get_node("CounterTopPoint") )

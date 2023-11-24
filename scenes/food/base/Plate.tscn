@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c45cy6vcrdq2j" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/CabbageSliced_Visual.prefab.tscn" id="14_13htv"]
 [ext_resource type="PackedScene" uid="uid://c2doyukv012s8" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/MeatPattyBurned_Visual.prefab.tscn" id="15_kycnj"]
 
-[node name="plate" instance=ExtResource("1_0qkrm")]
+[node name="Plate" instance=ExtResource("1_0qkrm")]
 object_name = "Plate"
 default_name = "Plate"
 valid_kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("7_8xwab"), ExtResource("6_fnouy"), ExtResource("5_pipo5"), ExtResource("3_k3wq5"), ExtResource("4_f5bpf"), ExtResource("2_o03fk")])
@@ -32,21 +32,27 @@ skeleton = NodePath("")
 [node name="PlateCompleteVisual" type="Node3D" parent="." index="3"]
 
 [node name="Bread" parent="PlateCompleteVisual" index="0" instance=ExtResource("10_t0424")]
+visible = false
 
 [node name="MeatPattyCooked" parent="PlateCompleteVisual" index="1" instance=ExtResource("11_r7pcu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.166, 0)
+visible = false
 
 [node name="TomatoSlices" parent="PlateCompleteVisual" index="2" instance=ExtResource("12_kifdv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.272, 0)
+visible = false
 
 [node name="CheeseBlockSlices" parent="PlateCompleteVisual" index="3" instance=ExtResource("13_swb3d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32, 0)
+visible = false
 
 [node name="CabbageSlices" parent="PlateCompleteVisual" index="4" instance=ExtResource("14_13htv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29, 0)
+visible = false
 
 [node name="MeatPattyBurned" parent="PlateCompleteVisual" index="5" instance=ExtResource("15_kycnj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.166, 0)
+visible = false
 
 [editable path="PlateCompleteVisual/Bread"]
 [editable path="PlateCompleteVisual/Bread/Bread bottom"]
