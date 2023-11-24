@@ -15,7 +15,7 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 #region Counter Settings
 @export_subgroup("Counter_Settings")
 @export_enum("Counter", "Food") var handle_prog_on = "Food"
-@export_enum("Clear_Counter", "Cutting_Counter", "Container_Counter", "Trash_Bin", "Stove_Counter", "Plates_Counter") var type : String
+@export_enum("Clear_Counter", "Cutting_Counter", "Container_Counter", "Trash_Bin", "Stove_Counter", "Plates_Counter", "Delivery_Counter") var type : String
 @export_category("Plates_Counter_Settings")
 @export var spawn_plate_timer_max : float = 4.0
 @export var plate_amount_max: int = 4
@@ -25,8 +25,8 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 @export_subgroup("for_debugging")
 var spawn_plate_timer : float
 @export var _is_frying : bool
-@export var plates_on_top_offset_y : float
-@export var food_on_plates_offset_y : float = 0.15
+@export var plates_on_top_offset_y : float = 0.05
+#@export var food_on_plates_offset_y : float = 0.15
 @export var hovered : bool
 var is_burning_meat: bool
 var cutting_prog : float = 0
@@ -64,7 +64,7 @@ func handle_spawning_plates(delta)->void:
 		if counter_top_point.get_child_count() < plate_amount_max:
 			spawn_plate_timer += delta
 			if spawn_plate_timer > spawn_plate_timer_max:
-				spawn_food_on_container(counter_top_point.get_child_count())
+				spawn_item_on_container()
 				spawn_plate_timer = 0.0
 		else:
 			pass
@@ -302,11 +302,13 @@ func handle_reset_prog()->void:
 	
 
 func ItemHasChanged()->void:
-	if type == "Plates_Counter":
-		for plate in counter_top_point.get_children():
-			if plate.get_node("plate_content").get_child_count() != 0:
-				counter_top_point.move_child(plate, -1)
-	
+	if type == "Plates_Counter": # offsetting plates spawning
+		for food_plate in counter_top_point.get_children():
+			if not food_plate.Ingredients.is_empty():
+				food_plate.position.y = counter_top_point.get_child_count() * plates_on_top_offset_y
+				counter_top_point.move_child(food_plate, -1)
+
+		
 	if type == "Cutting_Counter":
 		if Settings.reset_prog_on_change:
 			match handle_prog_on:
@@ -354,7 +356,6 @@ func Unhover(interactor : MyPlayerClass)->void:
 
 func interact(interactor : MyPlayerClass)->void:	
 	item = counter_top_point.get_child(-1)
-	plates_on_top_offset_y = counter_top_point.get_child_count() *.5
 	
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
@@ -389,6 +390,7 @@ func interact(interactor : MyPlayerClass)->void:
 		else: 
 			if type == "Plates_Counter":
 				if player_obj == "Plate":
+					pass
 					print("This counter only produces plates")
 					return
 				else: 
@@ -409,7 +411,7 @@ func interact(interactor : MyPlayerClass)->void:
 		if not type == "Container_Counter":
 			print( "There's nothing on this counter" )
 		elif type == "Container_Counter" and Kitchen_Object != null:
-			spawn_food_on_container()
+			spawn_item_on_container()
 		else: print("This Base Container Counter does not have a Kitchen Object SO")
 
 func interact_alt(interactor : MyPlayerClass)->void:
@@ -549,14 +551,27 @@ func give_item(interactor : MyPlayerClass )->void:
 		print("Placed item in trash bin.")
 		OnItemChanged.emit()
 		return
+		
+	if type == "Delivery_Counter":
+		if interactor.item_holding.object_name == "Plate":
+			if not interactor.item_holding.Ingredients.is_empty():
+				print("Delivered plate!")
+				interactor.item_holding.queue_free()
+				return
+			else: 
+				print("This plate be empty yo")
+				return
+		else: 
+			print ("This Delivery Counter is only used to deliver orders (Plates) ")
+			return
 
-	if type != "Plates_Counter":
-		interactor.item_holding.reparent(self.get_node("CounterTopPoint") )
-		interactor.item_holding.position = Vector3(0, plates_on_top_offset_y, 0)
-		interactor.item_holding.rotation = Vector3.ZERO
-		print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
-		OnItemChanged.emit()
-	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
+#if type != "Plates_Counter":
+	interactor.item_holding.reparent(self.get_node("CounterTopPoint") )
+	interactor.item_holding.position = Vector3.ZERO
+	interactor.item_holding.rotation = Vector3.ZERO
+	print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
+	OnItemChanged.emit()
+#else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
 func take_item(interactor : MyPlayerClass)->void:
 	handle_reset_prog()
@@ -683,14 +698,14 @@ func fry_item_if_possible()->void:
 				prog_bar_sprite._hide()
 				prog_bar_sprite.shown = false
 
-func spawn_food_on_container(plates_on_top_offset_y : int = 1)->void:
+func spawn_item_on_container()->void:
 	var anim_player : AnimationPlayer = $CounterAnimations
 	if type == "Container_Counter" and anim_player != null:
 		anim_player.play("ContainerOpenClose")
 	var object : Object = Kitchen_Object.prefab.instantiate()
 	counter_top_point.add_child(object, true)
 	if type == "Plates_Counter":
-		object.position = Vector3(0.0, 0.05 * plates_on_top_offset_y, 0.0)
+		object.position = Vector3(0.0, counter_top_point.get_child_count() * plates_on_top_offset_y, 0.0)
 		object.rotation.y = randf_range(0.0, 360.0)
 	print("Spawned (", Kitchen_Object.object_name , ") on ", self.name )
 	OnItemChanged.emit()
