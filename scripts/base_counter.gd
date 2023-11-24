@@ -302,6 +302,11 @@ func handle_reset_prog()->void:
 	
 
 func ItemHasChanged()->void:
+	if type == "Plates_Counter":
+		for plate in counter_top_point.get_children():
+			if plate.get_node("plate_content").get_child_count() != 0:
+				counter_top_point.move_child(plate, -1)
+	
 	if type == "Cutting_Counter":
 		if Settings.reset_prog_on_change:
 			match handle_prog_on:
@@ -387,8 +392,19 @@ func interact(interactor : MyPlayerClass)->void:
 					print("This counter only produces plates")
 					return
 				else: 
-					# take plate from plate counter and put food on it
-					pass
+					# if holding food and interact with plate counter, get plate and put food on it
+					var food = interactor.item_holding
+					var plate = counter_top_point.get_child(-1)
+					if plate.valid_kitchen_object_so_list.has(food.get_kitchen_object_so()):
+						# put food on plate, then put plate in player's hand
+						food.reparent(plate.get_node("plate_content"))
+						food.position = Vector3.ZERO
+						food.rotation = Vector3.ZERO
+						plate.reparent(interactor.get_node("Hold_Item"))
+						plate.position = Vector3.ZERO
+						plate.rotation = Vector3.ZERO
+						OnItemChanged.emit()
+						return
 			print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
 	if not counter_has_object() and not player_has_object(interactor): # handles spawning an item
 		if not type == "Container_Counter":
