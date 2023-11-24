@@ -397,9 +397,8 @@ func interact(interactor : MyPlayerClass)->void:
 					var plate = counter_top_point.get_child(-1)
 					if plate.valid_kitchen_object_so_list.has(food.get_kitchen_object_so()):
 						# put food on plate, then put plate in player's hand
-						food.reparent(plate.get_node("plate_content"))
-						food.position = Vector3.ZERO
-						food.rotation = Vector3.ZERO
+						plate.add_ingredient(food.get_kitchen_object_so())
+						food.queue_free()
 						plate.reparent(interactor.get_node("Hold_Item"))
 						plate.position = Vector3.ZERO
 						plate.rotation = Vector3.ZERO
