@@ -556,7 +556,7 @@ func give_item(interactor : MyPlayerClass )->void:
 	if type == "Delivery_Counter":
 		if interactor.item_holding.object_name == "Plate":
 			if not interactor.item_holding.Ingredients.is_empty():
-				dev_man.deliver_recipe(interactor.item_holding)
+				dev_man.try_deliver_recipe(interactor.item_holding)
 				return
 			else: 
 				print("This plate be empty yo")

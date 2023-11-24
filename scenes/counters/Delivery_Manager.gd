@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 				print(waiting_recipe_so.recipe_name)
 				waiting_recipe_list.append(waiting_recipe_so)
 
-func deliver_recipe(plate : BaseFood)->void:
+func try_deliver_recipe(plate : BaseFood)->bool:
 	for order in waiting_recipe_list:
 		if order.kitchen_object_so_list.size() == plate.Ingredients.size():
 			# has same number of ingredients
@@ -28,5 +28,7 @@ func deliver_recipe(plate : BaseFood)->void:
 						# deliver the order
 						print("Delivered ", order.recipe_name, "!")
 						plate.queue_free()
-						waiting_recipe_list.erase(order) # erase order from list, as it is done
-						return
+						var element_to_remove = waiting_recipe_list.find(order)
+						waiting_recipe_list.remove_at(element_to_remove)
+						return true
+	return false
