@@ -43,7 +43,8 @@ var frying_recipe_so : FryingRecipeSO
 
 #region Getting nodes
 @export_subgroup("getting_nodes")
-@onready var dev_man : DeliveryManager = Globals.find_node("Delivery_Manager")
+@onready var sound_man : SoundManager = Globals.find_node("SoundManager")
+@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager")
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
 @onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
@@ -75,25 +76,22 @@ func handle_spawning_plates(delta)->void:
 func handle_stove_on_and_off_animation()->void:
 	if run_once:
 		if type == "Stove_Counter":
-			if counter_has_object():
-				if is_frying():
-					if stove_anims.current_animation != "StoveOn":
-						stove_anims.play("StoveOn")
-						run_once = false
-
-				elif not is_frying() and stove_anims.current_animation != "StoveOff":
-							stove_anims.play("StoveOff")
-							run_once = false	
-				else:
-					if stove_anims.current_animation != "StoveOff":
-						run_once = false
-						stove_anims.play("StoveOff")
+			if not is_frying():
+				if stove_anims.current_animation != "StoveOff":
+					stove_anims.play("StoveOff")
+					run_once = false	
+					
+	if run_once:
+		if type == "Stove_Counter":
+			if is_frying():
+				if stove_anims.current_animation != "StoveOn":
+					stove_anims.play("StoveOn")
+					run_once = false
 
 			else:
 				if stove_anims.current_animation != "StoveOff":
-						run_once = false
-						stove_anims.play("StoveOff")
-
+					stove_anims.play("StoveOff")
+					run_once = false	
 func handle_burning_meat_effects()->void:
 	if type == "Stove_Counter" and counter_has_object():
 		if current_counter_obj == "MeatPattyCooked":
@@ -273,10 +271,10 @@ func _on_fry_timer_timeout() -> void:
 						fry_timer.stop()
 
 func on_cut(prog_normalized: float)->void:
-	
 	if anim_tree:
 		var state_machine : AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
 		state_machine.travel("knife_cut")
+	sound_man.play_audio_at_pos("chop", self.position)
 	print("CUT") 
 
 
@@ -304,6 +302,8 @@ func handle_reset_prog()->void:
 	
 
 func ItemHasChanged()->void:
+	run_once = true
+	
 	if type == "Plates_Counter": # offsetting plates spawning
 		for food_plate in counter_top_point.get_children():
 			if not food_plate.Ingredients.is_empty():
@@ -331,7 +331,6 @@ func ItemHasChanged()->void:
 				fry_timer.timeout.connect(_on_fry_timer_timeout)
 	
 	print("Player was holding ", player_obj," and interacted with ", self.name, " which had ", current_counter_obj)
-	run_once = true
 func Hover(interactor : MyPlayerClass)->void: # setting up the hover on counter mechanics ( visuals )
 	if player_has_object(interactor) and type == "Stove_Counter" :
 		frying_recipe_so = get_recipe_so_with_input(interactor.item_holding.object_name)
@@ -550,6 +549,7 @@ func give_item(interactor : MyPlayerClass )->void:
 		interactor.item_holding.queue_free()
 		print("Placed item in trash bin.")
 		OnItemChanged.emit()
+		sound_man.play_audio_at_pos("trash_item", self.position)
 		return
 		
 	if type == "Delivery_Counter":
@@ -572,6 +572,7 @@ func give_item(interactor : MyPlayerClass )->void:
 		interactor.item_holding.position = Vector3.ZERO
 		interactor.item_holding.rotation = Vector3.ZERO
 		print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
+		sound_man.play_audio_at_pos("object_drop", self.position)
 		OnItemChanged.emit()
 	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
@@ -581,6 +582,7 @@ func take_item(interactor : MyPlayerClass)->void:
 	item.position = interactor.hold_item_marker.position * .2
 	item.rotation = Vector3.ZERO
 	print("Removed (", item.object_name ,") from (", self.name, ")")
+	sound_man.play_audio_at_pos("object_pickup", interactor.position)
 	OnItemChanged.emit()
 
 func replace_item(interactor : MyPlayerClass)->void:
@@ -598,6 +600,7 @@ func replace_item(interactor : MyPlayerClass)->void:
 							print("Put ", item_one.object_name, " on ", item_two.name)
 							item_two.add_ingredient(item_one.get_kitchen_object_so())
 							item_one.queue_free()
+							sound_man.play_audio_at_pos("object_pickup", interactor.position)
 							OnItemChanged.emit()
 							return
 						else: print("Plate already has this item")
@@ -618,6 +621,7 @@ func replace_item(interactor : MyPlayerClass)->void:
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
 				item_one.add_ingredient(item_two.get_kitchen_object_so())
 				item_two.queue_free()
+				sound_man.play_audio_at_pos("object_pickup", interactor.position)
 				OnItemChanged.emit()
 				return
 		elif item_two.object_name == "Plate" and item_one.object_name != "Plate": # if holding plate and there's food on counter
@@ -631,6 +635,7 @@ func replace_item(interactor : MyPlayerClass)->void:
 				#item_two.position = Vector3.ZERO
 				#item_two.rotation = Vector3.ZERO
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
+				sound_man.play_audio_at_pos("object_pickup", interactor.position)
 				item_two.add_ingredient(item_one.get_kitchen_object_so())
 				item_one.queue_free()
 				return
@@ -648,18 +653,25 @@ func replace_item(interactor : MyPlayerClass)->void:
 	# for placing food from stove or cutting counter to plate
 	elif not has_frying_recipe(interactor) or not has_recipe(interactor) and type == "Cutting_Counter" or type == "Stove_Counter" and item_two.object_name == "Plate" and Settings.can_replace_objects_on_normal_counter(self):
 		if not item_two.Ingredients.has(item_one.get_kitchen_object_so()) and item_two.valid_kitchen_object_so_list.has(item_one.get_kitchen_object_so()) : # if plate on player is empty
+				run_once = true
 				#item_one.reparent( item_two.get_node("plate_content") ) # place food on player's plate
 				#item_one.position = Vector3(0, item_two.get_node("plate_content").get_child_count() * food_on_plates_offset_y  , 0)
 				#item_one.rotation = Vector3.ZERO
 				# if place plate on counter when picking up food is enabled [ NOT NEEDED NOW ]
 				#item_two.reparent( counter_top_point ) # then place plate on counter
 				#item_two.position = Vector3.ZERO
-				#item_two.rotation = Vector3.ZERO
+				#item_two.rotation = Vector3.ZERO				
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
+				sound_man.play_audio_at_pos("object_pickup", interactor.position)
 				item_two.add_ingredient(item_one.get_kitchen_object_so())
 				item_one.queue_free()
 				OnItemChanged.emit()
 				return
+		else:
+			if type == "Stove_Counter":
+				print("The meat isn't cooked yet.")
+			elif type == "Cutting_Counter":
+				print("This item isn't sliced yet.")
 				
 	else: print("This food item cannot be placed here.")
 	
@@ -710,12 +722,17 @@ func spawn_item_on_container()->void:
 		object.position = Vector3(0.0, counter_top_point.get_child_count() * plates_on_top_offset_y, 0.0)
 		object.rotation.y = randf_range(0.0, 360.0)
 	print("Spawned (", Kitchen_Object.object_name , ") on ", self.name )
+	#if type != "Plates_Counter": below
+	sound_man.play_audio_at_pos("object_pickup", interactor.position)
 	OnItemChanged.emit()
 
 #endregion
 
 
 func _process(delta: float) -> void:
+	_is_frying = is_frying()
+	if not is_frying():
+		is_burning_meat = false
 	if counter_top_point.get_child_count() != 0:
 		item = counter_top_point.get_child(-1)
 	else: item = null
@@ -724,10 +741,10 @@ func _process(delta: float) -> void:
 	handle_lerp_progress_bar()
 	handle_prog_bar_max_value()
 	set_recipe_so()
-	handle_stove_on_and_off_animation()
 	handle_burning_meat_effects()
 	handle_prog_sprite_visibility()
 	set_current_player_and_counter_obj()
+	handle_stove_on_and_off_animation()
 func _ready() -> void:
 	OnItemChanged.connect(ItemHasChanged)
 	for child : Object in get_all_children(self):

@@ -1,6 +1,6 @@
-extends Node
+class_name SoundManager extends Node
 
-@onready var dev_man : DeliveryManager = Globals.find_node("Delivery_Manager") as DeliveryManager
+@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var sfx : AudioStreamPlayer3D = get_child(0)
 @export var audio_clips_references : AudioClipsRefsSO
 @onready var player : MyPlayerClass = Globals.find_node("Player") as MyPlayerClass

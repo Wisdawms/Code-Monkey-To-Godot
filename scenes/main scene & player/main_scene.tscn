@@ -229,15 +229,15 @@ font_size = 24
 script = ExtResource("1_v2br7")
 metadata/_edit_lock_ = true
 
-[node name="Delivery_Manager" type="Node" parent="."]
+[node name="DeliveryManager" type="Node" parent="."]
 script = ExtResource("2_f6pev")
 ingredient_scene_template = ExtResource("3_eo8rb")
 order_scene = ExtResource("4_ln6a4")
 possible_orders = ExtResource("5_r4p2v")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Delivery_Manager"]
+[node name="CanvasLayer" type="CanvasLayer" parent="DeliveryManager"]
 
-[node name="MarginContainer" type="MarginContainer" parent="Delivery_Manager/CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryManager/CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 50
@@ -245,22 +245,22 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="bg" type="MarginContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer"]
+[node name="bg" type="MarginContainer" parent="DeliveryManager/CanvasLayer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = -25
 theme_override_constants/margin_top = -25
 theme_override_constants/margin_right = -25
 theme_override_constants/margin_bottom = -25
 
-[node name="ColorRect" type="ColorRect" parent="Delivery_Manager/CanvasLayer/MarginContainer/bg"]
+[node name="ColorRect" type="ColorRect" parent="DeliveryManager/CanvasLayer/MarginContainer/bg"]
 layout_mode = 2
 color = Color(0, 0, 0, 0.337255)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="heading" type="Label" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="heading" type="Label" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
 theme_override_colors/font_outline_color = Color(0.223529, 0.188235, 0.313726, 1)
@@ -268,14 +268,14 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "Waiting orders:"
 
-[node name="Orders_Root" type="VBoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Orders_Root" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root"]
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root"]
 layout_mode = 2
 theme_override_constants/margin_right = 50
 
-[node name="orders_container" type="BoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root/MarginContainer"]
+[node name="orders_container" type="BoxContainer" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 vertical = true
@@ -413,7 +413,7 @@ FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 2.25)
 
 [node name="Cutting_Counter2" parent="Counters" instance=ExtResource("13_p46un")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.75, 0, 2.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.75, 0, 2.25)
 handle_prog_on = "Counter"
 
 [node name="Stove_Counter" parent="Counters" instance=ExtResource("19_yps3e")]
