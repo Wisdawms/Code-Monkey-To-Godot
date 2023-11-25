@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=35 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
 [ext_resource type="Script" path="res://scenes/counters/Delivery_Manager.gd" id="2_f6pev"]
 [ext_resource type="Script" path="res://scenes/main scene & player/SoundManager.gd" id="2_g2p2o"]
+[ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="2_t5pjo"]
 [ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="3_eo8rb"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="3_qj1pw"]
 [ext_resource type="Script" path="res://scripts/Camera3D.gd" id="3_yb8cg"]
@@ -237,7 +238,7 @@ possible_orders = ExtResource("5_r4p2v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DeliveryManager"]
 
-[node name="MarginContainer" type="MarginContainer" parent="DeliveryManager/CanvasLayer"]
+[node name="delivery_ui_container" type="MarginContainer" parent="DeliveryManager/CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/margin_left = 50
@@ -245,22 +246,22 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="bg" type="MarginContainer" parent="DeliveryManager/CanvasLayer/MarginContainer"]
+[node name="bg" type="MarginContainer" parent="DeliveryManager/CanvasLayer/delivery_ui_container"]
 layout_mode = 2
 theme_override_constants/margin_left = -25
 theme_override_constants/margin_top = -25
 theme_override_constants/margin_right = -25
 theme_override_constants/margin_bottom = -25
 
-[node name="ColorRect" type="ColorRect" parent="DeliveryManager/CanvasLayer/MarginContainer/bg"]
+[node name="ColorRect" type="ColorRect" parent="DeliveryManager/CanvasLayer/delivery_ui_container/bg"]
 layout_mode = 2
 color = Color(0, 0, 0, 0.337255)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/delivery_ui_container"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="heading" type="Label" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="heading" type="Label" parent="DeliveryManager/CanvasLayer/delivery_ui_container/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
 theme_override_colors/font_outline_color = Color(0.223529, 0.188235, 0.313726, 1)
@@ -268,14 +269,14 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 text = "Waiting orders:"
 
-[node name="Orders_Root" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Orders_Root" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/delivery_ui_container/VBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root"]
+[node name="MarginContainer" type="MarginContainer" parent="DeliveryManager/CanvasLayer/delivery_ui_container/VBoxContainer/Orders_Root"]
 layout_mode = 2
 theme_override_constants/margin_right = 50
 
-[node name="orders_container" type="BoxContainer" parent="DeliveryManager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root/MarginContainer"]
+[node name="orders_container" type="BoxContainer" parent="DeliveryManager/CanvasLayer/delivery_ui_container/VBoxContainer/Orders_Root/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 vertical = true
@@ -288,7 +289,82 @@ audio_clips_references = ExtResource("7_x3dj4")
 
 [node name="bg_music" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_mgtos")
-volume_db = -5.0
+volume_db = -8.0
+autoplay = true
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("2_t5pjo")
+game_playing_timer = 60.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
+
+[node name="bg_veil" type="ColorRect" parent="GameManager/CanvasLayer"]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.188235, 0.313726, 0.490196)
+
+[node name="countdown_timer_text" type="Label" parent="GameManager/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -68.5
+offset_right = 28.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 100
+text = "3"
+
+[node name="game_starting_text" type="Label" parent="GameManager/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -51.5
+offset_right = 285.5
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "INTERMISSION.."
+
+[node name="game_over_text" type="Label" parent="GameManager/CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.5
+offset_top = -51.5
+offset_right = 225.5
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.870588, 0.282353, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "GAME OVER!"
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_qj1pw")

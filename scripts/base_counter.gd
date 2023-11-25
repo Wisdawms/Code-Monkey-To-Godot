@@ -44,8 +44,9 @@ var frying_recipe_so : FryingRecipeSO
 #region Getting nodes
 @export_subgroup("getting_nodes")
 @onready var frying_sound
+@onready var game_man : GameManager = Globals.find_node("GameManager")
 @onready var sound_man : SoundManager = Globals.find_node("SoundManager")
-@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager")
+@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
 @onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
@@ -64,15 +65,16 @@ var mesh_instances : Array
 #region [    Methods For Handling Stuff    ]
 
 func handle_spawning_plates(delta)->void:
-	if type == "Plates_Counter":
-		if counter_top_point.get_child_count() < plate_amount_max:
-			spawn_plate_timer += delta
-			if spawn_plate_timer > spawn_plate_timer_max:
-				spawn_item_on_container()
-				spawn_plate_timer = 0.0
-		else:
-			pass
-			#print("Reached maximum number of plates on counter!")
+	if game_man.is_game_playing():
+		if type == "Plates_Counter":
+			if counter_top_point.get_child_count() < plate_amount_max:
+				spawn_plate_timer += delta
+				if spawn_plate_timer > spawn_plate_timer_max:
+					spawn_item_on_container()
+					spawn_plate_timer = 0.0
+			else:
+				pass
+				#print("Reached maximum number of plates on counter!")
 
 func handle_stove_on_and_off_effects()->void:
 	if run_once:
@@ -308,8 +310,6 @@ func ItemHasChanged()->void:
 			if not food_plate.Ingredients.is_empty():
 				food_plate.position.y = counter_top_point.get_child_count() * plates_on_top_offset_y
 				counter_top_point.move_child(food_plate, -1)
-
-		
 	if type == "Cutting_Counter":
 		if Settings.reset_prog_on_change:
 			match handle_prog_on:
@@ -321,14 +321,12 @@ func ItemHasChanged()->void:
 
 	fry_item_if_possible()
 	handle_stove_on_and_off_effects()
-	
 	if item and type == "Stove_Counter":
 		match handle_prog_on:
 			"Food":
 				item.fry_timer.timeout.connect(_on_fry_timer_timeout)
 			"Counter":
 				fry_timer.timeout.connect(_on_fry_timer_timeout)
-	
 	print("Player was holding ", player_obj," and interacted with ", self.name, " which had ", current_counter_obj)
 func Hover(interactor : MyPlayerClass)->void: # setting up the hover on counter mechanics ( visuals )
 	if player_has_object(interactor) and type == "Stove_Counter" :
@@ -401,6 +399,7 @@ func interact(interactor : MyPlayerClass)->void:
 						plate.add_ingredient(food.get_kitchen_object_so())
 						food.queue_free()
 						plate.reparent(interactor.get_node("Hold_Item"), false)
+						sound_man.play_audio_at_pos("object_pickup", self.position)
 						OnItemChanged.emit()
 						return
 			print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
@@ -664,7 +663,7 @@ func replace_item(interactor : MyPlayerClass)->void:
 					if stove_anims.current_animation != "StoveOff":
 						stove_anims.play("StoveOff")
 						if frying_sound:
-							frying_sound.playing = true
+							frying_sound.playing = false
 						run_once = false
 
 				return
@@ -724,7 +723,7 @@ func spawn_item_on_container()->void:
 		object.rotation.y = randf_range(0.0, 360.0)
 	print("Spawned (", Kitchen_Object.object_name , ") on ", self.name )
 	#if type != "Plates_Counter": below
-	sound_man.play_audio_at_pos("object_pickup", interactor.position)
+	sound_man.play_audio_at_pos("object_pickup", self.position)
 	OnItemChanged.emit()
 
 #endregion
