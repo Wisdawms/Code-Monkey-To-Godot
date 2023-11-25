@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://f8v8u1qe2xc1"]
+[gd_scene load_steps=5 format=3 uid="uid://f8v8u1qe2xc1"]
 
 [ext_resource type="Script" path="res://order_scene.gd" id="1_5jvkc"]
+[ext_resource type="Texture2D" uid="uid://ccqolege2ov78" path="res://Assets/_Assets/Textures/under.png" id="2_gwaja"]
+[ext_resource type="Texture2D" uid="uid://dbdju784dshiq" path="res://Assets/_Assets/Textures/progress.png" id="3_tlkim"]
+[ext_resource type="Script" path="res://circular-progress-bar.gd" id="4_wr8a7"]
 
 [node name="order" type="MarginContainer"]
 script = ExtResource("1_5jvkc")
@@ -9,7 +12,20 @@ script = ExtResource("1_5jvkc")
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="order_name" type="Label" parent="VBoxContainer"]
+[node name="order_name_time" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="circular-progress-bar" type="TextureProgressBar" parent="VBoxContainer/order_name_time"]
+layout_mode = 2
+max_value = 50.0
+step = 0.01
+fill_mode = 5
+texture_under = ExtResource("2_gwaja")
+texture_progress = ExtResource("3_tlkim")
+script = ExtResource("4_wr8a7")
+
+[node name="order_name" type="Label" parent="VBoxContainer/order_name_time"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.776471, 0.776471, 0.776471, 1)
 theme_override_colors/font_shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
@@ -23,6 +39,6 @@ theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="order_time" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 20.0
 one_shot = true
 autostart = true
