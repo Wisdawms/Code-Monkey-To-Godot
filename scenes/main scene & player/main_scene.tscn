@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scenes/main scene & player/SoundManager.gd" id="2_g2p2o"]
 [ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="3_eo8rb"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="3_qj1pw"]
-[ext_resource type="Resource" uid="uid://cl3o6p0dwbaok" path="res://resources/audio_clips_references.tres" id="3_rn4om"]
 [ext_resource type="Script" path="res://scripts/Camera3D.gd" id="3_yb8cg"]
 [ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_5kud7"]
 [ext_resource type="PackedScene" uid="uid://f8v8u1qe2xc1" path="res://order_scene.tscn" id="4_ln6a4"]
@@ -14,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="5_r4p2v"]
 [ext_resource type="AudioStream" uid="uid://cdt0ar3y1wked" path="res://Assets/_Assets/Sounds/Music/Music.wav" id="6_mgtos"]
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
+[ext_resource type="Resource" uid="uid://dat081hyy7iu" path="res://resources/sound_references_so.tres" id="7_x3dj4"]
 [ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
 [ext_resource type="PackedScene" uid="uid://c2f5d2m2eresa" path="res://scenes/counters/container_counters/cabbage_container_counter.tscn" id="9_ql0l1"]
 [ext_resource type="PackedScene" uid="uid://6vbwuf72kjgn" path="res://scenes/counters/bases/plates_counter.tscn" id="11_6wsyw"]
@@ -282,14 +282,13 @@ vertical = true
 
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("2_g2p2o")
-audio_clips_references = ExtResource("3_rn4om")
+audio_clips_references = ExtResource("7_x3dj4")
 
 [node name="MusicManager" type="Node" parent="."]
 
 [node name="bg_music" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_mgtos")
 volume_db = -5.0
-autoplay = true
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_qj1pw")
