@@ -10,14 +10,8 @@ class_name DeliveryManager extends Node
 @export var spawn_recipe_timer_max : float = 4.0
 @export var orders_max : int = 4
 
-#func time_timeout(parent)->void:
-	#print("timeout")
-	#for order in waiting_recipe_list:
-		#if order.order_name == parent.get_parent().order_name:
-			#hide_order_ui(order)
-			#return
-		#
-		
+signal OrderDelivered
+signal OrderFailed
 
 func order_timeout(order_ui, order)->void:
 	print(order.recipe_name," timed out")
@@ -44,7 +38,12 @@ func give_new_order()->void:
 			var order_timer : Timer = order_instance.get_child(-1) as Timer
 			order_timer.timeout.connect(order_timeout.bind(order_instance, waiting_recipe_so))
 			orders_container.add_child(order_instance, true)
-			order_instance.order_name.text = waiting_recipe_so.recipe_name
+			order_instance.order_name.text = waiting_recipe_so.recipe_name # setting order name
+			#setting timer according to order given
+			var time_to_order : float = waiting_recipe_so.order_time
+			order_instance.order_time.wait_time = time_to_order
+			order_instance.order_time.start()
+			# setting ingredient icons
 			for ingredient in waiting_recipe_so.kitchen_object_so_list:
 				var ing_icon = ingredient_scene_template.instantiate()
 				order_instance.order_ingredients_container.add_child(ing_icon, true)
@@ -76,8 +75,10 @@ func try_deliver_recipe(plate : BaseFood)->void:
 						print("Delivered ", order.recipe_name, "!")
 						remove_order(order)
 						destroy_plate(plate)
+						OrderDelivered.emit()
 						return
 	print("Not a requested recipe order!")
+	OrderFailed.emit()
 	return
 	
 

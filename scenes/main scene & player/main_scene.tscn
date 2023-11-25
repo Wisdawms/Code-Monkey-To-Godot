@@ -1,11 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=34 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
+[ext_resource type="Script" path="res://scenes/counters/Delivery_Manager.gd" id="2_f6pev"]
+[ext_resource type="Script" path="res://scenes/main scene & player/SoundManager.gd" id="2_g2p2o"]
+[ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="3_eo8rb"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="3_qj1pw"]
+[ext_resource type="Resource" uid="uid://cl3o6p0dwbaok" path="res://resources/audio_clips_references.tres" id="3_rn4om"]
 [ext_resource type="Script" path="res://scripts/Camera3D.gd" id="3_yb8cg"]
 [ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_5kud7"]
+[ext_resource type="PackedScene" uid="uid://f8v8u1qe2xc1" path="res://order_scene.tscn" id="4_ln6a4"]
 [ext_resource type="PackedScene" uid="uid://dbl1o1hgl32r7" path="res://scenes/main scene & player/fps.tscn" id="5_ixcvf"]
+[ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="5_r4p2v"]
 [ext_resource type="AudioStream" uid="uid://cdt0ar3y1wked" path="res://Assets/_Assets/Sounds/Music/Music.wav" id="6_mgtos"]
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
 [ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
@@ -223,10 +229,66 @@ font_size = 24
 script = ExtResource("1_v2br7")
 metadata/_edit_lock_ = true
 
-[node name="AudioManager" type="Node" parent="."]
+[node name="Delivery_Manager" type="Node" parent="."]
+script = ExtResource("2_f6pev")
+ingredient_scene_template = ExtResource("3_eo8rb")
+order_scene = ExtResource("4_ln6a4")
+possible_orders = ExtResource("5_r4p2v")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Delivery_Manager"]
+
+[node name="MarginContainer" type="MarginContainer" parent="Delivery_Manager/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="bg" type="MarginContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -25
+theme_override_constants/margin_top = -25
+theme_override_constants/margin_right = -25
+theme_override_constants/margin_bottom = -25
+
+[node name="ColorRect" type="ColorRect" parent="Delivery_Manager/CanvasLayer/MarginContainer/bg"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.337255)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="heading" type="Label" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_outline_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Waiting orders:"
+
+[node name="Orders_Root" type="VBoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root"]
+layout_mode = 2
+theme_override_constants/margin_right = 50
+
+[node name="orders_container" type="BoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+vertical = true
+
+[node name="SoundManager" type="Node" parent="."]
+script = ExtResource("2_g2p2o")
+audio_clips_references = ExtResource("3_rn4om")
+
+[node name="MusicManager" type="Node" parent="."]
+
+[node name="bg_music" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_mgtos")
+volume_db = -5.0
 autoplay = true
 
 [node name="env&light" type="WorldEnvironment" parent="."]
@@ -237,7 +299,7 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_aa4i7")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2, 1.5, 0.025)
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2, 1.5, -0.275)
 collision_mask = 7
 gravity = 20.0
 
@@ -260,6 +322,9 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 current = true
 script = ExtResource("3_yb8cg")
 player = NodePath("../Player")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
+current = true
 
 [node name="FPS" parent="." instance=ExtResource("5_ixcvf")]
 label_settings = SubResource("LabelSettings_gyb2q")
@@ -360,4 +425,7 @@ transform = Transform3D(-1.86265e-08, 0, -1, 0, 1, 0, 1, 0, -1.86265e-08, 8.25, 
 handle_prog_on = "Counter"
 
 [node name="Delivery_Counter" parent="Counters" instance=ExtResource("18_h0f4w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+
+[node name="Delivery_Counter2" parent="Counters" instance=ExtResource("18_h0f4w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 9)

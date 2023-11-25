@@ -43,7 +43,7 @@ var frying_recipe_so : FryingRecipeSO
 
 #region Getting nodes
 @export_subgroup("getting_nodes")
-@onready var dev_man : DeliveryManager = get_node("Delivery_Manager")
+@onready var dev_man : DeliveryManager = Globals.find_node("Delivery_Manager")
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
 @onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
@@ -358,7 +358,6 @@ func Unhover(interactor : MyPlayerClass)->void:
 
 func interact(interactor : MyPlayerClass)->void:	
 	item = counter_top_point.get_child(-1)
-	
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
 	

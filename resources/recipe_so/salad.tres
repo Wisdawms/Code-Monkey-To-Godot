@@ -8,3 +8,4 @@
 script = ExtResource("6_tphd8")
 kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("4_xgt6h"), ExtResource("5_suvqs")])
 recipe_name = "Salad"
+order_time = 20.0

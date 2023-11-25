@@ -1,12 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4ajcmgct0yw1"]
+[gd_scene load_steps=7 format=3 uid="uid://c4ajcmgct0yw1"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_ampbx"]
 [ext_resource type="Material" uid="uid://huh6uf1ousrb" path="res://Assets/_Assets/Meshes/Kitchen Counter_Blue.mat.tres" id="3_03nix"]
 [ext_resource type="Shader" uid="uid://br5xrq51plsli" path="res://shaders/moving_visual.tres" id="3_e52t1"]
-[ext_resource type="Script" path="res://scenes/counters/Delivery_Manager.gd" id="4_4sb2q"]
-[ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="5_8l1yj"]
-[ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="6_rjaxe"]
-[ext_resource type="PackedScene" uid="uid://f8v8u1qe2xc1" path="res://order_scene.tscn" id="7_eo384"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5hxex"]
 resource_local_to_scene = true
@@ -92,54 +88,3 @@ metadata/unidot_keys = {
 [node name="Delivery_Arrow" type="MeshInstance3D" parent="." index="7"]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 1.28, 0.03)
 mesh = SubResource("QuadMesh_2ajtd")
-
-[node name="Delivery_Manager" type="Node" parent="." index="8"]
-script = ExtResource("4_4sb2q")
-ingredient_scene_template = ExtResource("6_rjaxe")
-order_scene = ExtResource("7_eo384")
-possible_orders = ExtResource("5_8l1yj")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Delivery_Manager" index="0"]
-
-[node name="MarginContainer" type="MarginContainer" parent="Delivery_Manager/CanvasLayer" index="0"]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
-
-[node name="bg" type="MarginContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer" index="0"]
-layout_mode = 2
-theme_override_constants/margin_left = -25
-theme_override_constants/margin_top = -25
-theme_override_constants/margin_right = -25
-theme_override_constants/margin_bottom = -25
-
-[node name="ColorRect" type="ColorRect" parent="Delivery_Manager/CanvasLayer/MarginContainer/bg" index="0"]
-layout_mode = 2
-color = Color(0, 0, 0, 0.337255)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer" index="1"]
-layout_mode = 2
-theme_override_constants/separation = 50
-
-[node name="heading" type="Label" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer" index="0"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
-theme_override_colors/font_outline_color = Color(0.223529, 0.188235, 0.313726, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 30
-text = "Waiting orders:"
-
-[node name="Orders_Root" type="VBoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer" index="1"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root" index="0"]
-layout_mode = 2
-theme_override_constants/margin_right = 50
-
-[node name="orders_container" type="BoxContainer" parent="Delivery_Manager/CanvasLayer/MarginContainer/VBoxContainer/Orders_Root/MarginContainer" index="0"]
-layout_mode = 2
-theme_override_constants/separation = 20
-vertical = true
