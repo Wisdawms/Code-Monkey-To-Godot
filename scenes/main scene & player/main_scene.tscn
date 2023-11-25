@@ -350,4 +350,4 @@ transform = Transform3D(-1.86265e-08, 0, -1, 0, 1, 0, 1, 0, -1.86265e-08, 8.25, 
 handle_prog_on = "Counter"
 
 [node name="Delivery_Counter" parent="Counters" instance=ExtResource("18_h0f4w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 9)

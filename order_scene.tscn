@@ -21,3 +21,8 @@ text = "order_name"
 layout_mode = 2
 theme_override_constants/v_separation = 10
 columns = 4
+
+[node name="order_time" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true

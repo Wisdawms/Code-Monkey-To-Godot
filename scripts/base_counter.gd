@@ -414,8 +414,6 @@ func interact(interactor : MyPlayerClass)->void:
 			print( "There's nothing on this counter" )
 		elif type == "Container_Counter" and Kitchen_Object != null:
 			spawn_item_on_container()
-			item = counter_top_point.get_child(-1)
-			take_item(interactor)
 		else: print("This Base Container Counter does not have a Kitchen Object SO")
 
 func interact_alt(interactor : MyPlayerClass)->void:
