@@ -23,6 +23,7 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 
 #region Debugging
 @export_subgroup("for_debugging")
+@onready var once : bool = true
 var spawn_plate_timer : float
 @export var _is_frying : bool
 @export var plates_on_top_offset_y : float = 0.05
@@ -538,7 +539,6 @@ func player_has_object(interactor : MyPlayerClass)->bool:
 
 #region [    Do Methods    ]
 func give_item(interactor : MyPlayerClass )->void:
-	
 	if type == "Container_Counter":
 		if Kitchen_Object != null:
 			if interactor.item_holding.default_name != Kitchen_Object.object_name:
@@ -557,6 +557,9 @@ func give_item(interactor : MyPlayerClass )->void:
 		if interactor.item_holding.object_name == "Plate":
 			if not interactor.item_holding.Ingredients.is_empty():
 				dev_man.try_deliver_recipe(interactor.item_holding)
+				#elif once and not dev_man.try_deliver_recipe(interactor.item_holding):
+					#print("No current order matches the contents of this plate")
+					#once = false
 				return
 			else: 
 				print("This plate be empty yo")

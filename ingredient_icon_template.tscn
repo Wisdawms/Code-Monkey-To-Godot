@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm2gtwr6ci2jg"]
+
+[ext_resource type="Script" path="res://icon_template.gd" id="1_kqpqk"]
+[ext_resource type="Texture2D" uid="uid://dcaflgv8bt0jq" path="res://Assets/_Assets/Textures/Icons/Bread.png" id="2_1sut0"]
+
+[node name="ingredient_icon_template" type="Control"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_kqpqk")
+
+[node name="icon_sprite" type="Sprite2D" parent="."]
+position = Vector2(17, 17)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_1sut0")
