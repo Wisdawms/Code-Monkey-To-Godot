@@ -1,8 +1,11 @@
 class_name GameManager extends Node
+
+@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var bg_veil : ColorRect = get_node("CanvasLayer/bg_veil")
 @onready var countdown_timer_text : Label = get_node("CanvasLayer/countdown_timer_text")
 @onready var game_starting_text : Label = get_node("CanvasLayer/game_starting_text")
-@onready var game_over_text : Label = get_node("CanvasLayer/game_over_text")
+@onready var game_over_ui : Control = get_node("CanvasLayer/game_over_ui")
+@onready var gameover_recipes_number : Control = get_node("CanvasLayer/game_over_ui/gameover_recipes_number")
 signal StateChanged
 
 enum game_state {
@@ -52,7 +55,7 @@ func is_game_over()->bool:
 func _ready() -> void:
 	StateChanged.connect(update_game_manager_ui)
 	countdown_timer_text.visible = false
-	game_over_text.visible = false
+	game_over_ui.visible = false
 	
 func update_game_manager_ui()->void:
 	if is_game_starting():
@@ -62,5 +65,6 @@ func update_game_manager_ui()->void:
 		countdown_timer_text.visible = true
 	else: countdown_timer_text.visible = false
 	if is_game_over():
-		game_over_text.visible = true
-	else: game_over_text.visible = false
+		game_over_ui.visible = true
+		gameover_recipes_number.text = str(dev_man.orders_delivered)
+	else: game_over_ui.visible = false

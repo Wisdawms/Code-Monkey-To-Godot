@@ -294,7 +294,7 @@ autoplay = true
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_t5pjo")
-game_playing_timer = 60.0
+game_playing_timer = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
 
@@ -346,16 +346,27 @@ theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 75
 text = "INTERMISSION.."
 
-[node name="game_over_text" type="Label" parent="GameManager/CanvasLayer"]
+[node name="game_over_ui" type="Control" parent="GameManager/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="game_over_text" type="Label" parent="GameManager/CanvasLayer/game_over_ui"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -225.5
-offset_top = -51.5
+offset_top = -188.0
 offset_right = 225.5
-offset_bottom = 51.5
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -365,6 +376,48 @@ theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 75
 text = "GAME OVER!"
+
+[node name="gameover_recipes_delivered" type="Label" parent="GameManager/CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -51.0
+offset_right = 144.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 35
+text = "Orders Delivered"
+
+[node name="gameover_recipes_number" type="Label" parent="GameManager/CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = 8.5
+offset_right = 17.0
+offset_bottom = 91.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "5"
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_qj1pw")

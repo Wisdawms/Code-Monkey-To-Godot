@@ -11,6 +11,7 @@ class_name DeliveryManager extends Node
 @onready var spawn_recipe_timer : float = 4.0
 @export var spawn_recipe_timer_max : float = 4.0
 @export var orders_max : int = 4
+@onready var orders_delivered : int = 0
 
 signal OrderDelivered
 signal OrderFailed
@@ -85,6 +86,7 @@ func try_deliver_recipe(plate : BaseFood)->void:
 							print("Delivered ", order.recipe_name, "!")
 							remove_order(order)
 							destroy_plate(plate)
+							orders_delivered += 1
 							OrderDelivered.emit()
 							return
 		print("Not a requested recipe order!")
