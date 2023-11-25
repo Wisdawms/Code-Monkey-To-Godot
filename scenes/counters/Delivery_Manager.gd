@@ -14,7 +14,7 @@ class_name DeliveryManager extends Node
 	#print("timeout")
 	#for order in waiting_recipe_list:
 		#if order.order_name == parent.get_parent().order_name:
-			#remove_order_ui(order)
+			#hide_order_ui(order)
 			#return
 		#
 		
@@ -22,7 +22,7 @@ class_name DeliveryManager extends Node
 func order_timeout(order_ui, order)->void:
 	print(order.recipe_name," timed out")
 	#print(order_ui)
-	remove_order_ui(order)
+	hide_order_ui(order)
 	remove_order(order)
 	return
 
@@ -50,7 +50,7 @@ func give_new_order()->void:
 				order_instance.order_ingredients_container.add_child(ing_icon, true)
 				ing_icon.Icon.texture = ingredient.Icon
 
-func remove_order_ui(order)->void:
+func hide_order_ui(order)->void:
 	var orders_ui := orders_container.get_children()
 	for order_ui in orders_ui:
 		if order_ui.order_name.text == order.recipe_name:
@@ -60,6 +60,7 @@ func remove_order_ui(order)->void:
 func remove_order(order)->void:
 	var first_occurence_of_order = waiting_recipe_list.find(order)
 	waiting_recipe_list.erase(order)
+	hide_order_ui(order)
 
 func destroy_plate(plate)->void:
 	plate.queue_free()
@@ -73,10 +74,10 @@ func try_deliver_recipe(plate : BaseFood)->void:
 					if ingredient == plate_ingredient: # if both order and plate ingredients match
 						# deliver the order
 						print("Delivered ", order.recipe_name, "!")
-						remove_order_ui(order)
 						remove_order(order)
 						destroy_plate(plate)
 						return
 	print("Not a requested recipe order!")
 	return
 	
+

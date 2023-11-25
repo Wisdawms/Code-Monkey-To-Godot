@@ -7,7 +7,7 @@ class_name MyPlayerClass extends CharacterBody3D
 @onready var hold_item_marker: Marker3D = $Hold_Item
 
 func _process(_delta: float) -> void:
-	
+	handle_interactions()
 	if hold_item_marker.get_child_count() != 0: # set player.item_holdign
 		item_holding = hold_item_marker.get_child(-1)
 	else: item_holding = null
@@ -19,10 +19,6 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta)
 	
 	
-
-func _input(event: InputEvent) -> void:
-	handle_interactions()
-
 func get_movement_velocity()->void:
 	current_pos = global_position
 	delta_pos = current_pos - last_pos

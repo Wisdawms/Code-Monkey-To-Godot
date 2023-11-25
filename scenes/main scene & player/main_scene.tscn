@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=28 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/Camera3D.gd" id="3_yb8cg"]
 [ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_5kud7"]
 [ext_resource type="PackedScene" uid="uid://dbl1o1hgl32r7" path="res://scenes/main scene & player/fps.tscn" id="5_ixcvf"]
+[ext_resource type="AudioStream" uid="uid://cdt0ar3y1wked" path="res://Assets/_Assets/Sounds/Music/Music.wav" id="6_mgtos"]
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
 [ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
 [ext_resource type="PackedScene" uid="uid://c2f5d2m2eresa" path="res://scenes/counters/container_counters/cabbage_container_counter.tscn" id="9_ql0l1"]
@@ -222,10 +223,11 @@ font_size = 24
 script = ExtResource("1_v2br7")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("2_aa4i7")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2, 1.5, 0.025)
-collision_mask = 7
-gravity = 20.0
+[node name="AudioManager" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("6_mgtos")
+autoplay = true
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_qj1pw")
@@ -234,22 +236,30 @@ environment = ExtResource("3_qj1pw")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
+[node name="Player" parent="." instance=ExtResource("2_aa4i7")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 1.2, 1.5, 0.025)
+collision_mask = 7
+gravity = 20.0
+
+[node name="Ground" type="Node3D" parent="."]
+
+[node name="Plane" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+material_override = ExtResource("4_5kud7")
+mesh = SubResource("PlaneMesh_3j6gm")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Plane"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Plane/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_xr3p1")
+
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 1)
 current = true
 script = ExtResource("3_yb8cg")
 player = NodePath("../Player")
-
-[node name="Plane" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-material_override = ExtResource("4_5kud7")
-mesh = SubResource("PlaneMesh_3j6gm")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Plane"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_xr3p1")
 
 [node name="FPS" parent="." instance=ExtResource("5_ixcvf")]
 label_settings = SubResource("LabelSettings_gyb2q")
