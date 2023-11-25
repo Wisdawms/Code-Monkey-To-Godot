@@ -414,6 +414,8 @@ func interact(interactor : MyPlayerClass)->void:
 			print( "There's nothing on this counter" )
 		elif type == "Container_Counter" and Kitchen_Object != null:
 			spawn_item_on_container()
+			item = counter_top_point.get_child(-1)
+			take_item(interactor)
 		else: print("This Base Container Counter does not have a Kitchen Object SO")
 
 func interact_alt(interactor : MyPlayerClass)->void:
@@ -568,13 +570,13 @@ func give_item(interactor : MyPlayerClass )->void:
 			print ("This Delivery Counter is only used to deliver orders (Plates) ")
 			return
 
-#if type != "Plates_Counter":
-	interactor.item_holding.reparent(self.get_node("CounterTopPoint") )
-	interactor.item_holding.position = Vector3.ZERO
-	interactor.item_holding.rotation = Vector3.ZERO
-	print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
-	OnItemChanged.emit()
-#else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
+	if type != "Plates_Counter":
+		interactor.item_holding.reparent(self.get_node("CounterTopPoint") )
+		interactor.item_holding.position = Vector3.ZERO
+		interactor.item_holding.rotation = Vector3.ZERO
+		print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
+		OnItemChanged.emit()
+	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
 func take_item(interactor : MyPlayerClass)->void:
 	handle_reset_prog()

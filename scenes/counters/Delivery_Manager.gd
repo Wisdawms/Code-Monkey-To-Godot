@@ -32,6 +32,18 @@ func give_new_order()->void:
 				order_instance.order_ingredients_container.add_child(ing_icon, true)
 				ing_icon.Icon.texture = ingredient.Icon
 
+func remove_order_ui(order)->void:
+	var orders_ui := orders_container.get_children()
+	for _order in orders_ui:
+		if _order.order_name.text == order.recipe_name:
+			_order.queue_free()
+			return
+
+func remove_order(order, plate)->void:
+	plate.queue_free()
+	var first_occurence_of_order = waiting_recipe_list.find(order)
+	waiting_recipe_list.erase(order)
+
 func try_deliver_recipe(plate : BaseFood)->void:
 	for order in waiting_recipe_list:
 		if order.kitchen_object_so_list.size() == plate.Ingredients.size():
@@ -41,13 +53,9 @@ func try_deliver_recipe(plate : BaseFood)->void:
 					if ingredient == plate_ingredient: # if both order and plate ingredients match
 						# deliver the order
 						print("Delivered ", order.recipe_name, "!")
-						plate.queue_free()
-						var first_occurence_of_order = waiting_recipe_list.find(order)
-						waiting_recipe_list.erase(order)
-						var orders_ui := orders_container.get_children()
-						for _order in orders_ui:
-							if _order.order_name.text == order.recipe_name:
-								_order.queue_free()
-								return
+						remove_order_ui(order)
+						remove_order(order, plate)
 						return
+	print("Not a requested recipe order!")
 	return
+	
