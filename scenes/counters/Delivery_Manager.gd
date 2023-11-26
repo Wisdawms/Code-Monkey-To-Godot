@@ -12,6 +12,11 @@ class_name DeliveryManager extends Node
 @export var spawn_recipe_timer_max : float = 4.0
 @export var orders_max : int = 4
 @onready var orders_delivered : int = 0
+@onready var money_made : float = 0.0
+
+func get_formatted_money() -> String:
+	var formatted_money: String = "$%.2f" % money_made
+	return formatted_money
 
 signal OrderDelivered
 signal OrderFailed
@@ -37,7 +42,7 @@ func _process(delta: float) -> void:
 				give_new_order()
 
 func give_new_order()->void:
-	var index : int = randi_range (0, 3 )
+	var index : int = randi_range (0, possible_orders.recipe_so_list.size() - 1 )
 	spawn_recipe_timer = spawn_recipe_timer_max
 	if possible_orders:
 		if waiting_recipe_list.size() < orders_max:
@@ -76,21 +81,26 @@ func destroy_plate(plate)->void:
 
 func try_deliver_recipe(plate : BaseFood)->void:
 	if game_man.is_game_playing():
-		for order in waiting_recipe_list:
-			if order.kitchen_object_so_list.size() == plate.Ingredients.size():
-				# has same number of ingredients
-				for ingredient in order.kitchen_object_so_list: # cycle through all ingredients in order
-					for plate_ingredient in plate.Ingredients: # cycle through all ingredients on plate
-						if ingredient == plate_ingredient: # if both order and plate ingredients match
-							# deliver the order
-							print("Delivered ", order.recipe_name, "!")
-							remove_order(order)
-							destroy_plate(plate)
-							orders_delivered += 1
-							OrderDelivered.emit()
-							return
+		for order in waiting_recipe_list: # cycle through the recieved orders
+			if arrays_have_same_content(plate.Ingredients, order.kitchen_object_so_list): # cycle through all ingredients in the recieved order
+				# deliver the order
+				print("Delivered ", order.recipe_name, "!")
+				money_made += order.price
+				print_rich("[font_size=16][b][color=TEAL ]This [color=TOMATO]", order.recipe_name, "[color=TEAL ] cost [color=WEB_GREEN]$", "%.2f"%order.price ,". \n[color=TEAL ]You made [color=TOMATO]",get_formatted_money(), "[color=TEAL ] so far!")
+				remove_order(order)
+				destroy_plate(plate)
+				orders_delivered += 1
+				OrderDelivered.emit()
+				return
 		print("Not a requested recipe order!")
 		OrderFailed.emit()
 		return
 	
 
+
+func arrays_have_same_content(array1, array2)->bool:
+	if array1.size() != array2.size(): return false
+	for item in array1:
+		if !array2.has(item): return false
+		if array1.count(item) != array2.count(item): return false
+	return true

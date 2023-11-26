@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RecipeSO" load_steps=5 format=3 uid="uid://cvjg0b5vdvmlg"]
+
+[ext_resource type="Script" path="res://scripts/RecipeSO.gd" id="1_as34n"]
+[ext_resource type="Resource" uid="uid://cftya23kt6cib" path="res://resources/bread_SO.tres" id="1_te5jy"]
+[ext_resource type="Resource" uid="uid://dqs5g3atm4062" path="res://resources/slices/cabbage_slices.tres" id="2_6tkt8"]
+[ext_resource type="Resource" uid="uid://cth7qmkx0lt6v" path="res://resources/meat_patty_cooked.tres" id="3_lj156"]
+
+[resource]
+script = ExtResource("1_as34n")
+kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("1_te5jy"), ExtResource("2_6tkt8"), ExtResource("3_lj156")])
+recipe_name = "SaladBurger"
+order_time = 20.0
+price = 2.5

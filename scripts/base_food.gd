@@ -7,7 +7,7 @@ class_name BaseFood extends Node3D
 @export var object_name : String
 @export var default_name : String
 #@onready var object_name : String : get = getter_name
-@export var Ingredients : Array[KitchenObjectSO]
+@export var Ingredients : Array[KitchenObjectSO] : get = sort_ingredients
 @export var SO_List : Array[KitchenObjectSO]
 @export var valid_kitchen_object_so_list : Array[KitchenObjectSO]
 var cutting_prog : float = 0
@@ -18,6 +18,10 @@ var cutting_prog : float = 0
 
 @export var has_been_on_frying : bool = false
 @onready var on_counter : BaseCounter
+
+func sort_ingredients()->Array[KitchenObjectSO]:
+	Ingredients.sort()
+	return Ingredients
 
 func _ready() -> void:
 	get_sos()

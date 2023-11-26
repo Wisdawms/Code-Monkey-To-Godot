@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://7a57shcsus4x"]
+
+[ext_resource type="Script" path="res://scenes/loading_scene_script.gd" id="1_4ekal"]
+[ext_resource type="Texture2D" uid="uid://dhmaqf6ro7huk" path="res://icon.svg" id="1_agqcn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcesu"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.309804)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.968627, 0.854902, 0.54902, 0.419608)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h52x4"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.968627, 0.854902, 0.54902, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_size = 8
+anti_aliasing = false
+
+[node name="loading_scene" type="CanvasLayer"]
+script = ExtResource("1_4ekal")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.188235, 0.313726, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(500, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_agqcn")
+stretch_mode = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_colors/font_outline_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+theme_override_styles/background = SubResource("StyleBoxFlat_mcesu")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h52x4")
+rounded = true

@@ -9,3 +9,4 @@ script = ExtResource("1_cpse2")
 kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("1_kdjgi"), ExtResource("2_3clxy")])
 recipe_name = "Burger"
 order_time = 25.0
+price = 2.95

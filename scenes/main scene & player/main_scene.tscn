@@ -47,7 +47,7 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 shadow_size = 8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn38t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3oun4"]
 resource_name = "Floor"
 depth_draw_mode = 1
 uv1_scale = Vector3(50, 50, 0)
@@ -234,7 +234,7 @@ metadata/unidot_keys = {
 }
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_3j6gm"]
-material = SubResource("StandardMaterial3D_jn38t")
+material = SubResource("StandardMaterial3D_3oun4")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xr3p1"]
 size = Vector3(2, 0.001, 2)
@@ -317,7 +317,7 @@ volume_db = -8.0
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_t5pjo")
-game_playing_time_max = 120.0
+game_playing_time_max = 60.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
 
@@ -467,6 +467,7 @@ fill_mode = 4
 texture_under = ExtResource("11_l43lx")
 texture_progress = ExtResource("12_8m1iq")
 tint_under = Color(1, 1, 1, 0.337255)
+tint_over = Color(0.2, 0, 0, 1)
 tint_progress = Color(1, 1, 1, 0.592157)
 
 [node name="env&light" type="WorldEnvironment" parent="."]

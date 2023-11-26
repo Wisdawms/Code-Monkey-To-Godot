@@ -7,9 +7,10 @@ class_name SoundManager extends Node
 #@onready var this_counter : BaseCounter = get_parent()
 
 func _ready() -> void:
-	dev_man.OrderDelivered.connect(OnOrderDelivered)
-	dev_man.OrderFailed.connect(OnOrderFailed)
-	
+	if dev_man:
+		dev_man.OrderDelivered.connect(OnOrderDelivered)
+		dev_man.OrderFailed.connect(OnOrderFailed)
+		
 func OnOrderDelivered()->void:
 	play_audio_at_pos("delivery_success", player.current_counter.position)
 func OnOrderFailed()->void:

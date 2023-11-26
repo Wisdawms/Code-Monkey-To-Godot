@@ -23,8 +23,18 @@ enum game_state {
 @export var game_playing_time_max : float = 10.0
 @onready var game_playing_timer : float
 @onready var once : bool = true
+@onready var original_alpha:float = game_progress.tint_progress.a
+var flickering_timer : float = 0.0
+var flickering_interval : float = 0.2
 
 func _process(delta: float) -> void:
+	if is_game_playing():
+		if is_game_almost_over():
+			if game_progress.tint_progress != Color.RED :
+				game_progress.tint_progress.r = 1.0
+				game_progress.tint_progress.g = 0.0
+				game_progress.tint_progress.b = 0.0
+			flash(delta)
 	match current_game_state:	
 		game_state.WaitingToStart:
 			waiting_to_start_timer -= delta
@@ -80,3 +90,18 @@ func update_game_manager_ui()->void:
 		if gameover_recipes_number.text != str(dev_man.orders_delivered):
 			gameover_recipes_number.text = str(dev_man.orders_delivered)
 	else: game_over_ui.visible = false
+
+func is_game_almost_over()->bool:
+	return game_playing_timer < game_playing_time_max * .35
+
+func flash(delta)->void:
+	flickering_timer += delta
+	if flickering_timer >= flickering_interval:
+		flickering_timer = 0.0
+		toggle_visibility()
+		
+func toggle_visibility()->void:
+	if game_progress.tint_progress.a == 0.0:
+		game_progress.tint_progress.a = original_alpha
+	else:
+		game_progress.tint_progress.a = 0.0

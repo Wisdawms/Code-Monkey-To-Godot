@@ -12,3 +12,4 @@ script = ExtResource("4_6wcmi")
 kitchen_object_so_list = Array[Resource("res://scripts/KitchenObjectSO.gd")]([ExtResource("1_4ttea"), ExtResource("2_63bxf"), ExtResource("3_0mrfe"), ExtResource("4_7jmpu"), ExtResource("5_gw55r")])
 recipe_name = "MegaBurger"
 order_time = 50.0
+price = 5.0
