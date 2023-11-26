@@ -14,7 +14,7 @@ signal OnItemChanged ( interactor : MyPlayerClass, counter : BaseCounter)
 
 #region Counter Settings
 @export_subgroup("Counter_Settings")
-@export_enum("Counter", "Food") var handle_prog_on = "Food"
+@export_enum("Counter", "Food") var handle_prog_on : String = "Food"
 @export_enum("Clear_Counter", "Cutting_Counter", "Container_Counter", "Trash_Bin", "Stove_Counter", "Plates_Counter", "Delivery_Counter") var type : String
 @export_category("Plates_Counter_Settings")
 @export var spawn_plate_timer_max : float = 4.0
@@ -43,7 +43,7 @@ var frying_recipe_so : FryingRecipeSO
 
 #region Getting nodes
 @export_subgroup("getting_nodes")
-@onready var frying_sound
+@onready var frying_sound : AudioStreamPlayer3D
 @onready var game_man : GameManager = Globals.find_node("GameManager")
 @onready var sound_man : SoundManager = Globals.find_node("SoundManager")
 @onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
@@ -64,7 +64,7 @@ var mesh_instances : Array
 
 #region [    Methods For Handling Stuff    ]
 
-func handle_spawning_plates(delta)->void:
+func handle_spawning_plates(delta : float)->void:
 	if game_man.is_game_playing():
 		if type == "Plates_Counter":
 			if counter_top_point.get_child_count() < plate_amount_max:
@@ -234,13 +234,6 @@ func handle_prog_bar_max_value()->void:
 
 #region [   Signal Methods   ]
 
-func container_spawned_item()->void:
-	var timer : Timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = 0.0001
-	timer.start()
-	timer.timeout.connect(try_take_item.bind(interactor))
-
 func is_frying()->bool:
 	if type == "Stove_Counter" and item:
 		match handle_prog_on:
@@ -363,7 +356,8 @@ func interact(interactor : MyPlayerClass)->void:
 	item = counter_top_point.get_child(-1)
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
-	try_take_item(interactor)
+	if not player_has_object(interactor):
+		try_take_item(interactor)
 	
 	if not counter_has_object(): # handles giving counter an item
 		if player_has_object(interactor):
@@ -395,8 +389,8 @@ func interact(interactor : MyPlayerClass)->void:
 					return
 				else: 
 					# if holding apropos food and interact with plate counter, get plate and put food on it
-					var food = interactor.item_holding
-					var plate = counter_top_point.get_child(-1)
+					var food := interactor.item_holding
+					var plate := counter_top_point.get_child(-1)
 					if plate.valid_kitchen_object_so_list.has(food.get_kitchen_object_so()):
 						# put food on plate, then put plate in player's hand
 						plate.add_ingredient(food.get_kitchen_object_so())
@@ -578,7 +572,7 @@ func give_item(interactor : MyPlayerClass )->void:
 	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
 func try_take_item(interactor : MyPlayerClass)->void:
-	if not player_has_object(interactor): # handles taking an item from counter
+	if interactor.item_holding == null: # handles taking an item from counter
 		if counter_has_object(): # if counter has kitchen object
 			handle_reset_prog()
 			item.reparent(interactor.hold_item_marker, false)
@@ -754,7 +748,6 @@ func _process(delta: float) -> void:
 	handle_prog_sprite_visibility()
 	set_current_player_and_counter_obj()
 func _ready() -> void:
-	connect("ContainerSpawnedItem", container_spawned_item)
 	OnItemChanged.connect(ItemHasChanged)
 	for child : Object in get_all_children(self):
 		if child is MeshInstance3D:
