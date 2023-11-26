@@ -127,3 +127,6 @@ mesh = SubResource("ArrayMesh_iaymy")
 [node name="Sprite3D" parent="Counter_Lid" index="0"]
 material_override = SubResource("StandardMaterial3D_yi5j3")
 texture = SubResource("CompressedTexture2D_vq2kl")
+
+[node name="counter_hud" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

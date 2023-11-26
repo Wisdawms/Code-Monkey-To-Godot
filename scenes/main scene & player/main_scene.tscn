@@ -255,8 +255,10 @@ possible_orders = ExtResource("5_r4p2v")
 [node name="CanvasLayer" type="CanvasLayer" parent="DeliveryManager"]
 
 [node name="delivery_ui_container" type="MarginContainer" parent="DeliveryManager/CanvasLayer"]
-offset_right = 320.0
-offset_bottom = 192.0
+offset_left = 40.0
+offset_top = 48.0
+offset_right = 360.0
+offset_bottom = 240.0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -327,6 +329,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0862745, 0.0705882, 0.121569, 0.560784)
+metadata/_edit_lock_ = true
 
 [node name="countdown_timer_text" type="Label" parent="GameManager/CanvasLayer"]
 anchors_preset = 8
@@ -369,9 +372,11 @@ text = "INTERMISSION.."
 
 [node name="game_over_ui" type="Control" parent="GameManager/CanvasLayer"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -444,9 +449,9 @@ text = "5"
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -256.0
+offset_left = -224.0
 offset_top = 64.0
-offset_right = -96.0
+offset_right = -64.0
 offset_bottom = 224.0
 grow_horizontal = 0
 size_flags_horizontal = 4

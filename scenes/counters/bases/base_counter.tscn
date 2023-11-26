@@ -88,5 +88,6 @@ wait_time = 0.001
 one_shot = true
 
 [node name="counter_hud" parent="." instance=ExtResource("8_gq6uo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)
 
 [connection signal="timeout" from="FryTimer" to="." method="_on_fry_timer_timeout"]
