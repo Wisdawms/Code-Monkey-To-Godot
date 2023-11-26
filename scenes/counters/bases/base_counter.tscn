@@ -68,7 +68,7 @@ libraries = {
 autoplay = "hover"
 
 [node name="counter_name" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 text = "counter_name"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

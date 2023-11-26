@@ -234,6 +234,13 @@ func handle_prog_bar_max_value()->void:
 
 #region [   Signal Methods   ]
 
+func container_spawned_item()->void:
+	var timer : Timer = Timer.new()
+	add_child(timer)
+	timer.wait_time = 0.0001
+	timer.start()
+	timer.timeout.connect(try_take_item.bind(interactor))
+
 func is_frying()->bool:
 	if type == "Stove_Counter" and item:
 		match handle_prog_on:
@@ -356,11 +363,9 @@ func interact(interactor : MyPlayerClass)->void:
 	item = counter_top_point.get_child(-1)
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
+	try_take_item(interactor)
 	
-	if not player_has_object(interactor): # handles taking an item from counter
-		if counter_has_object(): # if counter has kitchen object
-			take_item(interactor)
-	elif not counter_has_object(): # handles giving counter an item
+	if not counter_has_object(): # handles giving counter an item
 		if player_has_object(interactor):
 			if Kitchen_Object !=null and type == "Container_Counter": # for containers
 				if interactor.item_holding.default_name != Kitchen_Object.object_name and interactor.item_holding.object_name != "Plate":
@@ -411,7 +416,6 @@ func interact(interactor : MyPlayerClass)->void:
 	if type == "Container_Counter" and not counter_has_object() and player_has_object(interactor):
 		if interactor.item_holding.object_name == "Plate":
 			spawn_item_on_container()
-			print("WHAT?")
 
 func interact_alt(interactor : MyPlayerClass)->void:
 	if type == "Cutting_Counter": # for cutting counter interaction_alt
@@ -573,13 +577,15 @@ func give_item(interactor : MyPlayerClass )->void:
 		OnItemChanged.emit()
 	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
-func take_item(interactor : MyPlayerClass)->void:
-	handle_reset_prog()
-	item.reparent(interactor.hold_item_marker, false)
-	item.position = interactor.hold_item_marker.position * .2
-	print("Removed (", item.object_name ,") from (", self.name, ")")
-	sound_man.play_audio_at_pos("object_pickup", self.position)
-	OnItemChanged.emit()
+func try_take_item(interactor : MyPlayerClass)->void:
+	if not player_has_object(interactor): # handles taking an item from counter
+		if counter_has_object(): # if counter has kitchen object
+			handle_reset_prog()
+			item.reparent(interactor.hold_item_marker, false)
+			item.position = interactor.hold_item_marker.position * .2
+			print("Removed (", item.object_name ,") from (", self.name, ")")
+			sound_man.play_audio_at_pos("object_pickup", self.position)
+			OnItemChanged.emit()
 
 func replace_item(interactor : MyPlayerClass)->void:
 	var item_one : BaseFood = item
@@ -748,6 +754,7 @@ func _process(delta: float) -> void:
 	handle_prog_sprite_visibility()
 	set_current_player_and_counter_obj()
 func _ready() -> void:
+	connect("ContainerSpawnedItem", container_spawned_item)
 	OnItemChanged.connect(ItemHasChanged)
 	for child : Object in get_all_children(self):
 		if child is MeshInstance3D:
