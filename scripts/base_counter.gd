@@ -357,17 +357,15 @@ func interact(interactor : MyPlayerClass)->void:
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
 	
-	
 	if not player_has_object(interactor): # handles taking an item from counter
 		if counter_has_object(): # if counter has kitchen object
 			take_item(interactor)
 	elif not counter_has_object(): # handles giving counter an item
 		if player_has_object(interactor):
 			if Kitchen_Object !=null and type == "Container_Counter": # for containers
-				if interactor.item_holding.default_name != Kitchen_Object.object_name:
+				if interactor.item_holding.default_name != Kitchen_Object.object_name and interactor.item_holding.object_name != "Plate":
 					print("You are holding (", interactor.item_holding.default_name, ") This (", self.name, ") only takes a (", self.Kitchen_Object.object_name, ")")
 					return
-				
 			if not has_recipe(interactor) and type == "Cutting_Counter":
 				print("This food item is not part of a recipe list that can be sliced.")
 				return
@@ -409,6 +407,11 @@ func interact(interactor : MyPlayerClass)->void:
 		elif type == "Container_Counter" and Kitchen_Object != null:
 			spawn_item_on_container()
 		else: print("This Base Container Counter does not have a Kitchen Object SO")
+		
+	if type == "Container_Counter" and not counter_has_object() and player_has_object(interactor):
+		if interactor.item_holding.object_name == "Plate":
+			spawn_item_on_container()
+			print("WHAT?")
 
 func interact_alt(interactor : MyPlayerClass)->void:
 	if type == "Cutting_Counter": # for cutting counter interaction_alt

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=39 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
@@ -13,13 +13,16 @@
 [ext_resource type="PackedScene" uid="uid://dbl1o1hgl32r7" path="res://scenes/main scene & player/fps.tscn" id="5_ixcvf"]
 [ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="5_r4p2v"]
 [ext_resource type="AudioStream" uid="uid://cdt0ar3y1wked" path="res://Assets/_Assets/Sounds/Music/Music.wav" id="6_mgtos"]
+[ext_resource type="Theme" uid="uid://dajs6324casyg" path="res://resources/new_theme.tres" id="6_ondsf"]
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
 [ext_resource type="Resource" uid="uid://dat081hyy7iu" path="res://resources/sound_references_so.tres" id="7_x3dj4"]
 [ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
 [ext_resource type="PackedScene" uid="uid://c2f5d2m2eresa" path="res://scenes/counters/container_counters/cabbage_container_counter.tscn" id="9_ql0l1"]
 [ext_resource type="PackedScene" uid="uid://6vbwuf72kjgn" path="res://scenes/counters/bases/plates_counter.tscn" id="11_6wsyw"]
 [ext_resource type="PackedScene" uid="uid://jtmrhy65dsc3" path="res://scenes/counters/container_counters/matty_patty_uncooked_container_counter.tscn" id="11_ab6fb"]
+[ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="11_l43lx"]
 [ext_resource type="PackedScene" uid="uid://dhi0y56man0l2" path="res://scenes/counters/bases/clear_counter.tscn" id="12_3c5xn"]
+[ext_resource type="Texture2D" uid="uid://dp544vtqhucrf" path="res://Assets/_Assets/Textures/game_progress.png" id="12_8m1iq"]
 [ext_resource type="PackedScene" uid="uid://dbo3mxqnxi6xf" path="res://scenes/counters/container_counters/tomato_container_counter.tscn" id="12_yo1jd"]
 [ext_resource type="PackedScene" uid="uid://x50jpniq1an6" path="res://scenes/counters/container_counters/cheese_container_counter.tscn" id="13_1eld5"]
 [ext_resource type="PackedScene" uid="uid://b28fqjvm4g2k2" path="res://scenes/counters/cutting_counter.tscn" id="13_p46un"]
@@ -30,6 +33,19 @@
 [ext_resource type="PackedScene" uid="uid://cn042vbpd1s0j" path="res://scenes/counters/stove_counter.tscn" id="19_yps3e"]
 [ext_resource type="Resource" uid="uid://cum74cmduytuv" path="res://resources/cutting_recipes/CheeseBlock-CheeseBlockSlices.tres" id="20_kgh8r"]
 [ext_resource type="Resource" uid="uid://c2cyx00w6lbrw" path="res://resources/cutting_recipes/Tomato-TomatoSlices.tres" id="21_t1842"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_daapw"]
+bg_color = Color(0.223529, 0.188235, 0.313726, 0.337255)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.94902, 0.835294, 0.541176, 0.337255)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jn38t"]
 resource_name = "Floor"
@@ -239,8 +255,8 @@ possible_orders = ExtResource("5_r4p2v")
 [node name="CanvasLayer" type="CanvasLayer" parent="DeliveryManager"]
 
 [node name="delivery_ui_container" type="MarginContainer" parent="DeliveryManager/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 320.0
+offset_bottom = 192.0
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
@@ -254,8 +270,14 @@ theme_override_constants/margin_right = -25
 theme_override_constants/margin_bottom = -25
 
 [node name="ColorRect" type="ColorRect" parent="DeliveryManager/CanvasLayer/delivery_ui_container/bg"]
+visible = false
 layout_mode = 2
+theme = ExtResource("6_ondsf")
 color = Color(0, 0, 0, 0.337255)
+
+[node name="bg_panel" type="Panel" parent="DeliveryManager/CanvasLayer/delivery_ui_container/bg"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_daapw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DeliveryManager/CanvasLayer/delivery_ui_container"]
 layout_mode = 2
@@ -290,11 +312,10 @@ audio_clips_references = ExtResource("7_x3dj4")
 [node name="bg_music" type="AudioStreamPlayer" parent="MusicManager"]
 stream = ExtResource("6_mgtos")
 volume_db = -8.0
-autoplay = true
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_t5pjo")
-game_playing_timer = 30.0
+game_playing_time_max = 120.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
 
@@ -305,7 +326,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.223529, 0.188235, 0.313726, 0.490196)
+color = Color(0.0862745, 0.0705882, 0.121569, 0.560784)
 
 [node name="countdown_timer_text" type="Label" parent="GameManager/CanvasLayer"]
 anchors_preset = 8
@@ -418,6 +439,30 @@ theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 75
 text = "5"
+
+[node name="game_playing_ui" type="MarginContainer" parent="GameManager/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_top = 64.0
+offset_right = -96.0
+offset_bottom = 224.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="game_progress" type="TextureProgressBar" parent="GameManager/CanvasLayer/game_playing_ui"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+step = 0.1
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("11_l43lx")
+texture_progress = ExtResource("12_8m1iq")
+tint_under = Color(1, 1, 1, 0.337255)
+tint_progress = Color(1, 1, 1, 0.592157)
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_qj1pw")

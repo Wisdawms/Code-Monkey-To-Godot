@@ -8,3 +8,7 @@ class_name OrderClass extends MarginContainer
 func _process(delta: float) -> void:
 	if order_time.time_left > 0.0:
 		prog_bar.value = (order_time.time_left / order_time.wait_time) * prog_bar.max_value
+	if order_time.time_left < 7:
+		prog_bar.tint_progress = Color.RED
+	else:
+		prog_bar.tint_progress = Color.WHITE

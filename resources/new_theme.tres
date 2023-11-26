@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dajs6324casyg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f3tch"]
+content_margin_left = 10.0
+content_margin_top = 28.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.223529, 0.180392, 0.72549, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 8.0
+expand_margin_top = 32.0
+expand_margin_right = 8.0
+expand_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd0wc"]
+content_margin_left = 10.0
+content_margin_top = 28.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 8.0
+expand_margin_top = 32.0
+expand_margin_right = 8.0
+expand_margin_bottom = 6.0
+
+[resource]
+default_font_size = 0
+Window/styles/embedded_border = SubResource("StyleBoxFlat_f3tch")
+Window/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_fd0wc")

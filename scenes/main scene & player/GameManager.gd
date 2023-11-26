@@ -5,7 +5,9 @@ class_name GameManager extends Node
 @onready var countdown_timer_text : Label = get_node("CanvasLayer/countdown_timer_text")
 @onready var game_starting_text : Label = get_node("CanvasLayer/game_starting_text")
 @onready var game_over_ui : Control = get_node("CanvasLayer/game_over_ui")
-@onready var gameover_recipes_number : Control = get_node("CanvasLayer/game_over_ui/gameover_recipes_number")
+@onready var gameover_recipes_number : Label = get_node("CanvasLayer/game_over_ui/gameover_recipes_number")
+@onready var game_progress : TextureProgressBar = get_node("CanvasLayer/game_playing_ui/game_progress")
+@onready var game_playing_ui : MarginContainer = get_node("CanvasLayer/game_playing_ui")
 signal StateChanged
 
 enum game_state {
@@ -18,7 +20,9 @@ enum game_state {
 @onready var current_game_state : game_state = game_state.WaitingToStart
 @export var waiting_to_start_timer : float = 1.0
 @export var countdown_to_start_timer : float = 3.0
-@export var game_playing_timer : float = 10.0
+@export var game_playing_time_max : float = 10.0
+@onready var game_playing_timer : float
+@onready var once : bool = true
 
 func _process(delta: float) -> void:
 	match current_game_state:	
@@ -26,19 +30,25 @@ func _process(delta: float) -> void:
 			waiting_to_start_timer -= delta
 			if waiting_to_start_timer < 0.0:
 				current_game_state = game_state.CountdownToStart
+				game_playing_ui.visible = true
 				StateChanged.emit()
 		game_state.CountdownToStart:
 			countdown_to_start_timer -= delta
 			if countdown_to_start_timer < 0.0:
 				current_game_state = game_state.GamePlaying
+				game_playing_timer = game_playing_time_max
 				StateChanged.emit()
 		game_state.GamePlaying:
 			game_playing_timer -= delta
+			game_progress.value = ( 1- ( game_playing_timer / game_playing_time_max ) ) * game_progress.max_value
 			if game_playing_timer < 0.0:
 				current_game_state = game_state.GameOver
 				StateChanged.emit()
 		game_state.GameOver:
-			StateChanged.emit()
+			if once:
+				StateChanged.emit()
+				game_playing_ui.visible = false
+				once = false
 
 	if countdown_timer_text.text != str(ceil(countdown_to_start_timer)):
 		countdown_timer_text.text = str(ceil(countdown_to_start_timer))
@@ -56,6 +66,7 @@ func _ready() -> void:
 	StateChanged.connect(update_game_manager_ui)
 	countdown_timer_text.visible = false
 	game_over_ui.visible = false
+	game_playing_ui.visible = false
 	
 func update_game_manager_ui()->void:
 	if is_game_starting():
@@ -66,5 +77,6 @@ func update_game_manager_ui()->void:
 	else: countdown_timer_text.visible = false
 	if is_game_over():
 		game_over_ui.visible = true
-		gameover_recipes_number.text = str(dev_man.orders_delivered)
+		if gameover_recipes_number.text != str(dev_man.orders_delivered):
+			gameover_recipes_number.text = str(dev_man.orders_delivered)
 	else: game_over_ui.visible = false
