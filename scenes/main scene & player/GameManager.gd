@@ -13,6 +13,9 @@ class_name GameManager extends Node
 @onready var paused_ui : Control = get_node("CanvasLayer/paused_ui")
 @export var main_menu_scene : String = "res://scenes/main_menu_scene.tscn"
 
+var orig_progress_alpha : float
+var orig_under_alpha : float
+
 signal StateChanged
 signal OnGamePaused
 signal OnGameUnpaused
@@ -83,6 +86,8 @@ func is_game_over()->bool:
 	return current_game_state == game_state.GameOver
 
 func _ready() -> void:
+	orig_progress_alpha = game_progress.tint_progress.a
+	orig_under_alpha = game_progress.tint_under.a
 	OnGamePaused.connect(show_pause_ui)
 	OnGameUnpaused.connect(hide_pause_ui)
 	StateChanged.connect(update_game_manager_ui)
@@ -90,6 +95,7 @@ func _ready() -> void:
 	game_over_ui.visible = false
 	game_playing_ui.visible = false
 	paused_ui.visible = false
+	
 func update_game_manager_ui()->void:
 	if is_game_starting():
 		game_starting_text.visible = true

@@ -106,7 +106,7 @@ func handle_interactions()->void:
 					current_counter.emit_signal("OnUnhover", self)
 				current_counter = body_hit
 				current_counter.emit_signal("OnHover", self)
-			if not game_man.is_game_playing(): return
+			if game_man and not game_man.is_game_playing(): return
 			if Input.is_action_just_pressed("interact"):
 				body_hit.emit_signal("OnInteract", self)
 			elif Input.is_action_just_pressed("interact_alt"):

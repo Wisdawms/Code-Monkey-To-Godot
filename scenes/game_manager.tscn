@@ -1,0 +1,272 @@
+[gd_scene load_steps=5 format=3 uid="uid://imu32ldc4tvw"]
+
+[ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="1_hpajb"]
+[ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="2_jcrki"]
+[ext_resource type="Texture2D" uid="uid://dp544vtqhucrf" path="res://Assets/_Assets/Textures/game_progress.png" id="3_h713o"]
+[ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="4_3cplw"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_hpajb")
+game_playing_time_max = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="bg_veil" type="ColorRect" parent="CanvasLayer"]
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.0705882, 0.121569, 0.560784)
+metadata/_edit_lock_ = true
+
+[node name="game_starting_ui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="game_starting_text" type="Label" parent="CanvasLayer/game_starting_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 654.5
+offset_top = 468.5
+offset_right = 1225.5
+offset_bottom = 571.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "INTERMISSION.."
+
+[node name="countdown_timer_text" type="Label" parent="CanvasLayer/game_starting_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 911.5
+offset_top = 451.5
+offset_right = 968.5
+offset_bottom = 588.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 100
+text = "3"
+
+[node name="game_over_ui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="game_over_text" type="Label" parent="CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.5
+offset_top = -188.0
+offset_right = 225.5
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.870588, 0.282353, 0.25098, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "GAME OVER!"
+
+[node name="gameover_recipes_delivered" type="Label" parent="CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -51.0
+offset_right = -96.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 35
+text = "Orders Delivered"
+horizontal_alignment = 1
+
+[node name="gameover_recipes_number" type="Label" parent="CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.5
+offset_top = -1.5
+offset_right = -218.5
+offset_bottom = 101.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "5"
+horizontal_alignment = 1
+
+[node name="gameover_money_made_label" type="Label" parent="CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -51.0
+offset_right = 352.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.411765, 0.858824, 0.360784, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 35
+text = "Money Made"
+horizontal_alignment = 1
+
+[node name="gameover_money_made" type="Label" parent="CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 186.5
+offset_top = -1.5
+offset_right = 229.5
+offset_bottom = 101.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.411765, 0.858824, 0.360784, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "5"
+horizontal_alignment = 1
+
+[node name="game_playing_ui" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -224.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = 224.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="game_progress" type="TextureProgressBar" parent="CanvasLayer/game_playing_ui"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+step = 0.1
+value = 100.0
+fill_mode = 4
+texture_under = ExtResource("2_jcrki")
+texture_progress = ExtResource("3_h713o")
+tint_under = Color(1, 1, 1, 0.337255)
+tint_over = Color(0.2, 0, 0, 1)
+tint_progress = Color(1, 1, 1, 0.592157)
+
+[node name="paused_ui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="paused_text" type="Label" parent="CanvasLayer/paused_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -256.0
+offset_right = 285.5
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/paused_ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -166.0
+offset_top = 128.0
+offset_right = 166.0
+offset_bottom = 390.0
+grow_horizontal = 2
+theme_override_constants/separation = 64
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/paused_ui/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_3cplw")
+text = "Resume ;)"
+
+[node name="GoToMainMenu" type="Button" parent="CanvasLayer/paused_ui/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_3cplw")
+text = "Main Menu :]"
+
+[connection signal="pressed" from="CanvasLayer/paused_ui/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/paused_ui/VBoxContainer/GoToMainMenu" to="." method="_on_go_to_main_menu_pressed"]

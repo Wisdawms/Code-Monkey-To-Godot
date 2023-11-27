@@ -64,8 +64,8 @@ var mesh_instances : Array
 #region [    Methods For Handling Stuff    ]
 
 func handle_spawning_plates(delta : float)->void:
-	if game_man.is_game_playing():
-		if type == "Plates_Counter":
+	if type == "Plates_Counter":
+		if game_man.is_game_playing():
 			if counter_top_point.get_child_count() < plate_amount_max:
 				spawn_plate_timer += delta
 				if spawn_plate_timer > spawn_plate_timer_max:

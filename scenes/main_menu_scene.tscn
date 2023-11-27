@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bs85gaah5a6x0"]
+[gd_scene load_steps=17 format=3 uid="uid://bs85gaah5a6x0"]
 
 [ext_resource type="Script" path="res://scenes/main_menu_scene.gd" id="1_4rw5b"]
 [ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="2_lycvu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_p3bme"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="5_6rye6"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="6_isos7"]
+[ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_qdgvt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xusr"]
 resource_name = "Floor"
@@ -200,7 +201,24 @@ material = SubResource("StandardMaterial3D_4xusr")
 [sub_resource type="BoxShape3D" id="BoxShape3D_lks8q"]
 size = Vector3(2, 0.001, 2)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_hm2ud"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lg3hy"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_abqw0"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8i6da"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0dce1"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
 [node name="Node3D" type="Node3D"]
+
+[node name="Bread_Container_Counter" parent="." instance=ExtResource("8_qdgvt")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.52476, 0, 0.138882)
 
 [node name="Menu" type="Control" parent="."]
 layout_mode = 3
@@ -281,8 +299,9 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.772376, -0.354119, -0.52729, 0.15285, 0.909392, -0.386837, 0.6165, 0.218187, 0.75652, 0, 0.0352846, 1)
+transform = Transform3D(0.772376, -0.354119, -0.52729, 0.15285, 0.909392, -0.386837, 0.6165, 0.218187, 0.75652, -0.192454, 0.0352846, 1.67127)
 current = true
+fov = 80.0
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
 current = true
@@ -293,7 +312,7 @@ transform = Transform3D(0.101207, 0, -0.172503, 0, 0.2, 0, 0.172503, 0, 0.101207
 [node name="Ground" type="Node3D" parent="."]
 
 [node name="Plane" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 1.27752, 0, -3.00029)
 material_override = ExtResource("4_p3bme")
 mesh = SubResource("PlaneMesh_0fx8i")
 skeleton = NodePath("../..")
@@ -303,6 +322,50 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Plane/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_lks8q")
+
+[node name="Wall" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.604527, 0.497286, 0.728195)
+layers = 4
+material_override = ExtResource("4_p3bme")
+mesh = SubResource("PlaneMesh_hm2ud")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Wall/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_lg3hy")
+
+[node name="Wall4" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, 1.39547, 0.497286, 0.728195)
+layers = 4
+material_override = ExtResource("4_p3bme")
+mesh = SubResource("PlaneMesh_hm2ud")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Wall4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_abqw0")
+
+[node name="Wall2" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, -4.37114e-08, 0.395473, 0.497286, 1.72819)
+layers = 4
+material_override = ExtResource("4_p3bme")
+mesh = SubResource("PlaneMesh_hm2ud")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Wall2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_8i6da")
+
+[node name="Wall3" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(-5.73206e-15, 1.31134e-07, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, 1.31134e-07, 0.395473, 0.497286, -0.271805)
+layers = 4
+material_override = ExtResource("4_p3bme")
+mesh = SubResource("PlaneMesh_hm2ud")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground/Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Wall3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0dce1")
 
 [connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/StartButton" to="Menu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/OptionsButton" to="Menu" method="_on_options_button_pressed"]
