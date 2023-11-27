@@ -11,7 +11,10 @@ class_name GameManager extends Node
 @onready var game_progress : TextureProgressBar = get_node("CanvasLayer/game_playing_ui/game_progress")
 @onready var game_playing_ui : MarginContainer = get_node("CanvasLayer/game_playing_ui")
 @onready var paused_ui : Control = get_node("CanvasLayer/paused_ui")
+@onready var music_volume_button: Button = get_node("CanvasLayer/options_ui/VBoxContainer/music_volume_button")
+@onready var sound_effects_volume_button: Button = get_node("CanvasLayer/options_ui/VBoxContainer/sound_effects_volume_button")
 @export var main_menu_scene : String = "res://scenes/main_menu_scene.tscn"
+
 
 var orig_progress_alpha : float
 var orig_under_alpha : float

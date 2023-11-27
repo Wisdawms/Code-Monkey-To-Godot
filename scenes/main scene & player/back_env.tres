@@ -4,9 +4,8 @@
 sky_top_color = Color(0.992157, 0.890196, 0.733333, 1)
 sky_horizon_color = Color(0.478431, 0.839216, 0.627451, 1)
 sky_curve = 0.235375
-sky_energy_multiplier = 3.1
-sky_cover_modulate = Color(1, 0.815686, 0.815686, 1)
-ground_energy_multiplier = 0.5
+sky_energy_multiplier = 0.7
+ground_energy_multiplier = 0.0
 sun_angle_max = 55.12
 
 [sub_resource type="Sky" id="Sky_dgh6k"]
