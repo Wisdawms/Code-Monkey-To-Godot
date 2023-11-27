@@ -1,9 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=37 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
 [ext_resource type="Script" path="res://scenes/counters/Delivery_Manager.gd" id="2_f6pev"]
-[ext_resource type="Script" path="res://scenes/main scene & player/SoundManager.gd" id="2_g2p2o"]
 [ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="2_t5pjo"]
 [ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="3_eo8rb"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="3_qj1pw"]
@@ -14,7 +13,6 @@
 [ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="5_r4p2v"]
 [ext_resource type="Theme" uid="uid://dajs6324casyg" path="res://resources/new_theme.tres" id="6_ondsf"]
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
-[ext_resource type="Resource" uid="uid://dat081hyy7iu" path="res://resources/sound_references_so.tres" id="7_x3dj4"]
 [ext_resource type="PackedScene" uid="uid://xa1bo0rf8lk6" path="res://scenes/counters/container_counters/bread_container_counter.tscn" id="8_4ipu1"]
 [ext_resource type="PackedScene" uid="uid://c2f5d2m2eresa" path="res://scenes/counters/container_counters/cabbage_container_counter.tscn" id="9_ql0l1"]
 [ext_resource type="PackedScene" uid="uid://6vbwuf72kjgn" path="res://scenes/counters/bases/plates_counter.tscn" id="11_6wsyw"]
@@ -305,10 +303,6 @@ layout_mode = 2
 theme_override_constants/separation = 20
 vertical = true
 
-[node name="SoundManager" type="Node" parent="."]
-script = ExtResource("2_g2p2o")
-audio_clips_references = ExtResource("7_x3dj4")
-
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_t5pjo")
 game_playing_time_max = 2.0
@@ -325,35 +319,23 @@ grow_vertical = 2
 color = Color(0.0862745, 0.0705882, 0.121569, 0.560784)
 metadata/_edit_lock_ = true
 
-[node name="countdown_timer_text" type="Label" parent="GameManager/CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -28.5
-offset_top = -68.5
-offset_right = 28.5
-offset_bottom = 68.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
-theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
-theme_override_constants/shadow_outline_size = 20
-theme_override_font_sizes/font_size = 100
-text = "3"
+[node name="game_starting_ui" type="Control" parent="GameManager/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="game_starting_text" type="Label" parent="GameManager/CanvasLayer"]
+[node name="game_starting_text" type="Label" parent="GameManager/CanvasLayer/game_starting_ui"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -285.5
-offset_top = -51.5
-offset_right = 285.5
-offset_bottom = 51.5
+offset_left = 654.5
+offset_top = 468.5
+offset_right = 1225.5
+offset_bottom = 571.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -363,6 +345,26 @@ theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 75
 text = "INTERMISSION.."
+
+[node name="countdown_timer_text" type="Label" parent="GameManager/CanvasLayer/game_starting_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 911.5
+offset_top = 451.5
+offset_right = 968.5
+offset_bottom = 588.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 100
+text = "3"
 
 [node name="game_over_ui" type="Control" parent="GameManager/CanvasLayer"]
 layout_mode = 3

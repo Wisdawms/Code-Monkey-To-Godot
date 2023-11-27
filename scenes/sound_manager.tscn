@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvhtco7hgl36d"]
+
+[ext_resource type="Script" path="res://scenes/main scene & player/SoundManager.gd" id="1_lmdp5"]
+[ext_resource type="Resource" uid="uid://dat081hyy7iu" path="res://resources/sound_references_so.tres" id="2_la2tx"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_lmdp5")
+audio_clips_references = ExtResource("2_la2tx")

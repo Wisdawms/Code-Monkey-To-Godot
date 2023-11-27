@@ -45,7 +45,6 @@ var frying_recipe_so : FryingRecipeSO
 @export_subgroup("getting_nodes")
 @onready var frying_sound : AudioStreamPlayer3D
 @onready var game_man : GameManager = Globals.find_node("GameManager")
-@onready var sound_man : SoundManager = Globals.find_node("SoundManager")
 @onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar

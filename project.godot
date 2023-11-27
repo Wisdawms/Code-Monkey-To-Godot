@@ -23,6 +23,7 @@ Settings="*res://scripts/settings.gd"
 Globals="*res://scripts/Globals.gd"
 Load="*res://scripts/load.gd"
 MusicManager="*res://scenes/music_manager.tscn"
+sound_man="*res://scenes/sound_manager.tscn"
 
 [debug]
 

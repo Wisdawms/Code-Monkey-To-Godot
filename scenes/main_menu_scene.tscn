@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bs85gaah5a6x0"]
+[gd_scene load_steps=11 format=3 uid="uid://bs85gaah5a6x0"]
 
 [ext_resource type="Script" path="res://scenes/main_menu_scene.gd" id="1_4rw5b"]
 [ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="2_lycvu"]
@@ -7,9 +7,6 @@
 [ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_p3bme"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="5_6rye6"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="6_isos7"]
-[ext_resource type="Script" path="res://scenes/main scene & player/SoundManager.gd" id="9_kto7g"]
-[ext_resource type="Resource" uid="uid://dat081hyy7iu" path="res://resources/sound_references_so.tres" id="10_om6h5"]
-[ext_resource type="AudioStream" uid="uid://cdt0ar3y1wked" path="res://Assets/_Assets/Sounds/Music/Music.wav" id="11_rcrb6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xusr"]
 resource_name = "Floor"
@@ -290,7 +287,7 @@ current = true
 [node name="AudioListener3D" type="AudioListener3D" parent="Camera3D"]
 current = true
 
-[node name="Player2" parent="." instance=ExtResource("6_isos7")]
+[node name="Player" parent="." instance=ExtResource("6_isos7")]
 transform = Transform3D(0.101207, 0, -0.172503, 0, 0.2, 0, 0.172503, 0, 0.101207, 0.565, 0, 0.67)
 
 [node name="Ground" type="Node3D" parent="."]
@@ -306,16 +303,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Plane/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_lks8q")
-
-[node name="SoundManager" type="Node" parent="."]
-script = ExtResource("9_kto7g")
-audio_clips_references = ExtResource("10_om6h5")
-
-[node name="MusicManager" type="Node" parent="."]
-
-[node name="bg_music" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("11_rcrb6")
-volume_db = -8.0
 
 [connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/StartButton" to="Menu" method="_on_start_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/OptionsButton" to="Menu" method="_on_options_button_pressed"]

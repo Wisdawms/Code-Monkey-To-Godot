@@ -97,7 +97,6 @@ func try_deliver_recipe(plate : BaseFood)->void:
 		return
 	
 
-
 func arrays_have_same_content(array1, array2)->bool:
 	if array1.size() != array2.size(): return false
 	for item in array1:

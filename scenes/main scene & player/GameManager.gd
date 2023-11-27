@@ -2,8 +2,9 @@ class_name GameManager extends Node
 
 @onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var bg_veil : ColorRect = get_node("CanvasLayer/bg_veil")
-@onready var countdown_timer_text : Label = get_node("CanvasLayer/countdown_timer_text")
-@onready var game_starting_text : Label = get_node("CanvasLayer/game_starting_text")
+@onready var game_starting_ui : Control = get_node("CanvasLayer/game_starting_ui")
+@onready var countdown_timer_text : Label = get_node("CanvasLayer/game_starting_ui/countdown_timer_text")
+@onready var game_starting_text : Label = get_node("CanvasLayer/game_starting_ui/game_starting_text")
 @onready var game_over_ui : Control = get_node("CanvasLayer/game_over_ui")
 @onready var gameover_recipes_number : Label = get_node("CanvasLayer/game_over_ui/gameover_recipes_number")
 @onready var gameover_money_made: Label = get_node("CanvasLayer/game_over_ui/gameover_money_made")
@@ -127,12 +128,24 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func toggle_pause_game()->void:
 	is_game_paused = !is_game_paused
-	if is_game_paused:
+	if is_game_paused and Engine.time_scale != 0.0:
 		Engine.time_scale = 0.0
 		OnGamePaused.emit()
+		if is_game_starting() or is_countdown_to_start() and game_starting_ui.visible != false:
+			game_starting_ui.visible = false
+			game_progress.tint_progress.a = 0.0
+			game_progress.tint_under.a = 0.0
+		if is_game_over() and game_over_ui.visible != false:
+			game_over_ui.visible = false
 	else:
 		Engine.time_scale = 1.0
 		OnGameUnpaused.emit()
+		if is_game_starting() or is_countdown_to_start() and game_starting_ui.visible != true:
+			game_starting_ui.visible = true
+			game_progress.tint_progress.a = 0.59
+			game_progress.tint_under.a = 0.33
+		if is_game_over() and game_over_ui.visible != true:
+			game_over_ui.visible = true
 
 func show_pause_ui()->void:
 	paused_ui.visible = true

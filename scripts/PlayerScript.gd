@@ -9,7 +9,6 @@ class_name MyPlayerClass extends CharacterBody3D
 @onready var interact_raycast: RayCast3D = $Interact_Raycast
 @onready var item_holding : BaseFood
 @onready var hold_item_marker: Marker3D = $Hold_Item
-@onready var sound_man : SoundManager = Globals.find_node("SoundManager")
 @onready var footstep_timer : float = 0.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -20,8 +19,7 @@ func handle_footstep_sounds(delta)->void:
 		footstep_timer -= delta
 		if footstep_timer < 0.0:
 			footstep_timer = footstep_sounds_interval
-			sound_man.play_audio_at_pos("footstep", self.position)
-
+			sound_man.play_audio_at_pos("footstep", self.position, -15.0)
 func _process(delta: float) -> void:
 	handle_footstep_sounds(delta)
 	handle_interactions()
