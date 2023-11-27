@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://7a57shcsus4x"]
 
 [ext_resource type="Script" path="res://scenes/loading_scene_script.gd" id="1_4ekal"]
-[ext_resource type="Texture2D" uid="uid://dhmaqf6ro7huk" path="res://icon.svg" id="1_agqcn"]
+[ext_resource type="Texture2D" uid="uid://ca7hmyuasksyb" path="res://Assets/_Assets/Textures/KitchenChaosLogo.png" id="2_al1ht"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcesu"]
 content_margin_left = 8.0
@@ -65,12 +65,13 @@ offset_right = 64.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 0
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 400)
 layout_mode = 2
-texture = ExtResource("1_agqcn")
-stretch_mode = 3
+texture = ExtResource("2_al1ht")
+stretch_mode = 5
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

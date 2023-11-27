@@ -6,17 +6,24 @@ class_name GameManager extends Node
 @onready var game_starting_text : Label = get_node("CanvasLayer/game_starting_text")
 @onready var game_over_ui : Control = get_node("CanvasLayer/game_over_ui")
 @onready var gameover_recipes_number : Label = get_node("CanvasLayer/game_over_ui/gameover_recipes_number")
+@onready var gameover_money_made: Label = get_node("CanvasLayer/game_over_ui/gameover_money_made")
 @onready var game_progress : TextureProgressBar = get_node("CanvasLayer/game_playing_ui/game_progress")
 @onready var game_playing_ui : MarginContainer = get_node("CanvasLayer/game_playing_ui")
+@onready var paused_ui : Control = get_node("CanvasLayer/paused_ui")
+@export var main_menu_scene : String = "res://scenes/main_menu_scene.tscn"
+
 signal StateChanged
+signal OnGamePaused
+signal OnGameUnpaused
 
 enum game_state {
 	WaitingToStart,
 	CountdownToStart,
 	GamePlaying,
-	GameOver
+	GameOver,
 }
 
+@onready var is_game_paused : bool = false
 @onready var current_game_state : game_state = game_state.WaitingToStart
 @export var waiting_to_start_timer : float = 1.0
 @export var countdown_to_start_timer : float = 3.0
@@ -28,13 +35,15 @@ var flickering_timer : float = 0.0
 var flickering_interval : float = 0.2
 
 func _process(delta: float) -> void:
-	if is_game_playing():
+	if is_game_playing() and not is_game_paused:
+		bg_veil.visible = false
 		if is_game_almost_over():
 			if game_progress.tint_progress != Color.RED :
 				game_progress.tint_progress.r = 1.0
 				game_progress.tint_progress.g = 0.0
 				game_progress.tint_progress.b = 0.0
 			flash(delta)
+	elif is_game_paused or not is_game_playing(): bg_veil.visible = true
 	match current_game_state:	
 		game_state.WaitingToStart:
 			waiting_to_start_timer -= delta
@@ -73,11 +82,13 @@ func is_game_over()->bool:
 	return current_game_state == game_state.GameOver
 
 func _ready() -> void:
+	OnGamePaused.connect(show_pause_ui)
+	OnGameUnpaused.connect(hide_pause_ui)
 	StateChanged.connect(update_game_manager_ui)
 	countdown_timer_text.visible = false
 	game_over_ui.visible = false
 	game_playing_ui.visible = false
-	
+	paused_ui.visible = false
 func update_game_manager_ui()->void:
 	if is_game_starting():
 		game_starting_text.visible = true
@@ -89,10 +100,12 @@ func update_game_manager_ui()->void:
 		game_over_ui.visible = true
 		if gameover_recipes_number.text != str(dev_man.orders_delivered):
 			gameover_recipes_number.text = str(dev_man.orders_delivered)
+		if gameover_money_made.text != dev_man.get_formatted_money():
+			gameover_money_made.text = dev_man.get_formatted_money()
 	else: game_over_ui.visible = false
 
 func is_game_almost_over()->bool:
-	return game_playing_timer < game_playing_time_max * .35
+	return game_playing_timer < game_playing_time_max * .30
 
 func flash(delta)->void:
 	flickering_timer += delta
@@ -105,3 +118,34 @@ func toggle_visibility()->void:
 		game_progress.tint_progress.a = original_alpha
 	else:
 		game_progress.tint_progress.a = 0.0
+
+# this is faster, because it doesn't run every frame
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			toggle_pause_game()
+
+func toggle_pause_game()->void:
+	is_game_paused = !is_game_paused
+	if is_game_paused:
+		Engine.time_scale = 0.0
+		OnGamePaused.emit()
+	else:
+		Engine.time_scale = 1.0
+		OnGameUnpaused.emit()
+
+func show_pause_ui()->void:
+	paused_ui.visible = true
+	bg_veil.visible = true
+func hide_pause_ui()->void:
+	paused_ui.visible = false
+	bg_veil.visible = false
+
+
+
+func _on_go_to_main_menu_pressed() -> void:
+	get_tree().change_scene_to_file(main_menu_scene)
+
+
+func _on_resume_button_pressed() -> void:
+	toggle_pause_game()

@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://f8v8u1qe2xc1" path="res://order_scene.tscn" id="4_ln6a4"]
 [ext_resource type="PackedScene" uid="uid://dbl1o1hgl32r7" path="res://scenes/main scene & player/fps.tscn" id="5_ixcvf"]
 [ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="5_r4p2v"]
-[ext_resource type="AudioStream" uid="uid://cdt0ar3y1wked" path="res://Assets/_Assets/Sounds/Music/Music.wav" id="6_mgtos"]
 [ext_resource type="Theme" uid="uid://dajs6324casyg" path="res://resources/new_theme.tres" id="6_ondsf"]
 [ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="7_3xxqs"]
 [ext_resource type="Resource" uid="uid://dat081hyy7iu" path="res://resources/sound_references_so.tres" id="7_x3dj4"]
@@ -23,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="11_l43lx"]
 [ext_resource type="PackedScene" uid="uid://dhi0y56man0l2" path="res://scenes/counters/bases/clear_counter.tscn" id="12_3c5xn"]
 [ext_resource type="Texture2D" uid="uid://dp544vtqhucrf" path="res://Assets/_Assets/Textures/game_progress.png" id="12_8m1iq"]
+[ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="12_md74k"]
 [ext_resource type="PackedScene" uid="uid://dbo3mxqnxi6xf" path="res://scenes/counters/container_counters/tomato_container_counter.tscn" id="12_yo1jd"]
 [ext_resource type="PackedScene" uid="uid://x50jpniq1an6" path="res://scenes/counters/container_counters/cheese_container_counter.tscn" id="13_1eld5"]
 [ext_resource type="PackedScene" uid="uid://b28fqjvm4g2k2" path="res://scenes/counters/cutting_counter.tscn" id="13_p46un"]
@@ -309,15 +309,9 @@ vertical = true
 script = ExtResource("2_g2p2o")
 audio_clips_references = ExtResource("7_x3dj4")
 
-[node name="MusicManager" type="Node" parent="."]
-
-[node name="bg_music" type="AudioStreamPlayer" parent="MusicManager"]
-stream = ExtResource("6_mgtos")
-volume_db = -8.0
-
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_t5pjo")
-game_playing_time_max = 60.0
+game_playing_time_max = 2.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameManager"]
 
@@ -410,9 +404,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -144.0
+offset_left = -384.0
 offset_top = -51.0
-offset_right = 144.0
+offset_right = -96.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -423,6 +417,7 @@ theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 35
 text = "Orders Delivered"
+horizontal_alignment = 1
 
 [node name="gameover_recipes_number" type="Label" parent="GameManager/CanvasLayer/game_over_ui"]
 layout_mode = 1
@@ -431,10 +426,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -17.0
-offset_top = 8.5
-offset_right = 17.0
-offset_bottom = 91.5
+offset_left = -261.5
+offset_top = -1.5
+offset_right = -218.5
+offset_bottom = 101.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -444,6 +439,51 @@ theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 75
 text = "5"
+horizontal_alignment = 1
+
+[node name="gameover_money_made_label" type="Label" parent="GameManager/CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = -51.0
+offset_right = 352.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.411765, 0.858824, 0.360784, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 35
+text = "Money Made"
+horizontal_alignment = 1
+
+[node name="gameover_money_made" type="Label" parent="GameManager/CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 186.5
+offset_top = -1.5
+offset_right = 229.5
+offset_bottom = 101.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.411765, 0.858824, 0.360784, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "5"
+horizontal_alignment = 1
 
 [node name="game_playing_ui" type="MarginContainer" parent="GameManager/CanvasLayer"]
 anchors_preset = 1
@@ -469,6 +509,60 @@ texture_progress = ExtResource("12_8m1iq")
 tint_under = Color(1, 1, 1, 0.337255)
 tint_over = Color(0.2, 0, 0, 1)
 tint_progress = Color(1, 1, 1, 0.592157)
+
+[node name="paused_ui" type="Control" parent="GameManager/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="paused_text" type="Label" parent="GameManager/CanvasLayer/paused_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -285.5
+offset_top = -256.0
+offset_right = 285.5
+offset_bottom = -153.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameManager/CanvasLayer/paused_ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -166.0
+offset_top = 128.0
+offset_right = 166.0
+offset_bottom = 390.0
+grow_horizontal = 2
+theme_override_constants/separation = 64
+
+[node name="ResumeButton" type="Button" parent="GameManager/CanvasLayer/paused_ui/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_md74k")
+text = "Resume ;)"
+
+[node name="GoToMainMenu" type="Button" parent="GameManager/CanvasLayer/paused_ui/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_md74k")
+text = "Main Menu :]"
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_qj1pw")
@@ -608,3 +702,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
 
 [node name="Delivery_Counter2" parent="Counters" instance=ExtResource("18_h0f4w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 9)
+
+[connection signal="pressed" from="GameManager/CanvasLayer/paused_ui/VBoxContainer/ResumeButton" to="GameManager" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="GameManager/CanvasLayer/paused_ui/VBoxContainer/GoToMainMenu" to="GameManager" method="_on_go_to_main_menu_pressed"]
