@@ -26,6 +26,7 @@ Load="*res://scripts/load.gd"
 MusicManager="*res://scenes/music_manager.tscn"
 dev_man="*res://scenes/delivery_manager.tscn"
 sound_man="*res://scenes/sound_manager.tscn"
+PlayerPrefs="*res://addons/PlayerPrefs/PlayerPrefs.tscn"
 
 [debug]
 
@@ -41,7 +42,7 @@ window/per_pixel_transparency/allowed=true
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/PlayerPrefs/plugin.cfg")
 
 [filesystem]
 

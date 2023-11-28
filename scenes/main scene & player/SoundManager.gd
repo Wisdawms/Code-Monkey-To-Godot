@@ -8,7 +8,9 @@ class_name SoundManager extends Node
 
 
 func _ready() -> void:
-	MusicManager.get_child(0).volume_db = clamped_volume
+	sfx_volume = PlayerPrefs.get_pref("sfx_vol", 0.7)
+	music_volume = PlayerPrefs.get_pref("music_vol", 0.7)
+	MusicManager.get_child(0).volume_db = lerp(-50.0, -10.0, music_volume)
 	game_man.sound_effects_volume_button.text = "Sound Effects : " + str(sfx_volume * 10)
 	game_man.music_volume_button.text = "Music : " +  str(music_volume * 10)
 	game_man.sound_effects_volume_button.pressed.connect(on_sfx_vol_button_pressed)
@@ -63,9 +65,15 @@ func change_sfx_volume()->void:
 	sfx_volume += .1
 	if sfx_volume > 1.0:
 		sfx_volume = 0.0
+	PlayerPrefs.set_pref("sfx_vol", sfx_volume)
+	PlayerPrefs.save_data()
+	
 	
 func change_music_volume()->void:
 	music_volume += .1
 	if music_volume > 1.0:
 		music_volume = 0.0
+	PlayerPrefs.set_pref("music_vol", music_volume)
+	PlayerPrefs.save_data()
+	
 

@@ -183,6 +183,8 @@ func hide_pause_ui()->void:
 		game_starting_text.visible = true
 
 func _on_go_to_main_menu_pressed() -> void:
+	current_game_state = game_state.MainMenu
+	toggle_pause_game()
 	get_tree().change_scene_to_file(main_menu_scene)
 
 func _on_resume_button_pressed() -> void:
