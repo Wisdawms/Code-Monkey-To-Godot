@@ -1,33 +1,34 @@
 class_name SoundManager extends Node
 
-@onready var game_man : GameManager = Globals.find_node("GameManager") as GameManager
-@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var sfx : AudioStreamPlayer3D = get_child(0)
 @export var audio_clips_references : AudioClipsRefsSO
-@onready var player : MyPlayerClass = Globals.find_node("Player") as MyPlayerClass
-var volume : float = 1.0
-#@onready var this_counter : BaseCounter = get_parent()
+@onready var sfx_volume : float = 1.0
+@onready var music_volume : float = 1.0
+@onready var clamped_volume : float = -10.0
+
 
 func _ready() -> void:
-	if game_man:
-		game_man.sound_effects_volume_button.pressed.connect(on_sfx_vol_button_pressed)
-		game_man.music_volume_button.pressed.connect(on_music_vol_button_pressed)
-	if dev_man:
-		dev_man.OrderDelivered.connect(OnOrderDelivered)
-		dev_man.OrderFailed.connect(OnOrderFailed)
+	MusicManager.get_child(0).volume_db = clamped_volume
+	game_man.sound_effects_volume_button.text = "Sound Effects : " + str(sfx_volume * 10)
+	game_man.music_volume_button.text = "Music : " +  str(music_volume * 10)
+	game_man.sound_effects_volume_button.pressed.connect(on_sfx_vol_button_pressed)
+	game_man.music_volume_button.pressed.connect(on_music_vol_button_pressed)
+	dev_man.OrderDelivered.connect(OnOrderDelivered)
+	dev_man.OrderFailed.connect(OnOrderFailed)
 		
 func OnOrderDelivered()->void:
-	play_audio_at_pos("delivery_success", player.current_counter.position)
+	play_audio_at_pos("delivery_success", Globals.find_node("Player").current_counter.position)
 func OnOrderFailed()->void:
-	play_audio_at_pos("delivery_fail", player.current_counter.position)
-func play_audio_at_pos(audio_clip : String, position : Vector3, volume_mult: float = -20.0, loop : bool = false)->AudioStreamPlayer3D:
+	play_audio_at_pos("delivery_fail", Globals.find_node("Player").current_counter.position)
+func play_audio_at_pos(audio_clip : String, position : Vector3, loop : bool = false, volume_mult: float = 5.0)->AudioStreamPlayer3D:
 	var _new_sound : AudioStreamPlayer3D = AudioStreamPlayer3D.new() as AudioStreamPlayer3D
 	var sound_file : AudioStream = audio_clips_references.get(str(audio_clip))[ randi_range(0, audio_clips_references.get(str(audio_clip)).size() -1 )  ]
 	var sound_length : float = sound_file.get_length()
 	add_child(_new_sound, true)	
 	_new_sound.stream = sound_file
 	_new_sound.position = position *.2
-	_new_sound.volume_db = volume_mult * volume
+	_new_sound.volume_db = volume_mult
+	_new_sound.unit_size = 1 * sfx_volume
 	match loop:
 		false:
 			_new_sound.stream.loop_mode = 0
@@ -40,7 +41,7 @@ func play_audio_at_pos(audio_clip : String, position : Vector3, volume_mult: flo
 func destroy_audio(this_sound : AudioStreamPlayer3D)->void:
 	this_sound.queue_free()
 
-#func play_audio_from_array(audio_clip : String, audio_array, volume, loop : bool = false)->void:
+#func play_audio_from_array(audio_clip : String, audio_array, sfx_volume, loop : bool = false)->void:
 	## assuming I have AudioStreamPlayer3D
 	#var _new_sound : AudioStreamPlayer3D = AudioStreamPlayer3D.new() as AudioStreamPlayer3D
 	#var sound_file : AudioStream = audio_array.get( str(audio_clip) )[ randi_range(0, audio_array.get(str(audio_clip)).size() -1 )  ]
@@ -48,12 +49,23 @@ func destroy_audio(this_sound : AudioStreamPlayer3D)->void:
 	#add_child(_new_sound)	
 
 func on_sfx_vol_button_pressed()->void:
-	pass
-
-func on_music_vol_button_pressed()->void:
-	pass
+	change_sfx_volume()
+	game_man.sound_effects_volume_button.text = "Sound Effects : " + str(sfx_volume * 10)
 	
-func change_volume()->void:
-	volume += .1
-	if volume > 1.0:
-		volume = 0.0
+func on_music_vol_button_pressed()->void:
+	change_music_volume()
+	game_man.music_volume_button.text = "Music : " +  str(music_volume * 10)
+	clamped_volume = lerp(-50.0, -10.0, music_volume)
+	MusicManager.get_child(0).volume_db = clamped_volume
+
+	
+func change_sfx_volume()->void:
+	sfx_volume += .1
+	if sfx_volume > 1.0:
+		sfx_volume = 0.0
+	
+func change_music_volume()->void:
+	music_volume += .1
+	if music_volume > 1.0:
+		music_volume = 0.0
+

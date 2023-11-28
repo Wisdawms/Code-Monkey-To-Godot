@@ -1,17 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://imu32ldc4tvw"]
 
-[ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="1_hpajb"]
-[ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="2_jcrki"]
-[ext_resource type="Texture2D" uid="uid://dp544vtqhucrf" path="res://Assets/_Assets/Textures/game_progress.png" id="3_h713o"]
-[ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="4_3cplw"]
+[ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="1_0xatu"]
+[ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="2_4d3c4"]
+[ext_resource type="Texture2D" uid="uid://dp544vtqhucrf" path="res://Assets/_Assets/Textures/game_progress.png" id="3_n5r67"]
+[ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="4_5cmf3"]
 
 [node name="GameManager" type="Node"]
-script = ExtResource("1_hpajb")
-game_playing_time_max = 2.0
+script = ExtResource("1_0xatu")
+game_playing_time_max = 30.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="bg_veil" type="ColorRect" parent="CanvasLayer"]
+visible = false
 top_level = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -189,7 +190,24 @@ theme_override_font_sizes/font_size = 75
 text = "5"
 horizontal_alignment = 1
 
+[node name="RestartButton" type="Button" parent="CanvasLayer/game_over_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = 128.0
+offset_right = 100.5
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_5cmf3")
+text = "Restart Game"
+
 [node name="game_playing_ui" type="MarginContainer" parent="CanvasLayer"]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -208,13 +226,14 @@ layout_mode = 2
 step = 0.1
 value = 100.0
 fill_mode = 4
-texture_under = ExtResource("2_jcrki")
-texture_progress = ExtResource("3_h713o")
+texture_under = ExtResource("2_4d3c4")
+texture_progress = ExtResource("3_n5r67")
 tint_under = Color(1, 1, 1, 0.337255)
 tint_over = Color(0.2, 0, 0, 1)
 tint_progress = Color(1, 1, 1, 0.592157)
 
 [node name="paused_ui" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -224,7 +243,66 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="paused_text" type="Label" parent="CanvasLayer/paused_ui"]
+[node name="paused_content" type="Control" parent="CanvasLayer/paused_ui"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="paused_text" type="Label" parent="CanvasLayer/paused_ui/paused_content"]
+layout_mode = 2
+offset_left = -145.0
+offset_top = -64.0
+offset_right = 145.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 75
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="paused_buttons" type="VBoxContainer" parent="CanvasLayer/paused_ui/paused_content"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -186.0
+offset_top = -64.0
+offset_right = 146.0
+offset_bottom = 361.0
+grow_horizontal = 2
+theme_override_constants/separation = 64
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
+layout_mode = 2
+theme = ExtResource("4_5cmf3")
+text = "Resume ;)"
+
+[node name="OptionsButton" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
+layout_mode = 2
+theme = ExtResource("4_5cmf3")
+text = "Options :v"
+
+[node name="GoToMainMenu" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
+layout_mode = 2
+theme = ExtResource("4_5cmf3")
+text = "Main Menu :]"
+
+[node name="options_ui" type="Control" parent="CanvasLayer/paused_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="options_text" type="Label" parent="CanvasLayer/paused_ui/options_ui"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -243,30 +321,41 @@ theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
 theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
 theme_override_constants/shadow_outline_size = 20
 theme_override_font_sizes/font_size = 75
-text = "PAUSED"
+text = "OPTIONS"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/paused_ui"]
+[node name="options_content" type="VBoxContainer" parent="CanvasLayer/paused_ui/options_ui"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -166.0
-offset_top = 128.0
-offset_right = 166.0
-offset_bottom = 390.0
+anchor_bottom = 0.5
+offset_left = -204.5
+offset_top = 28.0
+offset_right = 204.5
+offset_bottom = 290.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 64
 
-[node name="ResumeButton" type="Button" parent="CanvasLayer/paused_ui/VBoxContainer"]
+[node name="sound_effects_volume_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
-theme = ExtResource("4_3cplw")
-text = "Resume ;)"
+theme = ExtResource("4_5cmf3")
+text = "Sound Effects : 5"
 
-[node name="GoToMainMenu" type="Button" parent="CanvasLayer/paused_ui/VBoxContainer"]
+[node name="music_volume_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
-theme = ExtResource("4_3cplw")
-text = "Main Menu :]"
+theme = ExtResource("4_5cmf3")
+text = "Music : 5"
 
-[connection signal="pressed" from="CanvasLayer/paused_ui/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/paused_ui/VBoxContainer/GoToMainMenu" to="." method="_on_go_to_main_menu_pressed"]
+[node name="back_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
+layout_mode = 2
+theme = ExtResource("4_5cmf3")
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/game_over_ui/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/paused_ui/paused_content/paused_buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/paused_ui/paused_content/paused_buttons/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/paused_ui/paused_content/paused_buttons/GoToMainMenu" to="." method="_on_go_to_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/paused_ui/options_ui/options_content/back_button" to="." method="_on_back_button_pressed"]

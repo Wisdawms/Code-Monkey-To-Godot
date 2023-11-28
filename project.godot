@@ -21,8 +21,10 @@ config/icon="res://icon.svg"
 InputManager="*res://scripts/InputManager.gd"
 Settings="*res://scripts/settings.gd"
 Globals="*res://scripts/Globals.gd"
+game_man="*res://scenes/game_manager.tscn"
 Load="*res://scripts/load.gd"
 MusicManager="*res://scenes/music_manager.tscn"
+dev_man="*res://scenes/delivery_manager.tscn"
 sound_man="*res://scenes/sound_manager.tscn"
 
 [debug]

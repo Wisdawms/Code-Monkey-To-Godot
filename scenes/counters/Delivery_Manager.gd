@@ -1,6 +1,5 @@
 class_name DeliveryManager extends Node
 
-@onready var game_man : GameManager = Globals.find_node("GameManager")
 @export_subgroup("Delivery_Counter")
 @export var ingredient_scene_template : PackedScene
 @export var order_scene : PackedScene
@@ -31,10 +30,8 @@ func order_timeout(order_ui, order)->void:
 func _process(delta: float) -> void:
 	if game_man.is_game_playing():
 		delivery_ui.visible = true
-		game_man.bg_veil.visible = false
-	else: 
+	elif not game_man.is_game_playing() or game_man.current_game_state == game_man.game_state.MainMenu: 
 		delivery_ui.visible = false
-		game_man.bg_veil.visible = true
 	if game_man.is_game_playing():
 		if waiting_recipe_list.size() < orders_max:
 			spawn_recipe_timer -= delta

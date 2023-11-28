@@ -44,8 +44,6 @@ var frying_recipe_so : FryingRecipeSO
 #region Getting nodes
 @export_subgroup("getting_nodes")
 @onready var frying_sound : AudioStreamPlayer3D
-@onready var game_man : GameManager = Globals.find_node("GameManager")
-@onready var dev_man : DeliveryManager = Globals.find_node("DeliveryManager") as DeliveryManager
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
 @onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
@@ -82,7 +80,7 @@ func handle_stove_on_and_off_effects()->void:
 				if frying_sound:
 					frying_sound.playing = true
 				if frying_sound == null:
-					frying_sound = sound_man.play_audio_at_pos("stove_sizzle", self.position, -20.0 , true)
+					frying_sound = sound_man.play_audio_at_pos("stove_sizzle", self.position, true)
 				if stove_anims.current_animation != "StoveOn":
 					stove_anims.play("StoveOn")
 					run_once = false

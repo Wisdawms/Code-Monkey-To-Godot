@@ -1,9 +1,7 @@
 class_name MyPlayerClass extends CharacterBody3D
 
-@onready var game_man : GameManager = Globals.find_node("GameManager")
 
 @export var footstep_sounds_interval : float = 0.2
-
 @onready var body_hit : Node3D
 @onready var current_counter : BaseCounter
 @onready var interact_raycast: RayCast3D = $Interact_Raycast
@@ -14,12 +12,12 @@ class_name MyPlayerClass extends CharacterBody3D
 @onready var state_machine : AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
 
-func handle_footstep_sounds(delta)->void:
+func handle_footstep_sounds(delta:float)->void:
 	if is_walking():
 		footstep_timer -= delta
 		if footstep_timer < 0.0:
 			footstep_timer = footstep_sounds_interval
-			sound_man.play_audio_at_pos("footstep", self.position, -15.0)
+			sound_man.play_audio_at_pos("footstep", self.position)
 func _process(delta: float) -> void:
 	handle_footstep_sounds(delta)
 	handle_interactions()
@@ -106,7 +104,7 @@ func handle_interactions()->void:
 					current_counter.emit_signal("OnUnhover", self)
 				current_counter = body_hit
 				current_counter.emit_signal("OnHover", self)
-			if game_man and not game_man.is_game_playing(): return
+			if game_man.current_game_state != game_man.game_state.MainMenu and not game_man.is_game_playing(): return
 			if Input.is_action_just_pressed("interact"):
 				body_hit.emit_signal("OnInteract", self)
 			elif Input.is_action_just_pressed("interact_alt"):

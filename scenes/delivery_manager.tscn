@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8g3qyq6ubr85"]
+
+[ext_resource type="Script" path="res://scenes/counters/Delivery_Manager.gd" id="1_6fnko"]
+[ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="2_fpgbc"]
+[ext_resource type="PackedScene" uid="uid://f8v8u1qe2xc1" path="res://order_scene.tscn" id="3_6tlu3"]
+[ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="4_23ua5"]
+[ext_resource type="Theme" uid="uid://dajs6324casyg" path="res://resources/new_theme.tres" id="5_8i0ky"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_daapw"]
+bg_color = Color(0.223529, 0.188235, 0.313726, 0.337255)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.94902, 0.835294, 0.541176, 0.337255)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 8
+
+[node name="DeliveryManager" type="Node"]
+script = ExtResource("1_6fnko")
+ingredient_scene_template = ExtResource("2_fpgbc")
+order_scene = ExtResource("3_6tlu3")
+possible_orders = ExtResource("4_23ua5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="delivery_ui_container" type="MarginContainer" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 48.0
+offset_right = 360.0
+offset_bottom = 240.0
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="bg" type="MarginContainer" parent="CanvasLayer/delivery_ui_container"]
+layout_mode = 2
+theme_override_constants/margin_left = -25
+theme_override_constants/margin_top = -25
+theme_override_constants/margin_right = -25
+theme_override_constants/margin_bottom = -25
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/delivery_ui_container/bg"]
+visible = false
+layout_mode = 2
+theme = ExtResource("5_8i0ky")
+color = Color(0, 0, 0, 0.337255)
+
+[node name="bg_panel" type="Panel" parent="CanvasLayer/delivery_ui_container/bg"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_daapw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/delivery_ui_container"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="heading" type="Label" parent="CanvasLayer/delivery_ui_container/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_outline_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Waiting orders:"
+
+[node name="Orders_Root" type="VBoxContainer" parent="CanvasLayer/delivery_ui_container/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/delivery_ui_container/VBoxContainer/Orders_Root"]
+layout_mode = 2
+theme_override_constants/margin_right = 50
+
+[node name="orders_container" type="BoxContainer" parent="CanvasLayer/delivery_ui_container/VBoxContainer/Orders_Root/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+vertical = true
