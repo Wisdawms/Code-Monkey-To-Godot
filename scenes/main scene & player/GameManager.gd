@@ -16,6 +16,8 @@ class_name GameManager extends Node
 @onready var paused_content: Control = $CanvasLayer/paused_ui/paused_content
 @export var main_menu_scene : String = "res://scenes/main_menu_scene.tscn"
 @onready var options_ui: Control = $CanvasLayer/paused_ui/options_ui
+@onready var keybindings_menu: Control = $CanvasLayer/paused_ui/keybindings_menu
+
 
 var orig_progress_alpha : float
 var orig_under_alpha : float
@@ -31,9 +33,17 @@ enum game_state {
 	GamePlaying,
 	GameOver,
 }
+@onready var current_game_state : game_state = game_state.MainMenu
+
+enum menu_state{
+	NONE,
+	PauseMenu,
+	OptionsMenu,
+	KeybindingsMenu,
+}
+@onready var current_menu_state : menu_state = menu_state.NONE
 
 @onready var is_game_paused : bool = false
-@onready var current_game_state : game_state = game_state.MainMenu
 @export var waiting_to_start_timer : float = 1.0
 @export var countdown_to_start_timer : float = 3.0
 @export var game_playing_time_max : float = 10.0
@@ -44,6 +54,7 @@ var flickering_timer : float = 0.0
 var flickering_interval : float = 0.2
 
 func _process(delta: float) -> void:
+	update_current_menu_state()
 	if current_game_state == game_state.MainMenu: return
 	if is_game_playing() and not is_game_paused:
 		bg_veil.visible = false
@@ -60,6 +71,7 @@ func _process(delta: float) -> void:
 			waiting_to_start_timer -= delta
 			countdown_timer_text.visible = false
 			game_starting_ui.visible = true
+			game_starting_text.visible = true
 			if waiting_to_start_timer < 0.0:
 				current_game_state = game_state.CountdownToStart
 				game_playing_ui.visible = true
@@ -107,7 +119,7 @@ func _ready() -> void:
 	game_starting_ui.visible = false
 	
 func update_game_manager_ui()->void:
-	if get_tree().current_scene.name == "main_menu_scene": return
+	if get_tree().current_scene and get_tree().current_scene.name == "main_menu_scene": return
 	if is_game_starting() and not is_game_paused:
 		game_starting_text.visible = true
 	else: game_starting_text.visible = false
@@ -126,7 +138,7 @@ func update_game_manager_ui()->void:
 func is_game_almost_over()->bool:
 	return game_playing_timer < game_playing_time_max * .30
 
-func flash(delta)->void:
+func flash(delta:float)->void:
 	flickering_timer += delta
 	if flickering_timer >= flickering_interval:
 		flickering_timer = 0.0
@@ -140,18 +152,25 @@ func toggle_visibility()->void:
 
 # this is faster, because it doesn't run every frame
 func _unhandled_key_input(event: InputEvent) -> void:
-	if get_tree().current_scene.name == "main_menu_scene": return
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_ESCAPE:
-			toggle_pause_game()
+	if Input.is_action_just_pressed("escape"):
+		if get_tree().current_scene.name == "main_menu_scene":
+			if current_menu_state == menu_state.OptionsMenu:
+				current_menu_state = menu_state.NONE
+				return
+			else: current_menu_state -= 1
+		else: 
+			if current_menu_state == menu_state.NONE:
+				toggle_pause_game()
+			elif current_menu_state == menu_state.PauseMenu:
+				toggle_pause_game()
+				current_menu_state == menu_state.NONE
+			else: current_menu_state -= 1
 
 func toggle_pause_game()->void:
 	is_game_paused = !is_game_paused
 	if is_game_paused and Engine.time_scale != 0.0:
 		Engine.time_scale = 0.0
 		OnGamePaused.emit()
-		bg_veil.visible = true
-		paused_content.visible = true
 		if is_game_starting() or is_countdown_to_start() and game_starting_ui.visible != false:
 			bg_veil.visible = true
 			game_starting_ui.visible = false
@@ -171,36 +190,86 @@ func toggle_pause_game()->void:
 			game_over_ui.visible = true
 
 func show_pause_ui()->void:
-	options_ui.visible = false
-	paused_ui.visible = true
+	current_menu_state += 1
 	bg_veil.visible = true
 	if is_game_starting():
 		game_starting_text.visible = false
 func hide_pause_ui()->void:
-	paused_ui.visible = false
-	bg_veil.visible = false
+	current_menu_state -= 1
 	if is_game_starting():
 		game_starting_text.visible = true
 
-func _on_go_to_main_menu_pressed() -> void:
+
+func _on_restart_button_pressed() -> void:
+	restart_level()
+
+func _on_keybindings_button_pressed() -> void:
+	current_menu_state = menu_state.KeybindingsMenu
+
+func update_current_menu_state()->void:
+	match current_menu_state:
+		menu_state.NONE:
+			paused_ui.visible = false
+			bg_veil.visible = false
+			if get_tree().current_scene and get_tree().current_scene.name == "main_menu_scene":
+				Globals.find_node("StartButton").grab_focus()
+		menu_state.PauseMenu:
+			Globals.find_node("ResumeButton").grab_focus()
+			paused_ui.visible = true
+			paused_content.visible = true
+			options_ui.visible = false
+			bg_veil.visible = true
+			keybindings_menu.visible = false
+		menu_state.OptionsMenu:
+			Globals.find_node("keybindings_button").grab_focus()
+			paused_ui.visible = true
+			paused_content.visible = false
+			options_ui.visible = true
+			bg_veil.visible = true
+			keybindings_menu.visible = false
+		menu_state.KeybindingsMenu:
+			Globals.find_node("keybinding_forward").grab_focus()
+			paused_ui.visible = true
+			paused_content.visible = false
+			options_ui.visible = false
+			bg_veil.visible = true
+			keybindings_menu.visible = true
+
+func restart_level()->void:
+	get_tree().reload_current_scene()
+	initialize_game_start()
+func initialize_game_start()->void:
+	game_progress.tint_progress.r = 1.0
+	game_progress.tint_progress.g = 1.0
+	game_progress.tint_progress.b = 1.0
+	game_progress.tint_progress.a = original_alpha
+	game_over_ui.visible = false
+	for child in sound_man.get_children():  # remove all sounds
+		child.free()
+	waiting_to_start_timer = 1.0
+	countdown_to_start_timer = 3.0
+	game_playing_timer = game_playing_time_max
+	current_game_state = game_state.WaitingToStart # reset game_state
+	dev_man.money_made = 0.0
+	dev_man.orders_delivered = 0
+	dev_man.waiting_recipe_list.clear()
+	dev_man.spawn_recipe_timer = dev_man.spawn_recipe_timer_max
+	for child in dev_man.orders_container.get_children():
+		child.free()
+
+func _on_go_to_main_menu_button_up() -> void:
 	current_game_state = game_state.MainMenu
 	toggle_pause_game()
 	get_tree().change_scene_to_file(main_menu_scene)
 
-func _on_resume_button_pressed() -> void:
+func _on_options_button_button_up() -> void:
+	current_menu_state += 1
+
+func _on_resume_button_button_up() -> void:
 	toggle_pause_game()
 
-func _on_options_button_pressed() -> void:
-	options_ui.visible = true
-	bg_veil.visible = true
-	paused_content.visible = false
-
-func _on_back_button_pressed() -> void:
-	if current_game_state != game_state.MainMenu:
-		paused_content.visible = true
-	else: game_man.bg_veil.visible = false
-	options_ui.visible = false		
-
-
-func _on_restart_button_pressed() -> void:
-	get_tree().reload_current_scene()
+func _on_back_button_button_up() -> void:
+	if current_game_state != game_state.MainMenu or current_menu_state == menu_state.KeybindingsMenu:
+		current_menu_state -= 1
+	else: 
+		current_menu_state = menu_state.NONE

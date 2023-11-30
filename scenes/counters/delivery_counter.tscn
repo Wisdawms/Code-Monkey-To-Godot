@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4ajcmgct0yw1"]
+[gd_scene load_steps=10 format=3 uid="uid://c4ajcmgct0yw1"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_ampbx"]
 [ext_resource type="Material" uid="uid://huh6uf1ousrb" path="res://Assets/_Assets/Meshes/Kitchen Counter_Blue.mat.tres" id="3_03nix"]
@@ -33,6 +33,22 @@ shader_parameter/Panning_Speed = 2.0
 resource_local_to_scene = true
 lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("ShaderMaterial_6jvhq")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a85jb"]
+viewport_path = NodePath("price_gained/price_gained_sprite3d/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld75c"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = SubResource("ViewportTexture_a85jb")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_c4b4j"]
+viewport_path = NodePath("price_gained/price_gained_sprite3d/SubViewport")
 
 [node name="Delivery_Counter" instance=ExtResource("1_ampbx")]
 type = "Delivery_Counter"
@@ -88,3 +104,10 @@ metadata/unidot_keys = {
 [node name="Delivery_Arrow" type="MeshInstance3D" parent="." index="7"]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 1.28, 0.03)
 mesh = SubResource("QuadMesh_2ajtd")
+
+[node name="price_gained" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0442, 0.485413)
+
+[node name="price_gained_sprite3d" parent="price_gained" index="0"]
+material_override = SubResource("StandardMaterial3D_ld75c")
+texture = SubResource("ViewportTexture_c4b4j")

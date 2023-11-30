@@ -190,7 +190,7 @@ corner_radius_bottom_right = 128
 corner_radius_bottom_left = 128
 shadow_size = 16
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nts7v"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7idi6"]
 viewport_path = NodePath("text_3d/text_3d/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvulg"]
@@ -199,7 +199,7 @@ transparency = 1
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 0)
-albedo_texture = SubResource("ViewportTexture_nts7v")
+albedo_texture = SubResource("ViewportTexture_7idi6")
 billboard_mode = 1
 billboard_keep_scale = true
 

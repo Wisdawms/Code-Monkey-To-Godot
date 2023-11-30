@@ -3,7 +3,10 @@ class_name InputHandler extends Node
 
 var last_dir := Vector2.ZERO
 const diagonal_vector := 0.71
+
 func vec_normalized() -> Vector2:
+	if game_man.current_menu_state != game_man.menu_state.NONE:
+		return Vector2.ZERO
 	var input_vector : Vector2 = Vector2.ZERO
 
 	input_vector = Vector2( 

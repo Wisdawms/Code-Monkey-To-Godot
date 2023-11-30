@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://jl5e5su3nvdb"]
+
+[ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="1_onqev"]
+[ext_resource type="Script" path="res://scenes/keybinding.gd" id="2_wab7r"]
+
+[node name="keybinding" type="Button" groups=["button_keys"]]
+custom_minimum_size = Vector2(100, 0)
+size_flags_horizontal = 4
+theme = ExtResource("1_onqev")
+text = "W"
+icon_alignment = 1
+script = ExtResource("2_wab7r")
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8g3qyq6ubr85"]
+[gd_scene load_steps=8 format=3 uid="uid://b8g3qyq6ubr85"]
 
 [ext_resource type="Script" path="res://scenes/counters/Delivery_Manager.gd" id="1_6fnko"]
 [ext_resource type="PackedScene" uid="uid://dm2gtwr6ci2jg" path="res://ingredient_icon_template.tscn" id="2_fpgbc"]
 [ext_resource type="PackedScene" uid="uid://f8v8u1qe2xc1" path="res://order_scene.tscn" id="3_6tlu3"]
 [ext_resource type="Resource" uid="uid://c7vthls6uis3s" path="res://resources/recipe_so/RecipeListSO.tres" id="4_23ua5"]
+[ext_resource type="PackedScene" uid="uid://tp133h476fvr" path="res://scenes/order_price.tscn" id="4_b68u3"]
 [ext_resource type="Theme" uid="uid://dajs6324casyg" path="res://resources/new_theme.tres" id="5_8i0ky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_daapw"]
@@ -23,6 +24,7 @@ shadow_size = 8
 script = ExtResource("1_6fnko")
 ingredient_scene_template = ExtResource("2_fpgbc")
 order_scene = ExtResource("3_6tlu3")
+money_gained_scene = ExtResource("4_b68u3")
 possible_orders = ExtResource("4_23ua5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

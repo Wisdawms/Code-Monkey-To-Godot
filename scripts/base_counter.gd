@@ -43,6 +43,8 @@ var frying_recipe_so : FryingRecipeSO
 
 #region Getting nodes
 @export_subgroup("getting_nodes")
+@onready var deliver_anim: AnimationPlayer = $deliver_anim
+@onready var order_price: Label = %order_price
 @onready var frying_sound : AudioStreamPlayer3D
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
@@ -349,7 +351,8 @@ func Unhover(interactor : MyPlayerClass)->void:
 			mesh.material_override.set("emission_enabled", hovered)
 	#print("unhovered")
 
-func interact(interactor : MyPlayerClass)->void:	
+func interact(interactor : MyPlayerClass)->void:
+	dev_man.interacted_counter = self
 	item = counter_top_point.get_child(-1)
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
@@ -550,9 +553,6 @@ func give_item(interactor : MyPlayerClass )->void:
 		if interactor.item_holding.object_name == "Plate":
 			if not interactor.item_holding.Ingredients.is_empty():
 				dev_man.try_deliver_recipe(interactor.item_holding)
-				#elif once and not dev_man.try_deliver_recipe(interactor.item_holding):
-					#print("No current order matches the contents of this plate")
-					#once = false
 				return
 			else: 
 				print("This plate be empty yo")

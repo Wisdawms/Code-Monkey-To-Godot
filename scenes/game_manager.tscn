@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://imu32ldc4tvw"]
+[gd_scene load_steps=7 format=3 uid="uid://imu32ldc4tvw"]
 
 [ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="1_0xatu"]
 [ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="2_4d3c4"]
 [ext_resource type="Texture2D" uid="uid://dp544vtqhucrf" path="res://Assets/_Assets/Textures/game_progress.png" id="3_n5r67"]
 [ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="4_5cmf3"]
+[ext_resource type="Theme" uid="uid://kkxfuw5728cm" path="res://label_theme.tres" id="5_vyf8c"]
+[ext_resource type="PackedScene" uid="uid://jl5e5su3nvdb" path="res://scenes/keybinding_scene.tscn" id="6_1vk78"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_0xatu")
-game_playing_time_max = 30.0
+game_playing_time_max = 60.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="bg_veil" type="ColorRect" parent="CanvasLayer"]
-visible = false
 top_level = true
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,7 +208,6 @@ theme = ExtResource("4_5cmf3")
 text = "Restart Game"
 
 [node name="game_playing_ui" type="MarginContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -233,7 +233,6 @@ tint_over = Color(0.2, 0, 0, 1)
 tint_progress = Color(1, 1, 1, 0.592157)
 
 [node name="paused_ui" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -278,17 +277,22 @@ grow_horizontal = 2
 theme_override_constants/separation = 64
 
 [node name="ResumeButton" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
+unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../OptionsButton")
 theme = ExtResource("4_5cmf3")
 text = "Resume ;)"
 
 [node name="OptionsButton" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_bottom = NodePath("../GoToMainMenu")
 theme = ExtResource("4_5cmf3")
 text = "Options :v"
 
 [node name="GoToMainMenu" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../OptionsButton")
 theme = ExtResource("4_5cmf3")
 text = "Main Menu :]"
 
@@ -299,6 +303,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_top = -64.0
+offset_bottom = -64.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -310,9 +316,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -285.5
-offset_top = -256.0
+offset_top = -320.0
 offset_right = 285.5
-offset_bottom = -153.0
+offset_bottom = -217.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -339,23 +345,197 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
 
+[node name="keybindings_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../sound_effects_volume_button")
+theme = ExtResource("4_5cmf3")
+text = "Keybindings"
+
 [node name="sound_effects_volume_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../keybindings_button")
+focus_neighbor_bottom = NodePath("../music_volume_button")
 theme = ExtResource("4_5cmf3")
 text = "Sound Effects : 5"
 
 [node name="music_volume_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../sound_effects_volume_button")
+focus_neighbor_bottom = NodePath("../back_button")
 theme = ExtResource("4_5cmf3")
 text = "Music : 5"
 
 [node name="back_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../music_volume_button")
+theme = ExtResource("4_5cmf3")
+text = "Back"
+
+[node name="keybindings_menu" type="Control" parent="CanvasLayer/paused_ui"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -355.5
+offset_top = -384.0
+offset_right = 355.5
+offset_bottom = 522.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="keybindings_label" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_vyf8c")
+text = "Keybindings"
+
+[node name="keybindings_content" type="VBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="Forward" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2
+
+[node name="key_action" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_vyf8c")
+text = "Forward"
+
+[node name="keybinding_forward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward" instance=ExtResource("6_1vk78")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../Backward/keybinding_backward")
+action_name = "forward"
+
+[node name="Backward" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2
+
+[node name="key_action" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Backward"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_vyf8c")
+text = "Backward"
+
+[node name="keybinding_backward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Backward" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Forward/keybinding_forward")
+focus_neighbor_bottom = NodePath("../../Left/keybinding_left")
+text = "S"
+action_name = "backward"
+
+[node name="Left" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2
+
+[node name="key_action" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Left"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_vyf8c")
+text = "Left"
+
+[node name="keybinding_left" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Left" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Backward/keybinding_backward")
+focus_neighbor_bottom = NodePath("../../Right/keybinding_right")
+text = "A"
+action_name = "left"
+
+[node name="Right" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2
+
+[node name="key_action" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Right"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_vyf8c")
+text = "Right"
+
+[node name="keybinding_right" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Right" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Left/keybinding_left")
+focus_neighbor_bottom = NodePath("../../Interact/keybinding_interact")
+text = "D"
+action_name = "right"
+
+[node name="Interact" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2
+
+[node name="key_action" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Interact"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_vyf8c")
+text = "Interact/Pickup"
+
+[node name="keybinding_interact" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Interact" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Right/keybinding_right")
+focus_neighbor_bottom = NodePath("../../Alt-Interact_Cut/keybinding_alt_interact")
+text = "E"
+action_name = "interact"
+
+[node name="Alt-Interact_Cut" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 128
+alignment = 2
+
+[node name="key_action" type="Label" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Alt-Interact_Cut"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("5_vyf8c")
+text = "Alt-Interact/Cut"
+
+[node name="keybinding_alt_interact" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Alt-Interact_Cut" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../Interact/keybinding_interact")
+focus_neighbor_bottom = NodePath("../../../back_button")
+text = "F"
+action_name = "interact_alt"
+
+[node name="back_button" type="Button" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../keybindings_content/Alt-Interact_Cut/keybinding_alt_interact")
 theme = ExtResource("4_5cmf3")
 text = "Back"
 
 [connection signal="pressed" from="CanvasLayer/game_over_ui/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/paused_ui/paused_content/paused_buttons/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/paused_ui/paused_content/paused_buttons/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/paused_ui/paused_content/paused_buttons/GoToMainMenu" to="." method="_on_go_to_main_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/paused_ui/options_ui/options_content/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="button_up" from="CanvasLayer/paused_ui/paused_content/paused_buttons/ResumeButton" to="." method="_on_resume_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/paused_ui/paused_content/paused_buttons/OptionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/paused_ui/paused_content/paused_buttons/GoToMainMenu" to="." method="_on_go_to_main_menu_button_up"]
+[connection signal="pressed" from="CanvasLayer/paused_ui/options_ui/options_content/keybindings_button" to="." method="_on_keybindings_button_pressed"]
+[connection signal="button_up" from="CanvasLayer/paused_ui/options_ui/options_content/back_button" to="." method="_on_back_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/back_button" to="." method="_on_back_button_button_up"]

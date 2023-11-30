@@ -1,8 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bs85gaah5a6x0"]
+[gd_scene load_steps=17 format=3 uid="uid://dpdfeni0ma2ev"]
 
 [ext_resource type="Script" path="res://scenes/main_menu_scene.gd" id="1_4rw5b"]
 [ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="2_lycvu"]
-[ext_resource type="PackedScene" uid="uid://bab7vd3bw73uw" path="res://scenes/main scene & player/main_scene.tscn" id="2_nehjs"]
 [ext_resource type="Texture2D" uid="uid://ca7hmyuasksyb" path="res://Assets/_Assets/Textures/KitchenChaosLogo.png" id="3_ed6lb"]
 [ext_resource type="Material" uid="uid://di1oim2i7t0m7" path="res://Assets/_Assets/Materials/Floor.mat.tres" id="4_p3bme"]
 [ext_resource type="Environment" uid="uid://clndxvoywpt7g" path="res://scenes/main scene & player/back_env.tres" id="5_6rye6"]
@@ -219,6 +218,7 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [node name="main_menu_scene" type="Node3D"]
+script = ExtResource("1_4rw5b")
 
 [node name="Bread_Container_Counter" parent="." instance=ExtResource("8_qdgvt")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.124718, 0, 0.343362)
@@ -228,77 +228,6 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.124718, 0, 0.343362)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bread_Container_Counter/StaticBody3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.810916, 0)
 shape = SubResource("BoxShape3D_1rhfd")
-
-[node name="Menu" type="Control" parent="."]
-layout_mode = 3
-anchor_right = 0.5
-anchor_bottom = 0.833
-offset_right = 960.0
-offset_bottom = 180.36
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_4rw5b")
-main_game_scene = ExtResource("2_nehjs")
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.067
-anchor_top = 0.155
-anchor_right = 0.533
-anchor_bottom = 0.833
-offset_left = -0.639999
-offset_top = 728.6
-offset_right = 0.639893
-offset_bottom = -771.64
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Menu" type="VBoxContainer" parent="Menu/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/separation = 80
-
-[node name="GameTitle" type="Label" parent="Menu/MarginContainer/Menu"]
-visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
-theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_font_sizes/font_size = 80
-text = "Kitchen Chaos
-"
-
-[node name="TextureRect" type="TextureRect" parent="Menu/MarginContainer/Menu"]
-custom_minimum_size = Vector2(0, 350)
-layout_mode = 2
-texture = ExtResource("3_ed6lb")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="MenuOptions" type="VBoxContainer" parent="Menu/MarginContainer/Menu"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = 24
-
-[node name="StartButton" type="Button" parent="Menu/MarginContainer/Menu/MenuOptions"]
-layout_mode = 2
-theme = ExtResource("2_lycvu")
-text = "Start Game :)"
-
-[node name="OptionsButton" type="Button" parent="Menu/MarginContainer/Menu/MenuOptions"]
-layout_mode = 2
-theme = ExtResource("2_lycvu")
-text = "Options :o"
-
-[node name="QuitButton" type="Button" parent="Menu/MarginContainer/Menu/MenuOptions"]
-layout_mode = 2
-theme = ExtResource("2_lycvu")
-text = "Quit Game :("
 
 [node name="env&light" type="WorldEnvironment" parent="."]
 environment = ExtResource("5_6rye6")
@@ -380,6 +309,82 @@ mesh = SubResource("PlaneMesh_hm2ud")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/Wall3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_0dce1")
 
-[connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/StartButton" to="Menu" method="_on_start_button_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/OptionsButton" to="Menu" method="_on_options_button_pressed"]
-[connection signal="pressed" from="Menu/MarginContainer/Menu/MenuOptions/QuitButton" to="Menu" method="_on_quit_button_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Menu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.833
+offset_right = 960.0
+offset_bottom = 180.36
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Menu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.155
+anchor_right = 0.533
+anchor_bottom = 0.833
+offset_left = -0.639999
+offset_top = 728.6
+offset_right = 0.639893
+offset_bottom = -771.64
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="CanvasLayer/Menu/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 80
+
+[node name="GameTitle" type="Label" parent="CanvasLayer/Menu/MarginContainer/Menu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.968627, 0.854902, 0.54902, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.188235, 0.313726, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_font_sizes/font_size = 80
+text = "Kitchen Chaos
+"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Menu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+texture = ExtResource("3_ed6lb")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MenuOptions" type="VBoxContainer" parent="CanvasLayer/Menu/MarginContainer/Menu"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 24
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitButton")
+theme = ExtResource("2_lycvu")
+text = "Start Game :)"
+
+[node name="OptionsButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+theme = ExtResource("2_lycvu")
+text = "Options :o"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../StartButton")
+theme = ExtResource("2_lycvu")
+text = "Quit Game :("
+
+[connection signal="button_up" from="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions/StartButton" to="." method="_on_start_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions/OptionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions/QuitButton" to="." method="_on_quit_button_button_up"]

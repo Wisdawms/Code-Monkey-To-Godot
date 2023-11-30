@@ -3,8 +3,8 @@ class_name SoundManager extends Node
 @onready var sfx : AudioStreamPlayer3D = get_child(0)
 @export var audio_clips_references : AudioClipsRefsSO
 @onready var sfx_volume : float = 1.0
-@onready var music_volume : float = 1.0
-@onready var clamped_volume : float = -10.0
+@onready var music_volume : float = 0.0
+@onready var clamped_volume : float = lerp(-50.0, -10.0, music_volume)
 
 
 func _ready() -> void:
@@ -13,8 +13,8 @@ func _ready() -> void:
 	MusicManager.get_child(0).volume_db = lerp(-50.0, -10.0, music_volume)
 	game_man.sound_effects_volume_button.text = "Sound Effects : " + str(sfx_volume * 10)
 	game_man.music_volume_button.text = "Music : " +  str(music_volume * 10)
-	game_man.sound_effects_volume_button.pressed.connect(on_sfx_vol_button_pressed)
-	game_man.music_volume_button.pressed.connect(on_music_vol_button_pressed)
+	game_man.sound_effects_volume_button.button_up.connect(on_sfx_vol_button_pressed)
+	game_man.music_volume_button.button_up.connect(on_music_vol_button_pressed)
 	dev_man.OrderDelivered.connect(OnOrderDelivered)
 	dev_man.OrderFailed.connect(OnOrderFailed)
 		

@@ -3,6 +3,7 @@ class_name DeliveryManager extends Node
 @export_subgroup("Delivery_Counter")
 @export var ingredient_scene_template : PackedScene
 @export var order_scene : PackedScene
+@export var money_gained_scene : PackedScene
 @onready var delivery_ui : MarginContainer = get_node("CanvasLayer/delivery_ui_container")
 @onready var orders_container : BoxContainer = get_node("CanvasLayer/delivery_ui_container/VBoxContainer/Orders_Root/MarginContainer/orders_container")
 @onready var waiting_recipe_list : Array[RecipeSO]
@@ -12,6 +13,7 @@ class_name DeliveryManager extends Node
 @export var orders_max : int = 4
 @onready var orders_delivered : int = 0
 @onready var money_made : float = 0.0
+@onready var interacted_counter : BaseCounter
 
 func get_formatted_money() -> String:
 	var formatted_money: String = "$%.2f" % money_made
@@ -32,7 +34,7 @@ func _process(delta: float) -> void:
 		delivery_ui.visible = true
 	elif not game_man.is_game_playing() or game_man.current_game_state == game_man.game_state.MainMenu: 
 		delivery_ui.visible = false
-	if game_man.is_game_playing():
+	if game_man.current_game_state == game_man.game_state.GamePlaying:
 		if waiting_recipe_list.size() < orders_max:
 			spawn_recipe_timer -= delta
 			if spawn_recipe_timer <= 0.0:
@@ -51,7 +53,8 @@ func give_new_order()->void:
 			order_timer.timeout.connect(order_timeout.bind(order_instance, waiting_recipe_so))
 			orders_container.add_child(order_instance, true)
 			order_instance.order_name.text = waiting_recipe_so.recipe_name # setting order name
-			#setting timer according to order given
+			order_instance.order_price.text = "$%.2f" % waiting_recipe_so.price # setting price text
+			#setting timer according to order givend
 			var time_to_order : float = waiting_recipe_so.order_time
 			order_instance.order_time.wait_time = time_to_order
 			order_instance.order_time.start()
@@ -76,7 +79,7 @@ func remove_order(order)->void:
 func destroy_plate(plate)->void:
 	plate.queue_free()
 
-func try_deliver_recipe(plate : BaseFood)->void:
+func try_deliver_recipe(plate : BaseFood)->bool:
 	if game_man.is_game_playing():
 		for order in waiting_recipe_list: # cycle through the recieved orders
 			if arrays_have_same_content(plate.Ingredients, order.kitchen_object_so_list): # cycle through all ingredients in the recieved order
@@ -86,13 +89,15 @@ func try_deliver_recipe(plate : BaseFood)->void:
 				print_rich("[font_size=16][b][color=TEAL ]This [color=TOMATO]", order.recipe_name, "[color=TEAL ] cost [color=WEB_GREEN]$", "%.2f"%order.price ,". \n[color=TEAL ]You made [color=TOMATO]",get_formatted_money(), "[color=TEAL ] so far!")
 				remove_order(order)
 				destroy_plate(plate)
+				Globals.find_node("Player").current_counter.order_price.text = "$%.2f" % order.price
+				Globals.find_node("Player").current_counter.deliver_anim.play("delivered")
 				orders_delivered += 1
 				OrderDelivered.emit()
-				return
+				return true
 		print("Not a requested recipe order!")
 		OrderFailed.emit()
-		return
-	
+		return false
+	return false
 
 
 func arrays_have_same_content(array1, array2)->bool:

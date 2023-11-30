@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=25 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
@@ -14,9 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://dbo3mxqnxi6xf" path="res://scenes/counters/container_counters/tomato_container_counter.tscn" id="12_yo1jd"]
 [ext_resource type="PackedScene" uid="uid://x50jpniq1an6" path="res://scenes/counters/container_counters/cheese_container_counter.tscn" id="13_1eld5"]
 [ext_resource type="PackedScene" uid="uid://b28fqjvm4g2k2" path="res://scenes/counters/cutting_counter.tscn" id="13_p46un"]
+[ext_resource type="PackedScene" uid="uid://bh8vk351ruj27" path="res://scenes/main scene & player/Wall.tscn" id="18_7exhy"]
 [ext_resource type="PackedScene" uid="uid://jq0pwd7jvd56" path="res://scenes/counters/bases/trash_bin_counter.tscn" id="18_8w7u7"]
 [ext_resource type="PackedScene" uid="uid://c4ajcmgct0yw1" path="res://scenes/counters/delivery_counter.tscn" id="18_h0f4w"]
+[ext_resource type="Material" uid="uid://cs3mvofrrh0li" path="res://Assets/_Assets/Materials/Wall.mat.tres" id="19_7j7h4"]
 [ext_resource type="PackedScene" uid="uid://cn042vbpd1s0j" path="res://scenes/counters/stove_counter.tscn" id="19_yps3e"]
+[ext_resource type="Material" uid="uid://ciy54jf2yjldb" path="res://Assets/_Assets/Materials/Black.mat.tres" id="20_i6g0y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3oun4"]
 resource_name = "Floor"
@@ -244,8 +247,9 @@ transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_xr3p1")
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 1)
+transform = Transform3D(1, 0, 0, 0, 0.62388, 0.781521, 0, -0.781521, 0.62388, 0.12, 2.71, 2.63)
 current = true
+fov = 35.5
 script = ExtResource("3_yb8cg")
 player = NodePath("../Player")
 
@@ -333,6 +337,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5, 
 [node name="Delivery_Counter" parent="Counters" instance=ExtResource("18_h0f4w")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5, 0, 0)
 
+[node name="Delivery_Counter2" parent="Counters" instance=ExtResource("18_h0f4w")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.04151, 0, 0.958767)
+
 [node name="MattyPattyUncooked_Container_Counter" parent="Counters" instance=ExtResource("11_ab6fb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1.5)
 
@@ -347,3 +354,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
 
 [node name="Cheese_Container_Counter" parent="Counters" instance=ExtResource("13_1eld5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1.5)
+
+[node name="Wall" parent="." instance=ExtResource("18_7exhy")]
+transform = Transform3D(0.134815, 0, 0, 0, 0.56557, 0, 0, 0, 2.27913, -1.48211, 0.279697, 0.512846)
+material_override = ExtResource("19_7j7h4")
+
+[node name="Wall2" parent="." instance=ExtResource("18_7exhy")]
+transform = Transform3D(-0.134815, 0, 1.19209e-07, 0, 0.56557, 0, -1.49012e-08, 0, -2.27913, 1.66856, 0.279697, 0.512846)
+material_override = ExtResource("19_7j7h4")
+
+[node name="Wall5" parent="." instance=ExtResource("18_7exhy")]
+transform = Transform3D(-1.45504, 0, 1.25405e-07, 0, 0.56557, 0, -1.60827e-07, 0, -2.39759, 2.47273, 0.279697, 0.575938)
+material_override = ExtResource("20_i6g0y")
+
+[node name="Wall6" parent="." instance=ExtResource("18_7exhy")]
+transform = Transform3D(-1.45504, 0, 1.25405e-07, 0, 0.56557, 0, -1.60827e-07, 0, -2.39759, -2.29614, 0.279697, 0.575938)
+material_override = ExtResource("20_i6g0y")
+
+[node name="Wall7" parent="." instance=ExtResource("18_7exhy")]
+transform = Transform3D(2.24429e-07, 0, 6.12438, 0, 0.56557, 0, -1.45504, 0, 5.8804e-07, 0.0593343, 0.279697, -1.32086)
+material_override = ExtResource("20_i6g0y")
+
+[node name="Wall4" parent="." instance=ExtResource("18_7exhy")]
+transform = Transform3D(2.07941e-08, 0, 3.30028, 0, 0.56557, 0, -0.134815, 0, 3.1688e-07, 0.0822501, 0.279697, -0.532915)
+material_override = ExtResource("19_7j7h4")
