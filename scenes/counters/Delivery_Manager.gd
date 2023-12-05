@@ -22,7 +22,7 @@ func get_formatted_money() -> String:
 signal OrderDelivered
 signal OrderFailed
 
-func order_timeout(order_ui, order)->void:
+func order_timeout(order_ui, order:RecipeSO)->void:
 	print(order.recipe_name," timed out")
 	#print(order_ui)
 	hide_order_ui(order)
@@ -60,23 +60,22 @@ func give_new_order()->void:
 			order_instance.order_time.start()
 			# setting ingredient icons
 			for ingredient in waiting_recipe_so.kitchen_object_so_list:
-				var ing_icon = ingredient_scene_template.instantiate()
+				var ing_icon := ingredient_scene_template.instantiate()
 				order_instance.order_ingredients_container.add_child(ing_icon, true)
 				ing_icon.Icon.texture = ingredient.Icon
 
-func hide_order_ui(order)->void:
+func hide_order_ui(order : RecipeSO)->void:
 	var orders_ui := orders_container.get_children()
 	for order_ui in orders_ui:
 		if order_ui.order_name.text == order.recipe_name:
 			order_ui.queue_free()
 			return
 
-func remove_order(order)->void:
-	var first_occurence_of_order = waiting_recipe_list.find(order)
+func remove_order(order : RecipeSO)->void:
 	waiting_recipe_list.erase(order)
 	hide_order_ui(order)
 
-func destroy_plate(plate)->void:
+func destroy_plate(plate : BaseFood)->void:
 	plate.queue_free()
 
 func try_deliver_recipe(plate : BaseFood)->bool:
@@ -100,7 +99,7 @@ func try_deliver_recipe(plate : BaseFood)->bool:
 	return false
 
 
-func arrays_have_same_content(array1, array2)->bool:
+func arrays_have_same_content(array1 : Array, array2 : Array)->bool:
 	if array1.size() != array2.size(): return false
 	for item in array1:
 		if !array2.has(item): return false

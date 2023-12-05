@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b28fqjvm4g2k2"]
+[gd_scene load_steps=30 format=3 uid="uid://b28fqjvm4g2k2"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_vjbhv"]
 [ext_resource type="Texture2D" uid="uid://d2uqu0kvio624" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_AlbedoTransparency.png" id="2_d7bpe"]
@@ -104,7 +104,7 @@ states/knife_cut/position = Vector2(478, 142)
 states/knife_idle/node = SubResource("AnimationNodeAnimation_6vge3")
 states/knife_idle/position = Vector2(300, 61)
 transitions = ["Start", "knife_idle", SubResource("AnimationNodeStateMachineTransition_c55k1"), "knife_idle", "knife_cut", SubResource("AnimationNodeStateMachineTransition_yempl"), "knife_cut", "knife_idle", SubResource("AnimationNodeStateMachineTransition_auiqj")]
-graph_offset = Vector2(-18, -7)
+graph_offset = Vector2(-11, -13)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fy3bx"]
 resource_local_to_scene = true
@@ -196,6 +196,22 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_vi1ph"]
+viewport_path = NodePath("price_gained/price_gained_sprite3d/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7elu0"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = SubResource("ViewportTexture_vi1ph")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4vjn3"]
+viewport_path = NodePath("price_gained/price_gained_sprite3d/SubViewport")
+
 [node name="Cutting_Counter" instance=ExtResource("1_vjbhv")]
 type = "Cutting_Counter"
 CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([ExtResource("2_vlp42"), ExtResource("3_s2m55"), ExtResource("4_otwvj")])
@@ -271,3 +287,7 @@ skeleton = NodePath("")
 transform = Transform3D(-7.09518e-06, 0, -1.96, 0, 1.96, 0, 1.96, 0, -7.09518e-06, -0.32, 1.284, 0.503)
 mesh = SubResource("ArrayMesh_5y115")
 skeleton = NodePath("")
+
+[node name="price_gained_sprite3d" parent="price_gained" index="0"]
+material_override = SubResource("StandardMaterial3D_7elu0")
+texture = SubResource("ViewportTexture_4vjn3")

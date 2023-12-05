@@ -239,6 +239,7 @@ func restart_level()->void:
 	get_tree().reload_current_scene()
 	initialize_game_start()
 func initialize_game_start()->void:
+	is_game_paused = false
 	game_progress.tint_progress.r = 1.0
 	game_progress.tint_progress.g = 1.0
 	game_progress.tint_progress.b = 1.0

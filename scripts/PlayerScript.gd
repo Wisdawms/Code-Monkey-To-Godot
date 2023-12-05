@@ -19,6 +19,7 @@ func handle_footstep_sounds(delta:float)->void:
 			footstep_timer = footstep_sounds_interval
 			sound_man.play_audio_at_pos("footstep", self.position)
 func _process(delta: float) -> void:
+	print(game_man.is_game_paused)
 	handle_footstep_sounds(delta)
 	handle_interactions()
 	if hold_item_marker.get_child_count() != 0: # set player.item_holdign
@@ -27,10 +28,11 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
+	handle_movement(delta)
 	handle_gravity(delta)
 	get_movement_velocity()
 	handle_rotation(delta)
-	handle_movement(delta)
+	
 
 func get_movement_velocity()->void:
 	current_pos = global_position
@@ -70,6 +72,7 @@ func handle_rotation(delta: float) -> void:
 	# or you can use this method: 
 	#rotation.y = lerp_angle(rotation.y, atan2(moveDir.x, moveDir.z), player_rot_speed * delta) 
 func handle_movement(delta: float) -> void:
+	if game_man.is_game_paused: return
 	var input_vector : Vector2 = InputManager.vec_normalized()
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := Vector3(input_dir.x, 0, input_dir.y).normalized()

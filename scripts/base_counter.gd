@@ -50,9 +50,9 @@ var frying_recipe_so : FryingRecipeSO
 @onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
 @onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
 @onready var fry_timer: Timer = get_node("FryTimer")
-@onready var stove_anims : AnimationPlayer = $StoveAnims
-@onready var anim_tree : AnimationTree = $knife_anim/AnimationTree
-@onready var stove_on_visual : MeshInstance3D = get_node("Stove/StoveOnVisual")
+@onready var stove_anims : AnimationPlayer 
+@onready var anim_tree : AnimationTree
+@onready var stove_on_visual : MeshInstance3D
 var mesh_instances : Array
 @export_subgroup("Recipes")
 @export var CuttingRecipeSOArray : Array[CuttingRecipeSO]
@@ -745,6 +745,11 @@ func _process(delta: float) -> void:
 	handle_prog_sprite_visibility()
 	set_current_player_and_counter_obj()
 func _ready() -> void:
+	if type == "Cutting_Counter":
+		anim_tree = $knife_anim/AnimationTree
+	if type == "Stove_Counter":
+		stove_on_visual = get_node("Stove/StoveOnVisual")
+		stove_anims = $StoveAnims
 	OnItemChanged.connect(ItemHasChanged)
 	for child : Object in get_all_children(self):
 		if child is MeshInstance3D:

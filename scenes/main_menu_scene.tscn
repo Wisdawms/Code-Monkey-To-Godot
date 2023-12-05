@@ -370,6 +370,7 @@ theme_override_constants/separation = 24
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
 theme = ExtResource("2_lycvu")
+keep_pressed_outside = true
 text = "Start Game :)"
 
 [node name="OptionsButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions"]
@@ -377,12 +378,14 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../StartButton")
 focus_neighbor_bottom = NodePath("../QuitButton")
 theme = ExtResource("2_lycvu")
+keep_pressed_outside = true
 text = "Options :o"
 
 [node name="QuitButton" type="Button" parent="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../StartButton")
 theme = ExtResource("2_lycvu")
+keep_pressed_outside = true
 text = "Quit Game :("
 
 [connection signal="button_up" from="CanvasLayer/Menu/MarginContainer/Menu/MenuOptions/StartButton" to="." method="_on_start_button_button_up"]

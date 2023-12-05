@@ -2,7 +2,7 @@ class_name OrderClass extends MarginContainer
 
 @onready var order_name : Label = get_node("VBoxContainer/order_name_time/order_name")
 @onready var order_price : Label = get_node("VBoxContainer/order_name_time/order_price")
-@onready var order_ingredients_container = get_node("VBoxContainer/order_ingredients")
+@onready var order_ingredients_container := get_node("VBoxContainer/order_ingredients")
 @onready var order_time : Timer = get_node("order_time")
 @onready var prog_bar : TextureProgressBar = get_node("VBoxContainer/order_name_time/circular-progress-bar")
 var flickering_timer : float = 0.0
@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 		prog_bar.tint_progress.g = 1.0
 		prog_bar.tint_progress.b = 1.0
 
-func flash(delta)->void:
+func flash(delta:float)->void:
 	flickering_timer += delta
 	if flickering_timer >= flickering_interval:
 		flickering_timer = 0.0

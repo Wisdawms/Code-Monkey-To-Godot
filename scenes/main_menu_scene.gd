@@ -3,6 +3,7 @@ extends Node3D
 @export var main_game_scene : PackedScene
 
 func _ready() -> void:
+	game_man.is_game_paused = true
 	game_man.game_starting_ui.visible = false
 	game_man.current_menu_state = game_man.menu_state.NONE
 	Engine.time_scale = 1.0

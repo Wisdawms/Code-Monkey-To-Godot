@@ -1,6 +1,6 @@
 class_name SoundManager extends Node
 
-@onready var sfx : AudioStreamPlayer3D = get_child(0)
+@onready var sfx : AudioStreamPlayer3D
 @export var audio_clips_references : AudioClipsRefsSO
 @onready var sfx_volume : float = 1.0
 @onready var music_volume : float = 0.0
@@ -8,6 +8,8 @@ class_name SoundManager extends Node
 
 
 func _ready() -> void:
+	if get_children():
+		sfx = get_child(0)
 	sfx_volume = PlayerPrefs.get_pref("sfx_vol", 0.7)
 	music_volume = PlayerPrefs.get_pref("music_vol", 0.7)
 	MusicManager.get_child(0).volume_db = lerp(-50.0, -10.0, music_volume)
