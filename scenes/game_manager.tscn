@@ -279,6 +279,7 @@ theme_override_constants/separation = 64
 [node name="ResumeButton" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../GoToMainMenu")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 theme = ExtResource("4_5cmf3")
 text = "Resume ;)"
@@ -293,6 +294,7 @@ text = "Options :v"
 [node name="GoToMainMenu" type="Button" parent="CanvasLayer/paused_ui/paused_content/paused_buttons"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../ResumeButton")
 theme = ExtResource("4_5cmf3")
 text = "Main Menu :]"
 
@@ -348,6 +350,7 @@ theme_override_constants/separation = 64
 [node name="keybindings_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../back_button")
 focus_neighbor_bottom = NodePath("../sound_effects_volume_button")
 theme = ExtResource("4_5cmf3")
 text = "Keybindings"
@@ -369,6 +372,7 @@ text = "Music : 5"
 [node name="back_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../music_volume_button")
+focus_neighbor_bottom = NodePath("../keybindings_button")
 theme = ExtResource("4_5cmf3")
 text = "Back"
 
@@ -426,6 +430,7 @@ text = "Forward"
 [node name="keybinding_forward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward" instance=ExtResource("6_1vk78")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../../../back_button")
 focus_neighbor_bottom = NodePath("../../Backward/keybinding_backward")
 action_name = "forward"
 
@@ -529,6 +534,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../keybindings_content/Alt-Interact_Cut/keybinding_alt_interact")
+focus_neighbor_bottom = NodePath("../keybindings_content/Forward/keybinding_forward")
 theme = ExtResource("4_5cmf3")
 text = "Back"
 

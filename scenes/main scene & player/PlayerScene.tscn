@@ -128,7 +128,7 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.57945, 0)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 1.56262, 0)
 
 [node name="MeshRenderer" type="MeshInstance3D" parent="Head"]
 editor_description = "[MeshRenderer 23::1c5dda3c7cd3cf742afcade5419faeab:3294758250785316822]"
@@ -330,7 +330,6 @@ metadata/unidot_keys = {
 [node name="Interact_Raycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 top_level = true
-visible = false
 target_position = Vector3(0, 0, 1)
 collision_mask = 6
 script = ExtResource("6_0vjvn")

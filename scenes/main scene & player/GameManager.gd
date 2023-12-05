@@ -54,7 +54,7 @@ var flickering_timer : float = 0.0
 var flickering_interval : float = 0.2
 
 func _process(delta: float) -> void:
-	update_current_menu_state()
+	yup()
 	if current_game_state == game_state.MainMenu: return
 	if is_game_playing() and not is_game_paused:
 		bg_veil.visible = false
@@ -107,6 +107,9 @@ func is_game_over()->bool:
 	return current_game_state == game_state.GameOver
 
 func _ready() -> void:
+	if get_tree().current_scene and get_tree().current_scene.name == "main_menu_scene":
+		Globals.find_node("StartButton").grab_focus()
+	update_current_menu_state()
 	orig_progress_alpha = game_progress.tint_progress.a
 	orig_under_alpha = game_progress.tint_under.a
 	OnGamePaused.connect(show_pause_ui)
@@ -151,20 +154,27 @@ func toggle_visibility()->void:
 		game_progress.tint_progress.a = 0.0
 
 # this is faster, because it doesn't run every frame
-func _unhandled_key_input(event: InputEvent) -> void:
+func yup() -> void:
 	if Input.is_action_just_pressed("escape"):
 		if get_tree().current_scene.name == "main_menu_scene":
 			if current_menu_state == menu_state.OptionsMenu:
 				current_menu_state = menu_state.NONE
+				update_current_menu_state()
 				return
-			else: current_menu_state -= 1
+			else:
+				current_menu_state -= 1
+				update_current_menu_state()
 		else: 
 			if current_menu_state == menu_state.NONE:
 				toggle_pause_game()
+				update_current_menu_state()
 			elif current_menu_state == menu_state.PauseMenu:
 				toggle_pause_game()
 				current_menu_state == menu_state.NONE
-			else: current_menu_state -= 1
+				update_current_menu_state()
+			else:
+				current_menu_state -= 1
+				update_current_menu_state()
 
 func toggle_pause_game()->void:
 	is_game_paused = !is_game_paused
@@ -192,26 +202,30 @@ func toggle_pause_game()->void:
 func show_pause_ui()->void:
 	current_menu_state += 1
 	bg_veil.visible = true
+	update_current_menu_state()
 	if is_game_starting():
 		game_starting_text.visible = false
 func hide_pause_ui()->void:
 	current_menu_state -= 1
+	update_current_menu_state()
 	if is_game_starting():
 		game_starting_text.visible = true
 
 
 func _on_restart_button_pressed() -> void:
 	restart_level()
+	update_current_menu_state()
 
 func _on_keybindings_button_pressed() -> void:
 	current_menu_state = menu_state.KeybindingsMenu
+	update_current_menu_state()
 
 func update_current_menu_state()->void:
 	match current_menu_state:
 		menu_state.NONE:
 			paused_ui.visible = false
 			bg_veil.visible = false
-			if get_tree().current_scene and get_tree().current_scene.name == "main_menu_scene":
+			if current_game_state == game_state.MainMenu and Globals.find_node("StartButton"):
 				Globals.find_node("StartButton").grab_focus()
 		menu_state.PauseMenu:
 			Globals.find_node("ResumeButton").grab_focus()
@@ -262,15 +276,21 @@ func _on_go_to_main_menu_button_up() -> void:
 	current_game_state = game_state.MainMenu
 	toggle_pause_game()
 	get_tree().change_scene_to_file(main_menu_scene)
+	update_current_menu_state()
 
 func _on_options_button_button_up() -> void:
 	current_menu_state += 1
+	update_current_menu_state()
 
 func _on_resume_button_button_up() -> void:
 	toggle_pause_game()
+	update_current_menu_state()
 
 func _on_back_button_button_up() -> void:
 	if current_game_state != game_state.MainMenu or current_menu_state == menu_state.KeybindingsMenu:
 		current_menu_state -= 1
+		update_current_menu_state()
 	else: 
 		current_menu_state = menu_state.NONE
+		update_current_menu_state()
+		Globals.find_node("StartButton").grab_focus()

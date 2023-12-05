@@ -3,11 +3,11 @@ extends Node3D
 @export var main_game_scene : PackedScene
 
 func _ready() -> void:
+	game_man.update_current_menu_state()
 	game_man.is_game_paused = true
 	game_man.game_starting_ui.visible = false
 	game_man.current_menu_state = game_man.menu_state.NONE
 	Engine.time_scale = 1.0
-	$CanvasLayer/Menu/MarginContainer/Menu/MenuOptions/StartButton.grab_focus()
 
 
 func _on_start_button_button_up() -> void:
@@ -16,6 +16,7 @@ func _on_start_button_button_up() -> void:
 
 func _on_options_button_button_up() -> void:
 	game_man.current_menu_state = game_man.menu_state.OptionsMenu
+	game_man.update_current_menu_state()
 
 
 func _on_quit_button_button_up() -> void:

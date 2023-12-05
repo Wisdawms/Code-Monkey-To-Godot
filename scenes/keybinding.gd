@@ -17,11 +17,11 @@ func _on_button_up() -> void:
 
 func _input(event: InputEvent) -> void:
 	if do_set:
+		if Input.is_action_just_pressed("escape"):
+			text = OS.get_keycode_string(InputMap.action_get_events(action_name)[1].keycode)
+			do_set = false
+			return
 		if event is InputEventKey:
-			if event.keycode == KEY_ESCAPE:
-				text = OS.get_keycode_string(InputMap.action_get_events(action_name)[1].keycode)
-				do_set = false
-				return
 			InputMap.action_erase_events(action_name)
 			InputMap.action_add_event(action_name, event)
 			text = OS.get_keycode_string(event.keycode)
