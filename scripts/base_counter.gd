@@ -375,13 +375,13 @@ func interact(interactor : MyPlayerClass)->void:
 			give_item(interactor)
 
 	elif counter_has_object() and player_has_object(interactor): # replace two objects
-		if Settings.can_replace_objects_on_cutting_counter(self): # cutting counter
+		if Settings.can_replace_objects_on_cutting_counter(self):
 			replace_item(interactor)
-		elif Settings.can_replace_objects_on_normal_counter(self): # normal counters
+		elif Settings.can_replace_objects_on_normal_counter(self):
 			replace_item(interactor)
-		elif Settings.can_replace_objects_on_frying_counter(self): # normal counters
+		elif Settings.can_replace_objects_on_frying_counter(self):
 			replace_item(interactor)
-		else: 
+		else:
 			if type == "Plates_Counter":
 				if player_obj == "Plate":
 					pass
@@ -399,7 +399,7 @@ func interact(interactor : MyPlayerClass)->void:
 						sound_man.play_audio_at_pos("object_pickup", self.position)
 						OnItemChanged.emit()
 						return
-			print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
+				print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
 	if not counter_has_object() and not player_has_object(interactor): # handles spawning an item
 		if not type == "Container_Counter":
 			print( "There's nothing on this counter" )

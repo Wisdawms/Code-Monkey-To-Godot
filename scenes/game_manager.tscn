@@ -427,12 +427,29 @@ size_flags_horizontal = 2
 theme = ExtResource("5_vyf8c")
 text = "Forward"
 
-[node name="keybinding_forward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward" instance=ExtResource("6_1vk78")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="keybinding_forward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward/HBoxContainer" instance=ExtResource("6_1vk78")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../../../back_button")
-focus_neighbor_bottom = NodePath("../../Backward/keybinding_backward")
+focus_neighbor_left = NodePath("../keybinding_forward_joy")
+focus_neighbor_top = NodePath("../../../../back_button")
+focus_neighbor_right = NodePath("../keybinding_forward_joy")
+focus_neighbor_bottom = NodePath("../../../Backward/HBoxContainer/keybinding_backward")
 action_name = "forward"
+
+[node name="keybinding_forward_joy" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Forward/HBoxContainer" instance=ExtResource("6_1vk78")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_forward")
+focus_neighbor_top = NodePath("../../../../back_button")
+focus_neighbor_right = NodePath("../keybinding_forward")
+focus_neighbor_bottom = NodePath("../../../Backward/HBoxContainer/keybinding_backward_joy")
+action_name = "forward"
+is_joy = true
 
 [node name="Backward" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
 custom_minimum_size = Vector2(500, 0)
@@ -446,12 +463,29 @@ size_flags_horizontal = 2
 theme = ExtResource("5_vyf8c")
 text = "Backward"
 
-[node name="keybinding_backward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Backward" instance=ExtResource("6_1vk78")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Backward"]
+layout_direction = 2
 layout_mode = 2
-focus_neighbor_top = NodePath("../../Forward/keybinding_forward")
-focus_neighbor_bottom = NodePath("../../Left/keybinding_left")
+theme_override_constants/separation = 32
+
+[node name="keybinding_backward" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Backward/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_backward_joy")
+focus_neighbor_top = NodePath("../../../Forward/HBoxContainer/keybinding_forward")
+focus_neighbor_right = NodePath("../keybinding_backward_joy")
+focus_neighbor_bottom = NodePath("../../../Left/HBoxContainer/keybinding_left")
 text = "S"
 action_name = "backward"
+
+[node name="keybinding_backward_joy" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Backward/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_backward")
+focus_neighbor_top = NodePath("../../../Forward/HBoxContainer/keybinding_forward_joy")
+focus_neighbor_right = NodePath("../keybinding_backward")
+focus_neighbor_bottom = NodePath("../../../Left/HBoxContainer/keybinding_left_joy")
+text = "S"
+action_name = "backward"
+is_joy = true
 
 [node name="Left" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
 custom_minimum_size = Vector2(500, 0)
@@ -465,12 +499,29 @@ size_flags_horizontal = 2
 theme = ExtResource("5_vyf8c")
 text = "Left"
 
-[node name="keybinding_left" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Left" instance=ExtResource("6_1vk78")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Left"]
+layout_direction = 2
 layout_mode = 2
-focus_neighbor_top = NodePath("../../Backward/keybinding_backward")
-focus_neighbor_bottom = NodePath("../../Right/keybinding_right")
+theme_override_constants/separation = 32
+
+[node name="keybinding_left" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Left/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_left_joy")
+focus_neighbor_top = NodePath("../../../Backward/HBoxContainer/keybinding_backward")
+focus_neighbor_right = NodePath("../keybinding_left_joy")
+focus_neighbor_bottom = NodePath("../../../Right/HBoxContainer/keybinding_right")
 text = "A"
 action_name = "left"
+
+[node name="keybinding_left_joy" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Left/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_left")
+focus_neighbor_top = NodePath("../../../Backward/HBoxContainer/keybinding_backward_joy")
+focus_neighbor_right = NodePath("../keybinding_left")
+focus_neighbor_bottom = NodePath("../../../Right/HBoxContainer/keybinding_right_joy")
+text = "A"
+action_name = "left"
+is_joy = true
 
 [node name="Right" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
 custom_minimum_size = Vector2(500, 0)
@@ -484,12 +535,29 @@ size_flags_horizontal = 2
 theme = ExtResource("5_vyf8c")
 text = "Right"
 
-[node name="keybinding_right" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Right" instance=ExtResource("6_1vk78")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Right"]
+layout_direction = 2
 layout_mode = 2
-focus_neighbor_top = NodePath("../../Left/keybinding_left")
-focus_neighbor_bottom = NodePath("../../Interact/keybinding_interact")
+theme_override_constants/separation = 32
+
+[node name="keybinding_right" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Right/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_right_joy")
+focus_neighbor_top = NodePath("../../../Left/HBoxContainer/keybinding_left")
+focus_neighbor_right = NodePath("../keybinding_right_joy")
+focus_neighbor_bottom = NodePath("../../../Interact/HBoxContainer/keybinding_interact")
 text = "D"
 action_name = "right"
+
+[node name="keybinding_right_joy" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Right/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_right")
+focus_neighbor_top = NodePath("../../../Left/HBoxContainer/keybinding_left_joy")
+focus_neighbor_right = NodePath("../keybinding_right")
+focus_neighbor_bottom = NodePath("../../../Interact/HBoxContainer/keybinding_interact_joy")
+text = "D"
+action_name = "right"
+is_joy = true
 
 [node name="Interact" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
 custom_minimum_size = Vector2(500, 0)
@@ -503,12 +571,29 @@ size_flags_horizontal = 2
 theme = ExtResource("5_vyf8c")
 text = "Interact/Pickup"
 
-[node name="keybinding_interact" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Interact" instance=ExtResource("6_1vk78")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Interact"]
+layout_direction = 2
 layout_mode = 2
-focus_neighbor_top = NodePath("../../Right/keybinding_right")
-focus_neighbor_bottom = NodePath("../../Alt-Interact_Cut/keybinding_alt_interact")
+theme_override_constants/separation = 32
+
+[node name="keybinding_interact" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Interact/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_interact_joy")
+focus_neighbor_top = NodePath("../../../Right/HBoxContainer/keybinding_right")
+focus_neighbor_right = NodePath("../keybinding_interact_joy")
+focus_neighbor_bottom = NodePath("../../../Alt-Interact_Cut/HBoxContainer/keybinding_alt_interact")
 text = "E"
 action_name = "interact"
+
+[node name="keybinding_interact_joy" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Interact/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_interact")
+focus_neighbor_top = NodePath("../../../Right/HBoxContainer/keybinding_right_joy")
+focus_neighbor_right = NodePath("../keybinding_interact")
+focus_neighbor_bottom = NodePath("../../../Alt-Interact_Cut/HBoxContainer/keybinding_alt_interact_joy")
+text = "E"
+action_name = "interact"
+is_joy = true
 
 [node name="Alt-Interact_Cut" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content"]
 custom_minimum_size = Vector2(500, 0)
@@ -522,19 +607,36 @@ size_flags_horizontal = 2
 theme = ExtResource("5_vyf8c")
 text = "Alt-Interact/Cut"
 
-[node name="keybinding_alt_interact" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Alt-Interact_Cut" instance=ExtResource("6_1vk78")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Alt-Interact_Cut"]
+layout_direction = 2
 layout_mode = 2
-focus_neighbor_top = NodePath("../../Interact/keybinding_interact")
-focus_neighbor_bottom = NodePath("../../../back_button")
+theme_override_constants/separation = 32
+
+[node name="keybinding_alt_interact" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Alt-Interact_Cut/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_alt_interact_joy")
+focus_neighbor_top = NodePath("../../../Interact/HBoxContainer/keybinding_interact")
+focus_neighbor_right = NodePath("../keybinding_alt_interact_joy")
+focus_neighbor_bottom = NodePath("../../../../back_button")
 text = "F"
 action_name = "interact_alt"
+
+[node name="keybinding_alt_interact_joy" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/keybindings_content/Alt-Interact_Cut/HBoxContainer" instance=ExtResource("6_1vk78")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../keybinding_alt_interact")
+focus_neighbor_top = NodePath("../../../Interact/HBoxContainer/keybinding_interact_joy")
+focus_neighbor_right = NodePath("../keybinding_alt_interact")
+focus_neighbor_bottom = NodePath("../../../../back_button")
+text = "F"
+action_name = "interact_alt"
+is_joy = true
 
 [node name="back_button" type="Button" parent="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_top = NodePath("../keybindings_content/Alt-Interact_Cut/keybinding_alt_interact")
-focus_neighbor_bottom = NodePath("../keybindings_content/Forward/keybinding_forward")
+focus_neighbor_top = NodePath("../keybindings_content/Alt-Interact_Cut/HBoxContainer/keybinding_alt_interact")
+focus_neighbor_bottom = NodePath("../keybindings_content/Forward/HBoxContainer/keybinding_forward")
 theme = ExtResource("4_5cmf3")
 text = "Back"
 
