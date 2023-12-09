@@ -43,13 +43,13 @@ var frying_recipe_so : FryingRecipeSO
 
 #region Getting nodes
 @export_subgroup("getting_nodes")
-@onready var deliver_anim: AnimationPlayer = $deliver_anim
-@onready var order_price: Label = %order_price
+@onready var deliver_anim: AnimationPlayer
+@onready var order_price: Label
 @onready var frying_sound : AudioStreamPlayer3D
 @onready var counter_top_point: Marker3D = $CounterTopPoint
-@onready var prog_bar: ProgressBar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
-@onready var prog_bar_sprite : Sprite3D = $counter_hud/prog_bar_sprite
-@onready var fry_timer: Timer = get_node("FryTimer")
+@onready var prog_bar: ProgressBar
+@onready var prog_bar_sprite : Sprite3D
+@onready var fry_timer: Timer
 @onready var stove_anims : AnimationPlayer 
 @onready var anim_tree : AnimationTree
 @onready var stove_on_visual : MeshInstance3D
@@ -183,12 +183,15 @@ func handle_lerp_progress_bar()->void:
 							if prog_bar.value != item.fry_timer.time_left:
 								prog_bar.value = lerp(prog_bar.value, fry_timer.time_left, 0.15)
 
-		else: prog_bar.value = lerp(prog_bar.value, 0.0, 0.15)
+		else: 
+			if prog_bar != null:
+				prog_bar.value = lerp(prog_bar.value, 0.0, 0.15)
 
 func handle_prog_sprite_visibility()->void:
 	match type:
 		"Cutting_Counter":
-			prog_bar.get("theme_override_styles/fill/bg_color").set_bg_color(Color(0.63137257099152, 0.39215686917305, 0.19607843458652))
+			if prog_bar != null:
+				prog_bar.get("theme_override_styles/fill/bg_color").set_bg_color(Color(0.63137257099152, 0.39215686917305, 0.19607843458652))
 			if counter_has_object():
 				match handle_prog_on:
 					"Food":
@@ -217,7 +220,7 @@ func handle_prog_sprite_visibility()->void:
 					prog_bar_sprite.shown = true
 					print("Show Progress Bar")
 	if not counter_has_object(): # hides prog bar sprite if no object on it
-		if prog_bar_sprite and prog_bar_sprite.shown:
+		if prog_bar_sprite != null and prog_bar_sprite and prog_bar_sprite.shown:
 				print("Hide Progress Bar")
 				prog_bar_sprite._hide()
 				prog_bar_sprite.shown = false
@@ -271,7 +274,7 @@ func _on_fry_timer_timeout() -> void:
 					"Counter":
 						fry_timer.stop()
 
-func on_cut(prog_normalized: float)->void:
+func on_cut(_prog_normalized: float)->void:
 	if anim_tree:
 		var state_machine : AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
 		state_machine.travel("knife_cut")
@@ -323,11 +326,13 @@ func ItemHasChanged()->void:
 	if item and type == "Stove_Counter":
 		match handle_prog_on:
 			"Food":
-				item.fry_timer.timeout.connect(_on_fry_timer_timeout)
+				if not item.fry_timer.timeout.is_connected(_on_fry_timer_timeout):
+					item.fry_timer.timeout.connect(_on_fry_timer_timeout)
 			"Counter":
-				fry_timer.timeout.connect(_on_fry_timer_timeout)
+				if not fry_timer.timeout.is_connected(_on_fry_timer_timeout):
+					fry_timer.timeout.connect(_on_fry_timer_timeout)
 	print("Player was holding ", player_obj," and interacted with ", self.name, " which had ", current_counter_obj)
-func Hover(interactor : MyPlayerClass)->void: # setting up the hover on counter mechanics ( visuals )
+func Hover(_interactor : MyPlayerClass)->void: # setting up the hover on counter mechanics ( visuals )
 	if player_has_object(interactor) and type == "Stove_Counter" :
 		frying_recipe_so = get_recipe_so_with_input(interactor.item_holding.object_name)
 	interactor.current_counter = self
@@ -335,27 +340,30 @@ func Hover(interactor : MyPlayerClass)->void: # setting up the hover on counter 
 	
 	for mesh : Node3D in mesh_instances:
 		if mesh is MeshInstance3D:
-			mesh.get_active_material(0).set("emission_enabled", hovered)
+			if mesh != null:
+				mesh.get_active_material(0).set("emission_enabled", hovered)
 		elif mesh is Sprite3D:
-			mesh.material_override.set("emission_enabled", hovered)
+			if mesh != null:
+				mesh.material_override.set("emission_enabled", hovered)
 	#print("hovered")
 	
-func Unhover(interactor : MyPlayerClass)->void:
+func Unhover(_interactor : MyPlayerClass)->void:
 	interactor.current_counter = null
 	hovered = false
 	
 	for mesh : Node3D in mesh_instances:
 		if mesh is MeshInstance3D:
-			mesh.get_active_material(0).set("emission_enabled", hovered)
+			if mesh != null:
+				mesh.get_active_material(0).set("emission_enabled", hovered)
 		else:
-			mesh.material_override.set("emission_enabled", hovered)
+			if mesh != null:
+				mesh.material_override.set("emission_enabled", hovered)
 	#print("unhovered")
 
-func interact(interactor : MyPlayerClass)->void:
+func interact(_interactor : MyPlayerClass)->void:
 	dev_man.interacted_counter = self
-	item = counter_top_point.get_child(-1)
-	var item_one : BaseFood = item
-	var item_two : BaseFood = interactor.item_holding
+	if counter_top_point.get_child_count() != 0:
+		item = counter_top_point.get_child(-1)
 	if not player_has_object(interactor):
 		try_take_item(interactor)
 	
@@ -411,7 +419,7 @@ func interact(interactor : MyPlayerClass)->void:
 		if interactor.item_holding.object_name == "Plate":
 			spawn_item_on_container()
 
-func interact_alt(interactor : MyPlayerClass)->void:
+func interact_alt(_interactor : MyPlayerClass)->void:
 	if type == "Cutting_Counter": # for cutting counter interaction_alt
 		if counter_has_object():
 			if not player_has_object(interactor):
@@ -484,7 +492,7 @@ func interact_alt(interactor : MyPlayerClass)->void:
 
 #region [    Boolean Methods    ]
 
-func has_frying_recipe(interactor : MyPlayerClass)->bool:
+func has_frying_recipe(_interactor : MyPlayerClass)->bool:
 	if FryingRecipeSOArray != null:
 		var array1 : Array = []
 		var names : Array = []
@@ -504,7 +512,7 @@ func has_frying_recipe(interactor : MyPlayerClass)->bool:
 				return false
 	return false
 
-func has_recipe(interactor : MyPlayerClass)->bool:
+func has_recipe(_interactor : MyPlayerClass)->bool:
 	if CuttingRecipeSOArray != null:
 		var array1 : Array = []
 		var names : Array = []
@@ -527,13 +535,13 @@ func has_recipe(interactor : MyPlayerClass)->bool:
 func counter_has_object()->bool:
 	return item != null
 
-func player_has_object(interactor : MyPlayerClass)->bool:
+func player_has_object(_interactor : MyPlayerClass)->bool:
 	return interactor.item_holding != null
 
 #endregion
 
 #region [    Do Methods    ]
-func give_item(interactor : MyPlayerClass )->void:
+func give_item(_interactor : MyPlayerClass )->void:
 	if type == "Container_Counter":
 		if Kitchen_Object != null:
 			if interactor.item_holding.default_name != Kitchen_Object.object_name:
@@ -568,7 +576,7 @@ func give_item(interactor : MyPlayerClass )->void:
 		OnItemChanged.emit()
 	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
-func try_take_item(interactor : MyPlayerClass)->void:
+func try_take_item(_interactor : MyPlayerClass)->void:
 	if interactor.item_holding == null: # handles taking an item from counter
 		if counter_has_object(): # if counter has kitchen object
 			handle_reset_prog()
@@ -578,7 +586,7 @@ func try_take_item(interactor : MyPlayerClass)->void:
 			sound_man.play_audio_at_pos("object_pickup", self.position)
 			OnItemChanged.emit()
 
-func replace_item(interactor : MyPlayerClass)->void:
+func replace_item(_interactor : MyPlayerClass)->void:
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
 	
@@ -678,6 +686,7 @@ func replace_item(interactor : MyPlayerClass)->void:
 
 func fry_item_if_possible()->void:
 	if type == "Stove_Counter" and not is_frying():
+		if counter_top_point.get_child_count() == 0: return
 		item = counter_top_point.get_child(-1)
 		if counter_has_object():
 			frying_recipe_so = get_recipe_so_with_input(item.object_name)
@@ -713,8 +722,8 @@ func fry_item_if_possible()->void:
 				prog_bar_sprite.shown = false
 
 func spawn_item_on_container()->void:
-	var anim_player : AnimationPlayer = $CounterAnimations
-	if type == "Container_Counter" and anim_player != null:
+	if type == "Container_Counter":
+		var anim_player : AnimationPlayer = $CounterAnimations
 		anim_player.play("ContainerOpenClose")
 	var object : Object = Kitchen_Object.prefab.instantiate()
 	counter_top_point.add_child(object, true)
@@ -745,9 +754,18 @@ func _process(delta: float) -> void:
 	handle_prog_sprite_visibility()
 	set_current_player_and_counter_obj()
 func _ready() -> void:
+	if type == "Stove_Counter" or type == "Cutting_Counter":
+		prog_bar = $counter_hud/prog_bar_sprite/SubViewport/Control/ProgressBar
+		prog_bar_sprite = $counter_hud/prog_bar_sprite
+	if type == "Delivery_Counter":
+		deliver_anim= $deliver_anim
+		order_price = %order_price
+		$price_gained/price_gained_sprite3d.texture = $price_gained/price_gained_sprite3d/SubViewport.get_texture()
+		$price_gained/price_gained_sprite3d.material_override.albedo_texture = $price_gained/price_gained_sprite3d/SubViewport.get_texture()
 	if type == "Cutting_Counter":
 		anim_tree = $knife_anim/AnimationTree
 	if type == "Stove_Counter":
+		fry_timer = get_node("FryTimer")
 		stove_on_visual = get_node("Stove/StoveOnVisual")
 		stove_anims = $StoveAnims
 	OnItemChanged.connect(ItemHasChanged)

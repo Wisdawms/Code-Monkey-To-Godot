@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpf5kerdx4buq"]
+[gd_scene load_steps=3 format=3 uid="uid://dpf5kerdx4buq"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_avvr0"]
-[ext_resource type="Texture2D" uid="uid://cl42hg7ckdufm" path="res://Assets/_Assets/Textures/Icons/Cabbage.png" id="2_rq1cv"]
 [ext_resource type="PackedScene" uid="uid://layret85o2vw" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/Cabbage_Visual.prefab.tscn" id="3_1lhyp"]
 
 [node name="Cabbage" instance=ExtResource("1_avvr0")]
 object_name = "Cabbage"
 default_name = "Cabbage"
-icon = ExtResource("2_rq1cv")
 
 [node name="Cabbage_Visual" parent="." index="0" instance=ExtResource("3_1lhyp")]

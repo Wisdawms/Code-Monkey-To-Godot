@@ -1,9 +1,9 @@
 extends Node
 
-@onready var loading_scene = preload("res://scenes/loading_scene.tscn")
-@onready var music_man = Globals.find_node("MusicManager")
+@onready var loading_scene : PackedScene = preload("res://scenes/loading_scene.tscn")
+@onready var music_man : Node = Globals.find_node("MusicManager")
 
-func load_screen_to_scene(target_scene:PackedScene)->void:
+func load_screen_to_scene(_target_scene:PackedScene)->void:
 	get_tree().change_scene_to_packed(loading_scene)
 
 func _process(_delta: float) -> void:

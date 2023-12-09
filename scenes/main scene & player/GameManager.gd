@@ -170,7 +170,6 @@ func yup() -> void:
 				update_current_menu_state()
 			elif current_menu_state == menu_state.PauseMenu:
 				toggle_pause_game()
-				current_menu_state == menu_state.NONE
 				update_current_menu_state()
 			else:
 				current_menu_state -= 1
@@ -206,7 +205,7 @@ func show_pause_ui()->void:
 	if is_game_starting():
 		game_starting_text.visible = false
 func hide_pause_ui()->void:
-	current_menu_state -= 1
+	current_menu_state = menu_state.NONE
 	update_current_menu_state()
 	if is_game_starting():
 		game_starting_text.visible = true
@@ -259,7 +258,7 @@ func initialize_game_start()->void:
 	game_progress.tint_progress.b = 1.0
 	game_progress.tint_progress.a = original_alpha
 	game_over_ui.visible = false
-	for child in sound_man.get_children():  # remove all sounds
+	for child : AudioStreamPlayer3D in sound_man.get_children():  # remove all sounds
 		child.free()
 	waiting_to_start_timer = 1.0
 	countdown_to_start_timer = 3.0
@@ -269,7 +268,7 @@ func initialize_game_start()->void:
 	dev_man.orders_delivered = 0
 	dev_man.waiting_recipe_list.clear()
 	dev_man.spawn_recipe_timer = dev_man.spawn_recipe_timer_max
-	for child in dev_man.orders_container.get_children():
+	for child : Node in dev_man.orders_container.get_children():
 		child.free()
 
 func _on_go_to_main_menu_button_up() -> void:
@@ -279,7 +278,7 @@ func _on_go_to_main_menu_button_up() -> void:
 	update_current_menu_state()
 
 func _on_options_button_button_up() -> void:
-	current_menu_state += 1
+	current_menu_state = menu_state.OptionsMenu
 	update_current_menu_state()
 
 func _on_resume_button_button_up() -> void:

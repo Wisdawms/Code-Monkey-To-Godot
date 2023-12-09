@@ -22,9 +22,8 @@ func get_formatted_money() -> String:
 signal OrderDelivered
 signal OrderFailed
 
-func order_timeout(order_ui, order:RecipeSO)->void:
+func order_timeout(_order_ui : OrderClass, order:RecipeSO)->void:
 	print(order.recipe_name," timed out")
-	#print(order_ui)
 	hide_order_ui(order)
 	remove_order(order)
 	return
@@ -88,8 +87,10 @@ func try_deliver_recipe(plate : BaseFood)->bool:
 				print_rich("[font_size=16][b][color=TEAL ]This [color=TOMATO]", order.recipe_name, "[color=TEAL ] cost [color=WEB_GREEN]$", "%.2f"%order.price ,". \n[color=TEAL ]You made [color=TOMATO]",get_formatted_money(), "[color=TEAL ] so far!")
 				remove_order(order)
 				destroy_plate(plate)
-				Globals.find_node("Player").current_counter.order_price.text = "$%.2f" % order.price
-				Globals.find_node("Player").current_counter.deliver_anim.play("delivered")
+				var curr_counter : BaseCounter = Globals.find_node("Player").current_counter
+				if curr_counter.type == "Delivery_Counter":
+					curr_counter.order_price.text = "$%.2f" % order.price
+					curr_counter.deliver_anim.play("delivered")
 				orders_delivered += 1
 				OrderDelivered.emit()
 				return true
@@ -101,7 +102,7 @@ func try_deliver_recipe(plate : BaseFood)->bool:
 
 func arrays_have_same_content(array1 : Array, array2 : Array)->bool:
 	if array1.size() != array2.size(): return false
-	for item in array1:
+	for item : Object in array1:
 		if !array2.has(item): return false
 		if array1.count(item) != array2.count(item): return false
 	return true

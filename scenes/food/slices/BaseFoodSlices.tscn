@@ -6,4 +6,3 @@
 script = ExtResource("1_7moed")
 object_name = "BaseFoodSlices"
 default_name = "BaseFoodSlicesDefaultName"
-sliced = true

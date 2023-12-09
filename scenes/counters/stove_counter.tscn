@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cn042vbpd1s0j"]
+[gd_scene load_steps=19 format=3 uid="uid://cn042vbpd1s0j"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_ti6ww"]
 [ext_resource type="Material" uid="uid://dj61d4l6xu6bm" path="res://Assets/_Assets/Meshes/Frying Pan.Frying pan.material" id="2_4gajx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ddqqypkwghxgd" path="res://Assets/_Assets/Meshes/Textures/Stove_Normal.png" id="5_s0aon"]
 [ext_resource type="Texture2D" uid="uid://d2uqu0kvio624" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_AlbedoTransparency.png" id="6_ah6fv"]
 [ext_resource type="Texture2D" uid="uid://b40iqkii1jasw" path="res://Assets/_Assets/Meshes/Textures/Kitchen Counter_Normal.png" id="7_bvyib"]
+[ext_resource type="PackedScene" uid="uid://csdsgppw14yh7" path="res://scenes/prog_bar_node_scene.tscn" id="8_mfau3"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lh3cu"]
 resource_local_to_scene = true
@@ -260,3 +261,10 @@ metadata/unidot_keys = {
 libraries = {
 "": SubResource("AnimationLibrary_3tug2")
 }
+
+[node name="FryTimer" type="Timer" parent="." index="9"]
+wait_time = 0.001
+one_shot = true
+
+[node name="counter_hud" parent="." index="10" instance=ExtResource("8_mfau3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)

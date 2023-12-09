@@ -1,4 +1,0 @@
-[gd_resource type="ViewportTexture" format=3 uid="uid://cwxxqnf047sqx"]
-
-[resource]
-viewport_path = NodePath("food_icons/food_icons_sprite3d/SubViewport")

@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbe58e3o66wpb"]
+[gd_scene load_steps=3 format=3 uid="uid://cbe58e3o66wpb"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_5u44p"]
 [ext_resource type="PackedScene" uid="uid://c0n4782t0rhbc" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/MeatPattyCooked_Visual.prefab.tscn" id="2_5qgbl"]
-[ext_resource type="Texture2D" uid="uid://g27v8qypqvi1" path="res://Assets/_Assets/Textures/Icons/MeatPattyCooked.png" id="2_egjdv"]
 
 [node name="MeatPattyCooked" instance=ExtResource("1_5u44p")]
 object_name = "MeatPattyCooked"
 default_name = "MeatPattyUncooked"
-icon = ExtResource("2_egjdv")
 
 [node name="MeatPattyCooked_Visual" parent="." index="0" instance=ExtResource("2_5qgbl")]

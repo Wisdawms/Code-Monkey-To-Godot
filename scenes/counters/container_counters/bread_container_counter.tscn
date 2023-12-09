@@ -114,8 +114,6 @@ load_path = "res://.godot/imported/Cabbage.png-57b67d4b848a96e84a6af397369d41e7.
 
 [node name="Bread_Container_Counter" instance=ExtResource("1_sifci")]
 Kitchen_Object = ExtResource("2_vtmst")
-CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
-FryingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([])
 
 [node name="Counter_Inner" parent="." index="5"]
 mesh = SubResource("ArrayMesh_u8tg2")

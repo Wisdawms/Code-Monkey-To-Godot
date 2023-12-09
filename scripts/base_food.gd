@@ -3,7 +3,7 @@ class_name BaseFood extends Node3D
 @export_category("BaseFood")
 
 @export var icon_template_scene : PackedScene
-@onready var icons_grid : GridContainer = $food_icons/food_icons_sprite3d/SubViewport/food_icons/MarginContainer/VBoxContainer/HBoxContainer/icons_grid
+@onready var icons_grid : GridContainer
 @export var object_name : String
 @export var default_name : String
 #@onready var object_name : String : get = getter_name
@@ -11,12 +11,10 @@ class_name BaseFood extends Node3D
 @export var SO_List : Array[KitchenObjectSO]
 @export var valid_kitchen_object_so_list : Array[KitchenObjectSO]
 var cutting_prog : float = 0
-@onready var fry_timer: Timer = get_node("FryTimer")
-@export var sliced: bool
-@export var icon : CompressedTexture2D
-@onready var plate_complete_visual : Node3D = get_node("PlateCompleteVisual")
-
-@export var has_been_on_frying : bool = false
+@onready var fry_timer: Timer
+@onready var sliced: bool
+@onready var plate_complete_visual : Node3D
+@onready var has_been_on_frying : bool = false
 @onready var on_counter : BaseCounter
 
 func sort_ingredients()->Array[KitchenObjectSO]:
@@ -24,6 +22,16 @@ func sort_ingredients()->Array[KitchenObjectSO]:
 	return Ingredients
 
 func _ready() -> void:
+	# get viewport's textures
+	
+	
+	if get_child_count() > 1:
+		fry_timer = get_node("FryTimer")
+	if object_name == "Plate":
+		$food_icons/food_icons_sprite3d.texture = $food_icons/food_icons_sprite3d/SubViewport.get_texture()
+		$food_icons/food_icons_sprite3d.material_override.albedo_texture = $food_icons/food_icons_sprite3d/SubViewport.get_texture()
+		plate_complete_visual = get_node("PlateCompleteVisual")
+		icons_grid = $food_icons/food_icons_sprite3d/SubViewport/food_icons/MarginContainer/VBoxContainer/HBoxContainer/icons_grid
 	get_sos()
 	if object_name == "Plate":
 		for node in plate_complete_visual.get_children():
@@ -34,14 +42,14 @@ func _process(_delta: float) -> void:
 		on_counter = get_parent().get_parent()
 	else: on_counter = null
 	
-func get_sos():
+func get_sos()->void:
 	if object_name != "Plate":
 		for a in DirAccess.get_files_at("res://resources/"):
-			var default = load("res://resources/"+a)
+			var default := load("res://resources/"+a)
 			if default is KitchenObjectSO:
 				SO_List.append(default)
 		for b in DirAccess.get_files_at("res://resources/slices/"):
-			var slices = load("res://resources/slices/"+b)
+			var slices : KitchenObjectSO = load("res://resources/slices/"+b)
 			if slices is KitchenObjectSO:
 				SO_List.append(slices)
 
@@ -57,6 +65,7 @@ func add_ingredient(kitchen_object_so : KitchenObjectSO)->void:
 			Ingredients.append(kitchen_object_so)
 			if Ingredients.has(kitchen_object_so):
 				plate_complete_visual.get_node(kitchen_object_so.object_name).visible = true
-				var new_food_icon = icon_template_scene.instantiate()
-				icons_grid.add_child(new_food_icon, true)
-				new_food_icon.Icon.texture = kitchen_object_so.Icon
+				var new_food_icon : Control = icon_template_scene.instantiate()
+				if icons_grid:
+					icons_grid.add_child(new_food_icon, true)
+					new_food_icon.Icon.texture = kitchen_object_so.Icon

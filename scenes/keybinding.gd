@@ -84,20 +84,20 @@ func get_Joybutton_name(raw_button_name: String) -> String:
 	var new_event : InputEventJoypadButton = InputEventJoypadButton.new()
 	if raw_button_name.contains("Joypad Motion on Axis 1 (Left Stick Y-Axis, Joystick 0 Y-Axis)"):
 		if InputMap.action_get_events(action_name)[0].axis_value < 0.00:
-			new_event.button_index = 11
+			new_event.button_index = JOY_BUTTON_DPAD_UP
 			InputMap.action_add_event(action_name, new_event)
 			return "Left Joystick Up"
 		elif InputMap.action_get_events(action_name)[0].axis_value > 0.00:
-			new_event.button_index = 12
+			new_event.button_index = JOY_BUTTON_DPAD_DOWN
 			InputMap.action_add_event(action_name, new_event)
 			return "Left Joystick Down"
 	if raw_button_name.contains ("Joypad Motion on Axis 0 (Left Stick X-Axis, Joystick 0 X-Axis)"):
 		if InputMap.action_get_events(action_name)[0].axis_value < 0.00:
-			new_event.button_index = 13
+			new_event.button_index = JOY_BUTTON_DPAD_LEFT
 			InputMap.action_add_event(action_name, new_event)
 			return "Left Joystick Left"
 		elif InputMap.action_get_events(action_name)[0].axis_value > 0.00:
-			new_event.button_index = 14
+			new_event.button_index = JOY_BUTTON_DPAD_RIGHT
 			InputMap.action_add_event(action_name, new_event)
 			return "Left Joystick Right"
 	print(InputMap.action_get_events(action_name)[0].axis_value)

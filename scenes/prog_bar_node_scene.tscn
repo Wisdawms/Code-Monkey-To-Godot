@@ -1,17 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://csdsgppw14yh7"]
+[gd_scene load_steps=11 format=3 uid="uid://csdsgppw14yh7"]
 
 [ext_resource type="Script" path="res://scenes/counters/Progress_Bar_Sprite.gd" id="3_ccskm"]
 [ext_resource type="Script" path="res://scenes/counters/Label3D.gd" id="3_lt7r6"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xi067"]
-viewport_path = NodePath("prog_bar_sprite/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5otjn"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 0)
-albedo_texture = SubResource("ViewportTexture_xi067")
 heightmap_scale = 16.0
 heightmap_deep_parallax = true
 heightmap_min_layers = 8
@@ -190,21 +186,14 @@ corner_radius_bottom_right = 128
 corner_radius_bottom_left = 128
 shadow_size = 16
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7idi6"]
-viewport_path = NodePath("text_3d/text_3d/SubViewport")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvulg"]
 resource_local_to_scene = true
 transparency = 1
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 0)
-albedo_texture = SubResource("ViewportTexture_7idi6")
 billboard_mode = 1
 billboard_keep_scale = true
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_gtnrf"]
-viewport_path = NodePath("text_3d/text_3d/SubViewport")
 
 [node name="counter_hud" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -213,7 +202,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_5otjn")
 modulate = Color(1, 1, 1, 0)
-texture = SubResource("ViewportTexture_xi067")
 script = ExtResource("3_ccskm")
 
 [node name="prog_anim" type="AnimationPlayer" parent="prog_bar_sprite"]
@@ -264,7 +252,6 @@ script = ExtResource("3_lt7r6")
 transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_qvulg")
 pixel_size = 0.03
-texture = SubResource("ViewportTexture_gtnrf")
 
 [node name="SubViewport" type="SubViewport" parent="text_3d/text_3d"]
 transparent_bg = true

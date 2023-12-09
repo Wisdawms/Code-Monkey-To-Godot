@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfi2pbgavclsr"]
+[gd_scene load_steps=3 format=3 uid="uid://cfi2pbgavclsr"]
 
 [ext_resource type="PackedScene" uid="uid://sp12slmo7dw5" path="res://scenes/food/slices/BaseFoodSlices.tscn" id="1_p3ixw"]
-[ext_resource type="Texture2D" uid="uid://njibj3d8boft" path="res://Assets/_Assets/Textures/Icons/TomatoSlice.png" id="2_lurry"]
 [ext_resource type="PackedScene" uid="uid://bi8wqorehhhdi" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/TomatoSlices_Visual.tscn" id="2_plqqm"]
 
 [node name="tomato_slice" instance=ExtResource("1_p3ixw")]
 object_name = "TomatoSlices"
 default_name = "Tomato"
-icon = ExtResource("2_lurry")
 
 [node name="TomatoSlices_Visual" parent="." index="0" instance=ExtResource("2_plqqm")]

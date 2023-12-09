@@ -1,12 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8evo6j2c3tl7"]
+[gd_scene load_steps=3 format=3 uid="uid://c8evo6j2c3tl7"]
 
 [ext_resource type="PackedScene" uid="uid://ncbk7iqm1b17" path="res://scenes/food/base/BaseFood.tscn" id="1_1t348"]
-[ext_resource type="Texture2D" uid="uid://dcaflgv8bt0jq" path="res://Assets/_Assets/Textures/Icons/Bread.png" id="2_f4wa2"]
 [ext_resource type="PackedScene" uid="uid://n2gcepossdrs" path="res://Assets/_Assets/PrefabsVisuals/KitchenObjectsVisuals/Bread_Visual.prefab.tscn" id="2_vtoab"]
 
 [node name="Bread" instance=ExtResource("1_1t348")]
 object_name = "Bread"
 default_name = "Bread"
-icon = ExtResource("2_f4wa2")
 
 [node name="Bread_Visual" parent="." index="0" instance=ExtResource("2_vtoab")]
