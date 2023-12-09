@@ -21,10 +21,10 @@ config/icon="res://icon.svg"
 
 RemoveRemap="*res://remove_remap.gd"
 Globals="*res://scripts/Globals.gd"
+dev_man="*res://scenes/delivery_manager.tscn"
 game_man="*res://scenes/game_manager.tscn"
 Load="*res://scripts/load.gd"
 MusicManager="*res://scenes/music_manager.tscn"
-dev_man="*res://scenes/delivery_manager.tscn"
 sound_man="*res://scenes/sound_manager.tscn"
 PlayerPrefs="*res://addons/PlayerPrefs/PlayerPrefs.tscn"
 InputManager="*res://scripts/InputManager.gd"
@@ -38,8 +38,9 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
+window/size/mode=1
 window/size/always_on_top=true
+window/stretch/scale_mode="integer"
 window/per_pixel_transparency/allowed=true
 
 [editor_plugins]

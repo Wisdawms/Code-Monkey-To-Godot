@@ -149,15 +149,18 @@ _data = {
 [node name="Stove_Counter" instance=ExtResource("1_ti6ww")]
 type = "Stove_Counter"
 
-[node name="SizzlingParticles" type="Node3D" parent="." index="4"]
+[node name="counter_hud" parent="." index="0" instance=ExtResource("8_mfau3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="SizzlingParticles" type="Node3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.047, 1.432, -0.018)
 
-[node name="Frying_Pan" type="MeshInstance3D" parent="." index="5"]
+[node name="Frying_Pan" type="MeshInstance3D" parent="." index="6"]
 transform = Transform3D(1.3793, 0, 1.44828, 0, 2, 0, -1.44828, 0, 1.3793, -0.048, 1.375, 0)
 mesh = SubResource("ArrayMesh_lh3cu")
 skeleton = NodePath("")
 
-[node name="Stove" type="MeshInstance3D" parent="." index="6"]
+[node name="Stove" type="MeshInstance3D" parent="." index="7"]
 editor_description = "[MeshRenderer 23::93af8b85a17635f40a5b76ed82a86c18:568043644244199763]"
 transform = Transform3D(1.67, 0, 0, 0, 1.67, 0, 0, 0, 1.67, -0.043, 1.431, 0.07)
 mesh = SubResource("ArrayMesh_tep68")
@@ -209,7 +212,7 @@ metadata/unidot_keys = {
 transform = Transform3D(0.23127, 0, 0, 0, 1.00254, 0, 0, 0, 0.269643, 0, -0.0256569, -0.0759925)
 mesh = SubResource("PlaneMesh_qqcdn")
 
-[node name="Stove_Counter" type="MeshInstance3D" parent="." index="7"]
+[node name="Stove_Counter" type="MeshInstance3D" parent="." index="8"]
 editor_description = "[MeshRenderer 23::93af8b85a17635f40a5b76ed82a86c18:496015676961670754]"
 transform = Transform3D(1.65, 0, 0, 0, 1.5, 0, 0, 0, 1.65, 0, 0, 0)
 mesh = SubResource("ArrayMesh_iqmli")
@@ -257,14 +260,11 @@ metadata/unidot_keys = {
 "m_StitchLightmapSeams": 1
 }
 
-[node name="StoveAnims" type="AnimationPlayer" parent="." index="8"]
+[node name="StoveAnims" type="AnimationPlayer" parent="." index="9"]
 libraries = {
 "": SubResource("AnimationLibrary_3tug2")
 }
 
-[node name="FryTimer" type="Timer" parent="." index="9"]
+[node name="FryTimer" type="Timer" parent="." index="10"]
 wait_time = 0.001
 one_shot = true
-
-[node name="counter_hud" parent="." index="10" instance=ExtResource("8_mfau3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)

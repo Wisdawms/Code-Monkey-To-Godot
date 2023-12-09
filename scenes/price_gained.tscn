@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpm07dhhyhiob"]
+
+[ext_resource type="PackedScene" uid="uid://tp133h476fvr" path="res://scenes/order_price.tscn" id="1_0g5sm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0q3fm"]
+resource_local_to_scene = true
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0)
+billboard_mode = 1
+billboard_keep_scale = true
+
+[node name="price_gained" type="Node3D"]
+
+[node name="price_gained_sprite3d" type="Sprite3D" parent="."]
+transform = Transform3D(0.0499986, 0.000375242, 0, -0.000375242, 0.0499986, 0, 0, 0, 0.05, 0, 2.044, 0)
+material_override = SubResource("StandardMaterial3D_0q3fm")
+modulate = Color(1, 1, 1, 0)
+pixel_size = 0.03
+
+[node name="SubViewport" type="SubViewport" parent="price_gained_sprite3d"]
+transparent_bg = true
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+size = Vector2i(822, 512)
+
+[node name="order_price" parent="price_gained_sprite3d/SubViewport" instance=ExtResource("1_0g5sm")]
+unique_name_in_owner = true

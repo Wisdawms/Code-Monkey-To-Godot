@@ -3,6 +3,8 @@ extends Node3D
 @export var main_game_scene : PackedScene
 
 func _ready() -> void:
+	for child in sound_man.get_children():
+		sound_man.remove_child(child)
 	game_man.update_current_menu_state()
 	game_man.is_game_paused = true
 	game_man.game_starting_ui.visible = false
@@ -11,7 +13,8 @@ func _ready() -> void:
 
 
 func _on_start_button_button_up() -> void:
-	Load.load_screen_to_scene(main_game_scene)
+	await Load.load_screen_to_scene(main_game_scene)
+	
 
 
 func _on_options_button_button_up() -> void:

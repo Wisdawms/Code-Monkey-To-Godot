@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bab7vd3bw73uw"]
+[gd_scene load_steps=26 format=3 uid="uid://bab7vd3bw73uw"]
 
 [ext_resource type="Script" path="res://scripts/main_scene.gd" id="1_v2br7"]
 [ext_resource type="PackedScene" uid="uid://c1e4ah00w8ega" path="res://scenes/main scene & player/PlayerScene.tscn" id="2_aa4i7"]
@@ -20,6 +20,7 @@
 [ext_resource type="Material" uid="uid://cs3mvofrrh0li" path="res://Assets/_Assets/Materials/Wall.mat.tres" id="19_7j7h4"]
 [ext_resource type="PackedScene" uid="uid://cn042vbpd1s0j" path="res://scenes/counters/stove_counter.tscn" id="19_yps3e"]
 [ext_resource type="Material" uid="uid://ciy54jf2yjldb" path="res://Assets/_Assets/Materials/Black.mat.tres" id="20_i6g0y"]
+[ext_resource type="Script" path="res://scenes/main scene & player/custom_tween.gd" id="22_x6ne4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3oun4"]
 resource_name = "Floor"
@@ -378,3 +379,13 @@ material_override = ExtResource("20_i6g0y")
 [node name="Wall4" parent="." instance=ExtResource("18_7exhy")]
 transform = Transform3D(2.07941e-08, 0, 3.30028, 0, 0.56557, 0, -0.134815, 0, 3.1688e-07, 0.0822501, 0.279697, -0.532915)
 material_override = ExtResource("19_7j7h4")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0.5, -0.326535)
+billboard = 1
+texture_filter = 5
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(0, 0, 0, 0)
+
+[node name="Node" type="Node" parent="Label3D"]
+script = ExtResource("22_x6ne4")

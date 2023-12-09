@@ -201,7 +201,10 @@ blend_shape_mode = 0
 type = "Cutting_Counter"
 CuttingRecipeSOArray = Array[Resource("res://scripts/CuttingRecipeSO.gd")]([ExtResource("2_vlp42"), ExtResource("3_s2m55"), ExtResource("4_otwvj")])
 
-[node name="knife_anim" type="AnimationPlayer" parent="." index="0"]
+[node name="counter_hud" parent="." index="0" instance=ExtResource("11_2wwrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="knife_anim" type="AnimationPlayer" parent="." index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_bbkn7")
 }
@@ -215,7 +218,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_cgf8q")
 anim_player = NodePath("..")
 
-[node name="Counter_Mesh" type="MeshInstance3D" parent="." index="5"]
+[node name="Counter_Mesh" type="MeshInstance3D" parent="." index="6"]
 editor_description = "[MeshRenderer 23::d72bee846803d074784ffb8f64e993ca:7398771634956237162]"
 transform = Transform3D(1.65, 0, 0, 0, 1.5, 0, 0, 0, 1.65, 0, 0, 0)
 mesh = SubResource("ArrayMesh_dxsww")
@@ -263,15 +266,12 @@ metadata/unidot_keys = {
 "m_StitchLightmapSeams": 1
 }
 
-[node name="Plate" type="MeshInstance3D" parent="." index="6"]
+[node name="Plate" type="MeshInstance3D" parent="." index="7"]
 transform = Transform3D(1.82, 0, 0, 0, 1.82, 0, 0, 0, 1.82, 0, 1.291, 0)
 mesh = SubResource("ArrayMesh_poyds")
 skeleton = NodePath("")
 
-[node name="Knife" type="MeshInstance3D" parent="." index="7"]
+[node name="Knife" type="MeshInstance3D" parent="." index="8"]
 transform = Transform3D(-7.09518e-06, 0, -1.96, 0, 1.96, 0, 1.96, 0, -7.09518e-06, -0.32, 1.284, 0.503)
 mesh = SubResource("ArrayMesh_5y115")
 skeleton = NodePath("")
-
-[node name="counter_hud" parent="." index="8" instance=ExtResource("11_2wwrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 0)

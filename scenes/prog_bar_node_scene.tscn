@@ -196,10 +196,10 @@ billboard_mode = 1
 billboard_keep_scale = true
 
 [node name="counter_hud" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+process_priority = 1
 
 [node name="prog_bar_sprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_5otjn")
 modulate = Color(1, 1, 1, 0)
 script = ExtResource("3_ccskm")
@@ -245,11 +245,11 @@ value = 1.0
 show_percentage = false
 
 [node name="text_3d" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386023, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 script = ExtResource("3_lt7r6")
 
 [node name="text_3d" type="Sprite3D" parent="text_3d"]
-transform = Transform3D(0.069998, 0.000525339, 0, -0.000525339, 0.069998, 0, 0, 0, 0.07, 0, 0, 0)
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_qvulg")
 pixel_size = 0.03
 
