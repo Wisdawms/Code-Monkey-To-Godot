@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-RemoveRemap="*res://remove_remap.gd"
 Globals="*res://scripts/Globals.gd"
 dev_man="*res://scenes/delivery_manager.tscn"
 game_man="*res://scenes/game_manager.tscn"

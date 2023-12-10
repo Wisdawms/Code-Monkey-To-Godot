@@ -233,6 +233,9 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0.375)
 collision_mask = 7
 gravity = 20.0
 
+[node name="Node" type="Node" parent="Player"]
+script = ExtResource("22_x6ne4")
+
 [node name="Ground" type="Node3D" parent="."]
 
 [node name="Plane" type="MeshInstance3D" parent="Ground"]

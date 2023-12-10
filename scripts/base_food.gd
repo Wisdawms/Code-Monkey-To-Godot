@@ -45,10 +45,14 @@ func _process(_delta: float) -> void:
 func get_sos()->void:
 	if object_name != "Plate":
 		for a in DirAccess.get_files_at("res://resources/"):
+			if a.ends_with(".remap"):
+				a = a.replace(".remap", "")
 			var default := load("res://resources/"+a)
 			if default is KitchenObjectSO:
 				SO_List.append(default)
 		for b in DirAccess.get_files_at("res://resources/slices/"):
+			if b.ends_with(".remap"):
+				b = b.replace(".remap", "")
 			var slices : KitchenObjectSO = load("res://resources/slices/"+b)
 			if slices is KitchenObjectSO:
 				SO_List.append(slices)
