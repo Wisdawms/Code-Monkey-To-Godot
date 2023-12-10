@@ -15,6 +15,7 @@ config/tags=PackedStringArray("mine")
 run/main_scene="res://scenes/main_menu_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=144
+boot_splash/bg_color=Color(0.223529, 0.188235, 0.313726, 1)
 boot_splash/image="res://Assets/_Assets/Textures/KitchenChaosLogo.png"
 config/icon="res://Assets/_Assets/Textures/KitchenChaosLogo.png"
 
@@ -38,8 +39,10 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=1
+window/size/mode=4
+window/size/borderless=true
 window/size/always_on_top=true
+window/size/extend_to_title=true
 window/stretch/scale_mode="integer"
 window/per_pixel_transparency/allowed=true
 
