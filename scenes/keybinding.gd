@@ -7,7 +7,6 @@ extends Button
 var do_set : bool = false
 
 func _ready() -> void:
-	PlayerPrefs.delete_all()
 	init_keybindings()
 	if not is_joy:
 		text = OS.get_keycode_string(InputMap.action_get_events(action_name)[1].keycode)
