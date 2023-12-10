@@ -10,7 +10,7 @@ signal prefs_changed(key: String, value)
 ## Holds player preferenceses
 var prefs: Dictionary = {}
 var filename: String = "prefs.save"
-var path: String = "user://"
+var path: String = "./"
 
 
 func _init() -> void:
@@ -74,7 +74,6 @@ func delete_pref(key: String):
 func delete_all():
 	prefs.clear()
 	await save_data()
-
 
 func save_data():
 	var file = FileAccess.open(path, FileAccess.WRITE)

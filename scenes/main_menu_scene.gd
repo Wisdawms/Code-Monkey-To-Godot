@@ -3,6 +3,7 @@ extends Node3D
 @export var main_game_scene : PackedScene
 
 func _ready() -> void:
+	PlayerPrefs.load_data()
 	for child in sound_man.get_children():
 		sound_man.remove_child(child)
 	game_man.update_current_menu_state()
@@ -23,4 +24,6 @@ func _on_options_button_button_up() -> void:
 
 
 func _on_quit_button_button_up() -> void:
+	PlayerPrefs.save_data()
 	get_tree().quit()
+	

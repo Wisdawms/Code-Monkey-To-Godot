@@ -255,6 +255,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="paused_content" type="Control" parent="CanvasLayer/paused_ui"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -330,9 +331,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -285.5
-offset_top = -320.0
+offset_top = -378.0
 offset_right = 285.5
-offset_bottom = -217.0
+offset_bottom = -275.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -352,9 +353,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -204.5
-offset_top = 28.0
+offset_top = -248.5
 offset_right = 204.5
-offset_bottom = 290.0
+offset_bottom = 502.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 64
@@ -377,18 +378,26 @@ text = "Sound Effects : 5"
 [node name="music_volume_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../sound_effects_volume_button")
-focus_neighbor_bottom = NodePath("../back_button")
+focus_neighbor_bottom = NodePath("../reset_prefs_button")
 theme = ExtResource("4_5cmf3")
 text = "Music : 5"
 
-[node name="back_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
+[node name="reset_prefs_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../music_volume_button")
+focus_neighbor_bottom = NodePath("../back_button")
+theme = ExtResource("4_5cmf3")
+text = "Reset Prefs"
+
+[node name="back_button" type="Button" parent="CanvasLayer/paused_ui/options_ui/options_content"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../reset_prefs_button")
 focus_neighbor_bottom = NodePath("../keybindings_button")
 theme = ExtResource("4_5cmf3")
 text = "Back"
 
 [node name="keybindings_menu" type="Control" parent="CanvasLayer/paused_ui"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -793,5 +802,6 @@ stretch_mode = 5
 [connection signal="button_up" from="CanvasLayer/paused_ui/paused_content/paused_buttons/OptionsButton" to="." method="_on_options_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/paused_ui/paused_content/paused_buttons/GoToMainMenu" to="." method="_on_go_to_main_menu_button_up"]
 [connection signal="pressed" from="CanvasLayer/paused_ui/options_ui/options_content/keybindings_button" to="." method="_on_keybindings_button_pressed"]
+[connection signal="button_up" from="CanvasLayer/paused_ui/options_ui/options_content/reset_prefs_button" to="." method="_on_reset_prefs_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/paused_ui/options_ui/options_content/back_button" to="." method="_on_back_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/paused_ui/keybindings_menu/VBoxContainer/back_button" to="." method="_on_back_button_button_up"]

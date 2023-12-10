@@ -12,11 +12,15 @@ func custom_tween(node : Object, property:String, target, duration : float)->voi
 			await get_tree().create_timer(2.0).timeout
 			parent.text == ""
 			custom_tween.call(parent, "text", "Hope you enjoy!", 1.0)
+			custom_tween.call(parent, "modulate", Color.ORANGE, 1.0)
 		elif parent.text == "Hope you enjoy!":
 			await get_tree().create_timer(2.0).timeout
 			custom_tween.call(parent, "text", "", 1.0)
+			custom_tween.call(parent, "modulate", Color.TRANSPARENT, 1.0)
 
 func _ready() -> void:
 	if parent is Label3D:
+		if game_man.seen_tut:
+			parent.visible = false
 		custom_tween.call(parent, "text", "Welcome to my game :)", 4.0)
 		custom_tween.call(parent, "modulate", Color.BLUE, 4.0)

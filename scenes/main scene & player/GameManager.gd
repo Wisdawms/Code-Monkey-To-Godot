@@ -80,7 +80,8 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("escape"):
 				initialize_game_start()
 		game_state.WaitingToStart:
-			Engine.time_scale = 1.0
+			if not is_game_paused:
+				Engine.time_scale = 1.0
 			$CanvasLayer/tut.visible = false
 			waiting_to_start_timer -= delta
 			countdown_timer_text.visible = false
@@ -121,7 +122,9 @@ func is_game_over()->bool:
 	return current_game_state == game_state.GameOver
 
 func _ready() -> void:
-	seen_tut = PlayerPrefs.get_pref("seen_tutorial", seen_tut)
+	if PlayerPrefs.get_pref("seen_tutorial", seen_tut) != null:
+		seen_tut = PlayerPrefs.get_pref("seen_tutorial", seen_tut)
+	else: seen_tut = false
 	if get_tree().current_scene and get_tree().current_scene.name == "main_menu_scene":
 		Globals.find_node("StartButton").grab_focus()
 	update_current_menu_state()
@@ -168,9 +171,9 @@ func toggle_visibility()->void:
 	else:
 		game_progress.tint_progress.a = 0.0
 
-# this is faster, because it doesn't run every frame
+
 func yup() -> void:
-	if Input.is_action_just_pressed("escape"):
+	if Input.is_action_just_pressed("escape") and current_game_state != game_state.Tutorial:
 		if get_tree().current_scene.name == "main_menu_scene":
 			if current_menu_state == menu_state.OptionsMenu:
 				current_menu_state = menu_state.NONE
@@ -179,7 +182,7 @@ func yup() -> void:
 			else:
 				current_menu_state -= 1
 				update_current_menu_state()
-		else: 
+		else:
 			if current_menu_state == menu_state.NONE:
 				toggle_pause_game()
 				update_current_menu_state()
@@ -187,12 +190,13 @@ func yup() -> void:
 				toggle_pause_game()
 				update_current_menu_state()
 			else:
-				current_menu_state -= 1
-				update_current_menu_state()
+				if current_menu_state != menu_state.NONE:
+					current_menu_state -= 1
+					update_current_menu_state()
 
 func toggle_pause_game()->void:
 	is_game_paused = !is_game_paused
-	if is_game_paused and Engine.time_scale != 0.0:
+	if is_game_paused:
 		Engine.time_scale = 0.0
 		OnGamePaused.emit()
 		if is_game_starting() or is_countdown_to_start() and game_starting_ui.visible != false:
@@ -209,7 +213,7 @@ func toggle_pause_game()->void:
 		if is_game_starting() or is_countdown_to_start() and game_starting_ui.visible != true:
 			game_starting_ui.visible = true
 			game_progress.tint_progress.a = 0.59
-			game_progress.tint_under.a = 0.33
+			game_progress.tint_under.a = orig_under_alpha
 		if is_game_over() and game_over_ui.visible != true:
 			game_over_ui.visible = true
 
@@ -318,3 +322,15 @@ func _on_back_button_button_up() -> void:
 		current_menu_state = menu_state.NONE
 		update_current_menu_state()
 		Globals.find_node("StartButton").grab_focus()
+
+
+func _on_reset_prefs_button_button_up() -> void:
+	PlayerPrefs.delete_all()
+	sound_man.music_volume = 0.6
+	sound_man.sfx_volume = 0.6
+	seen_tut = false
+	PlayerPrefs.set_pref("seen_tutorial", seen_tut)
+	sound_man.change_music_volume()
+	sound_man.change_sfx_volume()
+	PlayerPrefs.load_data()
+	PlayerPrefs.save_data()

@@ -54,19 +54,15 @@ func destroy_audio(this_sound : AudioStreamPlayer3D)->void:
 
 func on_sfx_vol_button_pressed()->void:
 	change_sfx_volume()
-	game_man.sound_effects_volume_button.text = "Sound Effects : " + str(sfx_volume * 10)
 	
 func on_music_vol_button_pressed()->void:
 	change_music_volume()
-	game_man.music_volume_button.text = "Music : " +  str(music_volume * 10)
-	clamped_volume = lerp(-50.0, -10.0, music_volume)
-	MusicManager.get_child(0).volume_db = clamped_volume
 
-	
 func change_sfx_volume()->void:
 	sfx_volume += .1
 	if sfx_volume > 1.0:
 		sfx_volume = 0.0
+	game_man.sound_effects_volume_button.text = "Sound Effects : " + str(sfx_volume * 10)
 	PlayerPrefs.set_pref("sfx_vol", sfx_volume)
 	PlayerPrefs.save_data()
 	
@@ -75,6 +71,9 @@ func change_music_volume()->void:
 	music_volume += .1
 	if music_volume > 1.0:
 		music_volume = 0.0
+	game_man.music_volume_button.text = "Music : " +  str(music_volume * 10)
+	clamped_volume = lerp(-50.0, -10.0, music_volume)
+	MusicManager.get_child(0).volume_db = clamped_volume
 	PlayerPrefs.set_pref("music_vol", music_volume)
 	PlayerPrefs.save_data()
 	
