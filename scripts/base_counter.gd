@@ -46,6 +46,7 @@ var frying_recipe_so : FryingRecipeSO
 @onready var deliver_anim: AnimationPlayer
 @onready var order_price: Label
 @onready var frying_sound : AudioStreamPlayer3D
+@onready var warning_sound : AudioStreamPlayer3D
 @onready var counter_top_point: Marker3D = $CounterTopPoint
 @onready var prog_bar: ProgressBar
 @onready var prog_bar_sprite : Sprite3D
@@ -94,17 +95,29 @@ func handle_stove_on_and_off_effects()->void:
 						frying_sound.playing = false
 					run_once = false
 func handle_burning_meat_effects()->void:
+	
 	if type == "Stove_Counter" and counter_has_object():
 		if current_counter_obj == "MeatPattyCooked":
 			if is_frying() and not is_burning_meat:
 				print("Your meat is burning yo!", " It will turn into ", get_output_from_input(current_counter_obj).object_name)
 				prog_bar.get("theme_override_styles/fill/bg_color").set_bg_color(Color(0.63137257099152, 0, 0.19607843458652))
 				is_burning_meat = true
+				if warning_sound != null:
+					warning_sound.queue_free()
+					warning_sound = null
+				if warning_sound == null:
+					warning_sound = sound_man.play_audio_at_pos("warning", self.position, true)
+				
+			
 		else:
 			prog_bar.get("theme_override_styles/fill/bg_color").set_bg_color(Color(0.63137257099152, 0.39215686917305, 0.19607843458652))
 			if is_burning_meat:
 				is_burning_meat = false
-
+				
+	if type == "Stove_Counter" and not is_burning_meat:
+		if warning_sound != null:
+			warning_sound.playing = false
+			warning_sound.queue_free()
 
 func set_current_player_and_counter_obj()->void:
 	if counter_has_object():
@@ -739,8 +752,9 @@ func spawn_item_on_container()->void:
 
 
 func _process(delta: float) -> void:
-	_is_frying = is_frying()
-	if not is_frying():
+	if _is_frying != is_frying():
+		_is_frying = is_frying()
+	if not is_frying() and is_burning_meat != false:
 		is_burning_meat = false
 	if counter_top_point.get_child_count() != 0:
 		item = counter_top_point.get_child(-1)

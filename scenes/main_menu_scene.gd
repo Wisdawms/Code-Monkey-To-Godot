@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func _on_start_button_button_up() -> void:
-	await Load.load_screen_to_scene(main_game_scene)
+	Load.load_screen_to_scene(main_game_scene)
 	
 
 

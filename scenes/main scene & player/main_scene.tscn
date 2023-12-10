@@ -268,96 +268,273 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -1.25, 0, 0)
 
 [node name="Clear_Counter" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter2" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter3" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 3)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter4" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 4.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter5" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 6)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter6" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter7" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.5, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter8" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter9" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.5, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter10" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 9, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter11" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter12" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 13.5, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter13" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 13.5, 0, 6)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter14" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 13.5, 0, 3)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter15" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 13.5, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter16" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 3, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter19" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 0, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter18" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 4.5, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Clear_Counter17" parent="Counters" instance=ExtResource("12_3c5xn")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 7.5, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Cabbage_Container_Counter" parent="Counters" instance=ExtResource("9_ql0l1")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.5, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Tomato_Container_Counter" parent="Counters" instance=ExtResource("12_yo1jd")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Cutting_Counter" parent="Counters" instance=ExtResource("13_p46un")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10.5, 0, 7.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Trash_Bin_Counter" parent="Counters" instance=ExtResource("18_8w7u7")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5, 0, 4.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Plates_Counter" parent="Counters" instance=ExtResource("11_6wsyw")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5, 0, 1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Delivery_Counter" parent="Counters" instance=ExtResource("18_h0f4w")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13.5, 0, 0)
-
-[node name="Delivery_Counter2" parent="Counters" instance=ExtResource("18_h0f4w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.04151, 0, 0.958767)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="MattyPattyUncooked_Container_Counter" parent="Counters" instance=ExtResource("11_ab6fb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Stove_Counter" parent="Counters" instance=ExtResource("19_yps3e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Cutting_Counter2" parent="Counters" instance=ExtResource("13_p46un")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Bread_Container_Counter" parent="Counters" instance=ExtResource("8_4ipu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Cheese_Container_Counter" parent="Counters" instance=ExtResource("13_1eld5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1.5)
+handle_prog_on = null
+spawn_plate_timer_max = null
+plate_amount_max = null
+_is_frying = null
+plates_on_top_offset_y = null
+hovered = null
 
 [node name="Wall" parent="." instance=ExtResource("18_7exhy")]
 transform = Transform3D(0.134815, 0, 0, 0, 0.56557, 0, 0, 0, 2.27913, -1.48211, 0.279697, 0.512846)

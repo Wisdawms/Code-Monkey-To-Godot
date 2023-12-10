@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://imu32ldc4tvw"]
+[gd_scene load_steps=19 format=3 uid="uid://imu32ldc4tvw"]
 
 [ext_resource type="Script" path="res://scenes/main scene & player/GameManager.gd" id="1_0xatu"]
 [ext_resource type="Texture2D" uid="uid://c2spuoxtru11x" path="res://Assets/_Assets/Textures/game_under.png" id="2_4d3c4"]
@@ -6,6 +6,18 @@
 [ext_resource type="Theme" uid="uid://ctv8t3oqxq6tx" path="res://scenes/button_theme.tres" id="4_5cmf3"]
 [ext_resource type="Theme" uid="uid://kkxfuw5728cm" path="res://label_theme.tres" id="5_vyf8c"]
 [ext_resource type="PackedScene" uid="uid://jl5e5su3nvdb" path="res://scenes/keybinding_scene.tscn" id="6_1vk78"]
+[ext_resource type="Texture2D" uid="uid://ue7r41h82i4d" path="res://Assets/_Assets/Textures/Tutorial.png" id="7_6whh7"]
+[ext_resource type="Texture2D" uid="uid://dnn2l50s5rf18" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0004.png" id="8_4ldta"]
+[ext_resource type="Texture2D" uid="uid://nu3151c2uhjr" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0212.png" id="8_rpsux"]
+[ext_resource type="Texture2D" uid="uid://b6admcku1qiv0" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0006.png" id="10_ernn8"]
+[ext_resource type="Texture2D" uid="uid://d26se8k5q1nqa" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0616.png" id="11_grvg4"]
+[ext_resource type="Texture2D" uid="uid://dn2jmasm5f6im" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0086.png" id="12_2lrdh"]
+[ext_resource type="Texture2D" uid="uid://b5rdmq4a0kb6" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0120.png" id="13_2osjr"]
+[ext_resource type="Texture2D" uid="uid://dde641okrp681" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0121.png" id="14_o53n6"]
+[ext_resource type="Texture2D" uid="uid://8jjyhaeli87y" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0093.png" id="15_n157l"]
+[ext_resource type="Texture2D" uid="uid://kp8fh5dylmkv" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0087.png" id="16_68o7m"]
+[ext_resource type="Texture2D" uid="uid://bfprh6meak8nv" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0123.png" id="17_up06g"]
+[ext_resource type="Texture2D" uid="uid://bibvk4g8kt571" path="res://Assets/_Assets/Textures/kenney_input-prompts-pixel-16/Tiles/tile_0017.png" id="18_g3eyy"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_0xatu")
@@ -639,6 +651,142 @@ focus_neighbor_top = NodePath("../keybindings_content/Alt-Interact_Cut/HBoxConta
 focus_neighbor_bottom = NodePath("../keybindings_content/Forward/HBoxContainer/keybinding_forward")
 theme = ExtResource("4_5cmf3")
 text = "Back"
+
+[node name="tut" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -730.0
+offset_top = -456.0
+offset_right = 729.0
+offset_bottom = 456.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 400)
+texture = ExtResource("7_6whh7")
+
+[node name="joy_tut_container" type="VBoxContainer" parent="CanvasLayer/tut"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 1351.0
+offset_top = 568.0
+offset_right = 1401.0
+offset_bottom = 822.0
+theme_override_constants/separation = 12
+
+[node name="move_container" type="HBoxContainer" parent="CanvasLayer/tut/joy_tut_container"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="move_joy" type="TextureRect" parent="CanvasLayer/tut/joy_tut_container/move_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_rpsux")
+stretch_mode = 5
+
+[node name="interact_joy" type="TextureRect" parent="CanvasLayer/tut/joy_tut_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("8_4ldta")
+stretch_mode = 5
+
+[node name="alt_interact_joy" type="TextureRect" parent="CanvasLayer/tut/joy_tut_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("10_ernn8")
+stretch_mode = 5
+
+[node name="pause_joy" type="TextureRect" parent="CanvasLayer/tut/joy_tut_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("11_grvg4")
+stretch_mode = 5
+
+[node name="kb_tut_container" type="VBoxContainer" parent="CanvasLayer/tut"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 1007.0
+offset_top = 568.0
+offset_right = 1179.0
+offset_bottom = 822.0
+theme_override_constants/separation = 12
+
+[node name="move_container" type="HBoxContainer" parent="CanvasLayer/tut/kb_tut_container"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="w" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container/move_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("12_2lrdh")
+stretch_mode = 5
+
+[node name="a" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container/move_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("13_2osjr")
+stretch_mode = 5
+
+[node name="s" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container/move_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("14_o53n6")
+stretch_mode = 5
+
+[node name="d" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container/move_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("15_n157l")
+stretch_mode = 5
+
+[node name="interact_kb" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("16_68o7m")
+stretch_mode = 5
+
+[node name="alt_interact_kb" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("17_up06g")
+stretch_mode = 5
+
+[node name="pause_kb" type="TextureRect" parent="CanvasLayer/tut/kb_tut_container"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("18_g3eyy")
+stretch_mode = 5
 
 [connection signal="pressed" from="CanvasLayer/game_over_ui/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="button_up" from="CanvasLayer/paused_ui/paused_content/paused_buttons/ResumeButton" to="." method="_on_resume_button_button_up"]

@@ -15,7 +15,8 @@ config/tags=PackedStringArray("mine")
 run/main_scene="res://scenes/main_menu_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=144
-config/icon="res://icon.svg"
+boot_splash/image="res://Assets/_Assets/Textures/KitchenChaosLogo.png"
+config/icon="res://Assets/_Assets/Textures/KitchenChaosLogo.png"
 
 [autoload]
 
@@ -124,5 +125,7 @@ common/physics_ticks_per_second=144
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=2
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2
 2d/snap/snap_2d_transforms_to_pixel=true

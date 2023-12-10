@@ -26,8 +26,11 @@ signal StateChanged
 signal OnGamePaused
 signal OnGameUnpaused
 
+var seen_tut : bool = false
+
 enum game_state {
 	MainMenu,
+	Tutorial,
 	WaitingToStart,
 	CountdownToStart,
 	GamePlaying,
@@ -54,6 +57,9 @@ var flickering_timer : float = 0.0
 var flickering_interval : float = 0.2
 
 func _process(delta: float) -> void:
+	if current_game_state == game_state.MainMenu and $CanvasLayer/tut.visible != false :
+		bg_veil.visible = false
+		$CanvasLayer/tut.visible = false
 	yup()
 	if current_game_state == game_state.MainMenu: return
 	if is_game_playing() and not is_game_paused:
@@ -66,8 +72,16 @@ func _process(delta: float) -> void:
 			flash(delta)
 	elif current_game_state != game_state.MainMenu and is_game_paused or not is_game_playing():
 		bg_veil.visible = true
-	match current_game_state:	
+	match current_game_state:
+		game_state.Tutorial:
+			Engine.time_scale = 0.0
+			bg_veil.visible = true
+			$CanvasLayer/tut.visible = true
+			if Input.is_action_just_pressed("interact") or Input.is_action_just_pressed("escape"):
+				initialize_game_start()
 		game_state.WaitingToStart:
+			Engine.time_scale = 1.0
+			$CanvasLayer/tut.visible = false
 			waiting_to_start_timer -= delta
 			countdown_timer_text.visible = false
 			game_starting_ui.visible = true
@@ -107,6 +121,7 @@ func is_game_over()->bool:
 	return current_game_state == game_state.GameOver
 
 func _ready() -> void:
+	seen_tut = PlayerPrefs.get_pref("seen_tutorial", seen_tut)
 	if get_tree().current_scene and get_tree().current_scene.name == "main_menu_scene":
 		Globals.find_node("StartButton").grab_focus()
 	update_current_menu_state()
@@ -225,6 +240,7 @@ func update_current_menu_state()->void:
 			paused_ui.visible = false
 			bg_veil.visible = false
 			if current_game_state == game_state.MainMenu and Globals.find_node("StartButton"):
+				game_playing_ui.visible = false
 				Globals.find_node("StartButton").grab_focus()
 		menu_state.PauseMenu:
 			Globals.find_node("ResumeButton").grab_focus()
@@ -252,6 +268,7 @@ func restart_level()->void:
 	get_tree().reload_current_scene()
 	initialize_game_start()
 func initialize_game_start()->void:
+	game_progress.value = game_progress.max_value
 	is_game_paused = false
 	game_progress.tint_progress.r = 1.0
 	game_progress.tint_progress.g = 1.0
@@ -263,13 +280,21 @@ func initialize_game_start()->void:
 	waiting_to_start_timer = 1.0
 	countdown_to_start_timer = 3.0
 	game_playing_timer = game_playing_time_max
-	current_game_state = game_state.WaitingToStart # reset game_state
 	dev_man.money_made = 0.0
 	dev_man.orders_delivered = 0
 	dev_man.waiting_recipe_list.clear()
 	dev_man.spawn_recipe_timer = dev_man.spawn_recipe_timer_max
 	for child : Node in dev_man.orders_container.get_children():
 		child.free()
+	
+	if not seen_tut:
+		current_game_state = game_state.Tutorial
+		seen_tut = true
+		PlayerPrefs.set_pref("seen_tutorial", seen_tut)
+		PlayerPrefs.save_data()
+		return
+	if seen_tut:
+		current_game_state = game_state.WaitingToStart 
 
 func _on_go_to_main_menu_button_up() -> void:
 	current_game_state = game_state.MainMenu
