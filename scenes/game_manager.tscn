@@ -21,7 +21,7 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_0xatu")
-game_playing_time_max = 60.0
+game_playing_time_max = 90.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

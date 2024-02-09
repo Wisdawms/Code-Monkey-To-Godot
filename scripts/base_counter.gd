@@ -103,7 +103,7 @@ func handle_burning_meat_effects()->void:
 				prog_bar.get("theme_override_styles/fill/bg_color").set_bg_color(Color(0.63137257099152, 0, 0.19607843458652))
 				is_burning_meat = true
 				if warning_sound != null:
-					warning_sound.queue_free()
+					warning_sound.cancel_free()
 					warning_sound = null
 				if warning_sound == null:
 					warning_sound = sound_man.play_audio_at_pos("warning", self.position, true)
@@ -117,7 +117,7 @@ func handle_burning_meat_effects()->void:
 	if type == "Stove_Counter" and not is_burning_meat:
 		if warning_sound != null:
 			warning_sound.playing = false
-			warning_sound.queue_free()
+			warning_sound.cancel_free()
 
 func set_current_player_and_counter_obj()->void:
 	if counter_has_object():
@@ -345,7 +345,7 @@ func ItemHasChanged()->void:
 				if not fry_timer.timeout.is_connected(_on_fry_timer_timeout):
 					fry_timer.timeout.connect(_on_fry_timer_timeout)
 	print("Player was holding ", player_obj," and interacted with ", self.name, " which had ", current_counter_obj)
-func Hover(_interactor : MyPlayerClass)->void: # setting up the hover on counter mechanics ( visuals )
+func Hover(interactor : MyPlayerClass)->void: # setting up the hover on counter mechanics ( visuals )
 	if player_has_object(interactor) and type == "Stove_Counter" :
 		frying_recipe_so = get_recipe_so_with_input(interactor.item_holding.object_name)
 	interactor.current_counter = self
@@ -360,7 +360,7 @@ func Hover(_interactor : MyPlayerClass)->void: # setting up the hover on counter
 				mesh.material_override.set("emission_enabled", hovered)
 	#print("hovered")
 	
-func Unhover(_interactor : MyPlayerClass)->void:
+func Unhover(interactor : MyPlayerClass)->void:
 	interactor.current_counter = null
 	hovered = false
 	
@@ -373,7 +373,7 @@ func Unhover(_interactor : MyPlayerClass)->void:
 				mesh.material_override.set("emission_enabled", hovered)
 	#print("unhovered")
 
-func interact(_interactor : MyPlayerClass)->void:
+func interact(interactor : MyPlayerClass)->void:
 	dev_man.interacted_counter = self
 	if counter_top_point.get_child_count() != 0:
 		item = counter_top_point.get_child(-1)
@@ -418,6 +418,7 @@ func interact(_interactor : MyPlayerClass)->void:
 						food.queue_free()
 						plate.reparent(interactor.get_node("Hold_Item"), false)
 						sound_man.play_audio_at_pos("object_pickup", self.position)
+						print('sound 1')
 						OnItemChanged.emit()
 						return
 				print ( "Replacing two items on a (", self.type ,") is disabled in the settings" )
@@ -432,7 +433,7 @@ func interact(_interactor : MyPlayerClass)->void:
 		if interactor.item_holding.object_name == "Plate":
 			spawn_item_on_container()
 
-func interact_alt(_interactor : MyPlayerClass)->void:
+func interact_alt(interactor : MyPlayerClass)->void:
 	if type == "Cutting_Counter": # for cutting counter interaction_alt
 		if counter_has_object():
 			if not player_has_object(interactor):
@@ -505,7 +506,7 @@ func interact_alt(_interactor : MyPlayerClass)->void:
 
 #region [    Boolean Methods    ]
 
-func has_frying_recipe(_interactor : MyPlayerClass)->bool:
+func has_frying_recipe(interactor : MyPlayerClass)->bool:
 	if FryingRecipeSOArray != null:
 		var array1 : Array = []
 		var names : Array = []
@@ -525,7 +526,7 @@ func has_frying_recipe(_interactor : MyPlayerClass)->bool:
 				return false
 	return false
 
-func has_recipe(_interactor : MyPlayerClass)->bool:
+func has_recipe(interactor : MyPlayerClass)->bool:
 	if CuttingRecipeSOArray != null:
 		var array1 : Array = []
 		var names : Array = []
@@ -548,16 +549,16 @@ func has_recipe(_interactor : MyPlayerClass)->bool:
 func counter_has_object()->bool:
 	return item != null
 
-func player_has_object(_interactor : MyPlayerClass)->bool:
+func player_has_object(interactor : MyPlayerClass)->bool:
 	return interactor.item_holding != null
 
 #endregion
 
 #region [    Do Methods    ]
-func give_item(_interactor : MyPlayerClass )->void:
+func give_item(interactor : MyPlayerClass )->void:
 	if type == "Container_Counter":
 		if Kitchen_Object != null:
-			if interactor.item_holding.default_name != Kitchen_Object.object_name:
+			if interactor.item_holding.default_name != Kitchen_Object.object_name: # holding an item
 				print("You are holding (", interactor.item_holding.object_name, ") This counter takes (", Kitchen_Object.object_name, ")")
 				return
 		else:
@@ -586,12 +587,13 @@ func give_item(_interactor : MyPlayerClass )->void:
 		interactor.item_holding.reparent(self.get_node("CounterTopPoint") , false)
 		print ( "Placed (", interactor.item_holding.object_name, ") on (", self.name, ")")
 		sound_man.play_audio_at_pos("object_drop", self.position)
+		print('sound 2')
 		OnItemChanged.emit()
 	else: print("This ", name , " only spawns ", Kitchen_Object.object_name, "s")
 
-func try_take_item(_interactor : MyPlayerClass)->void:
+func try_take_item(interactor : MyPlayerClass)->void:
 	if interactor.item_holding == null: # handles taking an item from counter
-		if counter_has_object(): # if counter has kitchen object
+		if counter_has_object(): # if counter has an object
 			handle_reset_prog()
 			item.reparent(interactor.hold_item_marker, false)
 			item.position = interactor.hold_item_marker.position * .2
@@ -599,7 +601,7 @@ func try_take_item(_interactor : MyPlayerClass)->void:
 			sound_man.play_audio_at_pos("object_pickup", self.position)
 			OnItemChanged.emit()
 
-func replace_item(_interactor : MyPlayerClass)->void:
+func replace_item(interactor : MyPlayerClass)->void:
 	var item_one : BaseFood = item
 	var item_two : BaseFood = interactor.item_holding
 	
@@ -615,6 +617,7 @@ func replace_item(_interactor : MyPlayerClass)->void:
 							item_two.add_ingredient(item_one.get_kitchen_object_so())
 							item_one.queue_free()
 							sound_man.play_audio_at_pos("object_pickup", self.position)
+							print('sound 4')
 							OnItemChanged.emit()
 							return
 						else: print("Plate already has this item")
@@ -636,6 +639,7 @@ func replace_item(_interactor : MyPlayerClass)->void:
 				item_one.add_ingredient(item_two.get_kitchen_object_so())
 				item_two.queue_free()
 				sound_man.play_audio_at_pos("object_pickup", self.position)
+				print('sound 5')
 				OnItemChanged.emit()
 				return
 		elif item_two.object_name == "Plate" and item_one.object_name != "Plate": # if holding plate and there's food on counter
@@ -650,6 +654,7 @@ func replace_item(_interactor : MyPlayerClass)->void:
 				#item_two.rotation = Vector3.ZERO
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
 				sound_man.play_audio_at_pos("object_pickup", self.position)
+				print('sound 6')
 				item_two.add_ingredient(item_one.get_kitchen_object_so())
 				item_one.queue_free()
 				return
@@ -661,6 +666,7 @@ func replace_item(_interactor : MyPlayerClass)->void:
 		item_one.rotation = Vector3.ZERO
 		print ( "Replaced (", item_one.object_name ,") with (", item_two.object_name, ") on (", self.name, ")")
 		sound_man.play_audio_at_pos("object_pickup", self.position)
+		print('sound 7')
 		OnItemChanged.emit()
 		
 	# for placing food from stove or cutting counter to plate
@@ -676,6 +682,7 @@ func replace_item(_interactor : MyPlayerClass)->void:
 				#item_two.rotation = Vector3.ZERO				
 				print("Placed ", item_two.object_name, " on ", item_one.object_name)
 				sound_man.play_audio_at_pos("object_pickup", self.position)
+				print('sound 8')
 				item_two.add_ingredient(item_one.get_kitchen_object_so())
 				item_one.queue_free()
 				OnItemChanged.emit()
@@ -735,18 +742,18 @@ func fry_item_if_possible()->void:
 				prog_bar_sprite.shown = false
 
 func spawn_item_on_container()->void:
-	if type == "Container_Counter":
-		var anim_player : AnimationPlayer = $CounterAnimations
-		anim_player.play("ContainerOpenClose")
 	var object : Object = Kitchen_Object.prefab.instantiate()
 	counter_top_point.add_child(object, true)
+	item = counter_top_point.get_child(-1)
 	if type == "Plates_Counter":
 		object.position = Vector3(0.0, counter_top_point.get_child_count() * plates_on_top_offset_y, 0.0)
 		object.rotation.y = randf_range(0.0, 360.0)
 	print("Spawned (", Kitchen_Object.object_name , ") on ", self.name )
-	#if type != "Plates_Counter": below
 	sound_man.play_audio_at_pos("object_pickup", self.position)
-	OnItemChanged.emit()
+	if type == "Container_Counter":
+		var anim_player : AnimationPlayer = $CounterAnimations
+		anim_player.play("ContainerOpenClose")
+		try_take_item(interactor)
 
 #endregion
 

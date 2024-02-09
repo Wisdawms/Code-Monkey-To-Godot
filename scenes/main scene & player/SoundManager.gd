@@ -8,6 +8,8 @@ class_name SoundManager extends Node
 
 
 func _ready() -> void:
+	game_man.OnGamePaused.connect(mute_audio)
+	game_man.OnGameUnpaused.connect(mute_audio)
 	if get_children():
 		sfx = get_child(0)
 	sfx_volume = PlayerPrefs.get_pref("sfx_vol", 0.7)
@@ -27,6 +29,7 @@ func OnOrderFailed()->void:
 func play_audio_at_pos(audio_clip : String, position : Vector3, loop : bool = false, volume_mult: float = 5.0)->AudioStreamPlayer3D:
 	var _new_sound : AudioStreamPlayer3D = AudioStreamPlayer3D.new() as AudioStreamPlayer3D
 	var sound_file : AudioStream = audio_clips_references.get(str(audio_clip))[ randi_range(0, audio_clips_references.get(str(audio_clip)).size() -1 )  ]
+	_new_sound.name = audio_clip
 	var sound_length : float = sound_file.get_length()
 	add_child(_new_sound, true)	
 	_new_sound.stream = sound_file
@@ -77,4 +80,11 @@ func change_music_volume()->void:
 	PlayerPrefs.set_pref("music_vol", music_volume)
 	PlayerPrefs.save_data()
 	
-
+func mute_audio()->void:
+	for child in get_children():
+		if child is AudioStreamPlayer3D:
+			var old_vol = child.volume_db
+			if game_man.is_game_paused:
+				child.playing = false
+			else:
+				child.playing = true

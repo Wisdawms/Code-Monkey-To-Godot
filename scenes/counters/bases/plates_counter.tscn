@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6vbwuf72kjgn"]
+[gd_scene load_steps=8 format=3 uid="uid://6vbwuf72kjgn"]
 
 [ext_resource type="PackedScene" uid="uid://b5vr4kdue1jb2" path="res://scenes/counters/bases/base_counter.tscn" id="1_sxyhh"]
 [ext_resource type="Resource" uid="uid://d0yh7wlandaox" path="res://resources/plate_SO.tres" id="2_gm3hk"]
@@ -36,27 +36,11 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_sp743"]
-viewport_path = NodePath("price_gained/price_gained_sprite3d/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rtmcc"]
-resource_local_to_scene = true
-transparency = 1
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(1, 1, 1, 0)
-albedo_texture = SubResource("ViewportTexture_sp743")
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_4s2kn"]
-viewport_path = NodePath("price_gained/price_gained_sprite3d/SubViewport")
-
 [node name="Plates_Counter" instance=ExtResource("1_sxyhh")]
 type = "Plates_Counter"
 Kitchen_Object = ExtResource("2_gm3hk")
 
-[node name="PlatesCounter_Visual" type="MeshInstance3D" parent="." index="6"]
+[node name="PlatesCounter_Visual" type="MeshInstance3D" parent="." index="4"]
 editor_description = "[MeshRenderer 23::e21b499d164095947b7559f0267f0e63:867046696110709345]"
 transform = Transform3D(1.7, 0, 0, 0, 1.5, 0, 0, 0, 1.7, 0, 0, 0)
 mesh = SubResource("ArrayMesh_bny2g")
@@ -104,10 +88,6 @@ metadata/unidot_keys = {
 "m_StitchLightmapSeams": 1
 }
 
-[node name="CircleSprite" type="Sprite3D" parent="." index="7"]
+[node name="CircleSprite" type="Sprite3D" parent="." index="5"]
 transform = Transform3D(0.7, 0, 0, 0, -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, 0, 1.268, 0)
 texture = ExtResource("4_48d0e")
-
-[node name="price_gained_sprite3d" parent="price_gained" index="0"]
-material_override = SubResource("StandardMaterial3D_rtmcc")
-texture = SubResource("ViewportTexture_4s2kn")

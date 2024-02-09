@@ -47,8 +47,9 @@ enum menu_state{
 @onready var current_menu_state : menu_state = menu_state.NONE
 
 @onready var is_game_paused : bool = false
-@export var waiting_to_start_timer : float = 1.0
-@export var countdown_to_start_timer : float = 3.0
+@export var intermission_timer : float = 1.0
+var game_start_timer : float
+@export var default_game_start_time : float = 3.0
 @export var game_playing_time_max : float = 10.0
 @onready var game_playing_timer : float
 @onready var once : bool = true
@@ -83,17 +84,17 @@ func _process(delta: float) -> void:
 			if not is_game_paused:
 				Engine.time_scale = 1.0
 			$CanvasLayer/tut.visible = false
-			waiting_to_start_timer -= delta
+			intermission_timer -= delta
 			countdown_timer_text.visible = false
 			game_starting_ui.visible = true
 			game_starting_text.visible = true
-			if waiting_to_start_timer < 0.0:
+			if intermission_timer < 0.0:
 				current_game_state = game_state.CountdownToStart
 				game_playing_ui.visible = true
 				StateChanged.emit()
 		game_state.CountdownToStart:
-			countdown_to_start_timer -= delta
-			if countdown_to_start_timer < 0.0:
+			game_start_timer -= delta
+			if game_start_timer < 0.0:
 				current_game_state = game_state.GamePlaying
 				game_playing_timer = game_playing_time_max
 				StateChanged.emit()
@@ -109,8 +110,8 @@ func _process(delta: float) -> void:
 				game_playing_ui.visible = false
 				once = false
 
-	if countdown_timer_text.text != str(ceil(countdown_to_start_timer)):
-		countdown_timer_text.text = str(ceil(countdown_to_start_timer))
+	if countdown_timer_text.text != str(ceil(game_start_timer)):
+		countdown_timer_text.text = str(ceil(game_start_timer))
 
 func is_game_playing()->bool:
 	return current_game_state == game_state.GamePlaying
@@ -150,6 +151,7 @@ func update_game_manager_ui()->void:
 		countdown_timer_text.visible = false
 	if is_game_over():
 		game_over_ui.visible = true
+		$CanvasLayer/game_over_ui/RestartButton.grab_focus()
 		if gameover_recipes_number.text != str(dev_man.orders_delivered):
 			gameover_recipes_number.text = str(dev_man.orders_delivered)
 		if gameover_money_made.text != dev_man.get_formatted_money():
@@ -281,8 +283,8 @@ func initialize_game_start()->void:
 	game_over_ui.visible = false
 	for child : AudioStreamPlayer3D in sound_man.get_children():  # remove all sounds
 		child.free()
-	waiting_to_start_timer = 1.0
-	countdown_to_start_timer = 3.0
+	intermission_timer = 1.0
+	game_start_timer = default_game_start_time
 	game_playing_timer = game_playing_time_max
 	dev_man.money_made = 0.0
 	dev_man.orders_delivered = 0
